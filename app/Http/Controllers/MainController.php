@@ -8,6 +8,6 @@ class MainController extends Controller
 {
     //
     public function index(){
-        return "Testing. Edit trên local nè";
+        return "Testing. Edit trực tiếp trên github nè";
     }
 }

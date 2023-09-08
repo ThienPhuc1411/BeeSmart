@@ -11,18 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('nha_cung_cap', function (Blueprint $table) {
             $table->id();
-            $table->string('HoTen');
-            $table->string('Avatar');
-            $table->string('email')->unique();
-            $table->string('Diachi')->nullable();
-            $table->string('sdt');
-            $table->string('quan');
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
             $table->timestamps();
+            $table->string('ten');
+            $table->string('diachi');
+            $table->string('email')->unique();
+            $table->string('sdt');
+            $table->string('MST');            
         });
     }
 
@@ -31,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('nha_cung_cap');
     }
 };

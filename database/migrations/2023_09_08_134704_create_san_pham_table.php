@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('san_pham', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->timestamps();
             $table->string('ten');
             $table->string('img')->nullable();
@@ -24,6 +24,11 @@ return new class extends Migration
             $table->integer('khoiLuong')->default(0);
             $table->integer('theTich')->default(0);
             $table->tinyInteger('anHien');
+            $table->unsignedBigInteger('id_ch');
+            $table->unsignedBigInteger('id_ncc');
+            $table->unsignedInteger('id_dmsp');
+            $table->unsignedInteger('id_th');
+            $table->unsignedInteger('id_loaisp');
         });
     }
 

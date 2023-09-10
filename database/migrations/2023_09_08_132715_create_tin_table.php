@@ -12,13 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tin', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->timestamps();
             $table->string('tieuDe');
             $table->text('tomTat');
             $table->text('noiDung');
             $table->tinyInteger('anHien');
             $table->integer('view');
+            $table->unsignedInteger('id_dmtin');
         });
     }
 

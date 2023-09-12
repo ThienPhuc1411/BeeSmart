@@ -16,3 +16,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Use App\Http\Controllers\AdminController;
+Route::prefix('admin')->group(function(){
+    Route::get('/',[AdminController::class,'index_admin']);
+    Route::get('tb-user',[AdminController::class,'tb_user']);
+    Route::get('tb-post',[AdminController::class,'tb_post']);
+});
+

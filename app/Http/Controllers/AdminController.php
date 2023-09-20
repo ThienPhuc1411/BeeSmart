@@ -10,10 +10,22 @@ class AdminController extends Controller
     public function index_admin(){
         return view('/admin/index');
     }
-    public function tb_user(){
-        return view('/admin/tb-user');
+    public function list_client(){
+        return view('/admin/list-client');
     }
-    public function tb_post(){
-        return view('/admin/tb-post');
+    public function list_post(){
+        return view('/admin/list-post');
+    }
+    public function list_ncc(){
+        return view('/admin/list-ncc');
+    }
+    public function list_reg(){
+        return view('/admin/list-reg');
+    }
+    public function list_profit_day(){
+        return view('/admin/list-profit-day');
+    }
+    public function list_profit_month(){
+        return view('/admin/list-profit-day');
     }
 }

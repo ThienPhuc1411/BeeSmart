@@ -98,7 +98,7 @@ h6 {
 }
 
 p {
-    margin-top: 0;
+    /* margin-top: 0; */
     margin-bottom: 1rem
 }
 
@@ -233,9 +233,9 @@ caption {
     caption-side: bottom
 }
 
-th {
-    text-align: inherit;
-    text-align: -webkit-match-parent
+th,td {
+    text-align: left !important;
+    /* text-align: -webkit-match-parent */
 }
 
 label {

@@ -14,7 +14,13 @@ class nhaCungCapController extends Controller
      */
     public function index()
     {
-        //
+        $ncc = nhaCungCap::all();
+        $arr = [
+            'status' => true,
+            'message' => "Danh sách nhà cung cấp",
+            'data' => NCC::collection($ncc)
+        ];
+        return response()->json($arr, 200);
     }
 
     /**
@@ -35,9 +41,9 @@ class nhaCungCapController extends Controller
             'ten' => 'required',
             'diaChi' => 'required',
             'sdt' => 'required|max:11|min:10',
-            'email' => 'required|unique:email',
+            'email' => 'required|unique:nha_cung_cap|email',
             'MST' => 'required',
-
+            'idCh' => 'required'
         ]);
         if ($validator->fails()) {
             $arr = [
@@ -61,7 +67,21 @@ class nhaCungCapController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $ncc = nhaCungCap::find($id);
+        if (is_null($ncc)) {
+            $arr = [
+                'success' => false,
+                'message' => 'Không tồn tại Nhà Cung Cấp',
+                'dara' => []
+            ];
+            return response()->json($arr, 200);
+        }
+        $arr = [
+            'status' => true,
+            'message' => "Thông tin Nhà Cung Cấp " . $ncc->ten,
+            'data' => new NCC($ncc)
+        ];
+        return response()->json($arr, 201);
     }
 
     /**
@@ -69,18 +89,34 @@ class nhaCungCapController extends Controller
      */
     public function edit(string $id)
     {
-        //
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, nhaCungCap $ncc)
+    public function update(Request $request, string $id)
     {
         $input = $request->all();
+        $ncc = nhaCungCap::find($id);
         $validator = Validator::make($input, [
-            'name' => 'required',
-            'price' => 'required'
+            'ten' => 'required',
+            'diaChi' => 'required',
+            'sdt' => 'required|max:11|min:10',
+            'email' => 'required|email',
+            'mst' => 'required',
+            'idCh' => 'required'
+        ], [
+            'required' => 'Trường :attribute không được để trống',
+            'max' => 'Trường :attribute không được hơn :max ký tự',
+            'min' => 'Trường :attribute không được ít hơn :min ký tự',
+            'email' => 'Trường :attribute không đúng định dạng'
+        ], [
+            'ten' => 'Tên nhà cung cấp',
+            'diaChi' => 'Địa chỉ',
+            'sdt' => 'Số điện thoại',
+            'email' => 'Địa chỉ email',
+            'mst' => 'Mã số thuế',
         ]);
         if ($validator->fails()) {
             $arr = [
@@ -90,9 +126,14 @@ class nhaCungCapController extends Controller
             ];
             return response()->json($arr, 200);
         }
-        $ncc->name = $input['name'];
-        $ncc->price = $input['price'];
+        $ncc->ten = $input['ten'];
+        $ncc->diaChi = $input['diaChi'];
+        $ncc->email = $input['email'];
+        $ncc->sdt = $input['sdt'];
+        $ncc->MST = $input['mst'];
+        $ncc->idCh = $input['idCh'];
         $ncc->save();
+        // $ncc = nhaCungCap::update($input);
         $arr = [
             'status' => true,
             'message' => 'Cập nhật nhà cung cấp thành công',
@@ -106,6 +147,21 @@ class nhaCungCapController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $ncc = nhaCungCap::find($id);
+        if (is_null($ncc)) {
+            $arr = [
+                'success' => false,
+                'message' => 'Không tồn tại Nhà Cung Cấp',
+                'dara' => []
+            ];
+            return response()->json($arr, 200);
+        }
+        $ncc->delete();
+        $arr = [
+            'status' => true,
+            'message' => 'Đã xóa Nhà Cung Cấp',
+            'data' => [],
+        ];
+        return response()->json($arr, 201);
     }
 }

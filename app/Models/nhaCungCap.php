@@ -15,6 +15,7 @@ class nhaCungCap extends Model
         'diaChi',
         'email',
         'sdt',
-        'MST'
+        'MST',
+        'idCh'
     ];
 }

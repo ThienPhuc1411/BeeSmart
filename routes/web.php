@@ -27,6 +27,5 @@ Route::prefix('admin')->group(function(){
     Route::get('list-reg',[AdminController::class,'list_reg']);
     Route::get('list-profit-day',[AdminController::class,'list_profit_day']);
     Route::get('list-profit-month',[AdminController::class,'list_profit_month']);
-
 });
 

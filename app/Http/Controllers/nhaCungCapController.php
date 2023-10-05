@@ -152,7 +152,7 @@ class nhaCungCapController extends Controller
             $arr = [
                 'success' => false,
                 'message' => 'Không tồn tại Nhà Cung Cấp',
-                'dara' => []
+                'data' => []
             ];
             return response()->json($arr, 200);
         }

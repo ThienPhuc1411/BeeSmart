@@ -23,7 +23,7 @@ class san_pham extends Model
         'idNcc',
         'idTh',
         'idDm',
-        'idLoaiSp',
+        'idLoai',
         'maSp',
         'ngayTao'
 

@@ -3,7 +3,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Danh Sách Tin</h1>
+    <h1 class="h3 mb-2 text-gray-800">Danh Sách Tin {{ $mytime }}</h1>
 
 
     <!-- DataTales Example -->
@@ -83,7 +83,7 @@
                                         <span class="text" style="width:120px">Khóa</span>
                                     </a> --}}
 
-                                
+
                             </td>
                     </tbody>
                 </table>

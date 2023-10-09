@@ -4,14 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Carbon;
 class AdminController extends Controller
 {
     public function index_admin(){
         return view('/admin/index');
     }
     public function list_client(){
-        return view('/admin/list-client');
+       
+        return view('/admin/list-client',compact('mytime'));
     }
     public function list_post(){
         return view('/admin/list-post');

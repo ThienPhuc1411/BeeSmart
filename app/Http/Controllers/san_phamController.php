@@ -8,6 +8,7 @@ use App\Http\Resources\san_pham as san_phamResource;
 use App\Models\san_pham;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Carbon;
 class san_phamController extends Controller
 {
 
@@ -38,7 +39,7 @@ class san_phamController extends Controller
           'idNcc' => 'required',
           'idDm' => 'required',
           'idTh' => 'required',
-          'idLoaiSp' => 'required',
+          'idLoai' => 'required',
           'maSp' => 'required'
         ]);
         if($validator->fails()){
@@ -49,6 +50,9 @@ class san_phamController extends Controller
             ];
             return response()->json($arr, 200);
         }
+
+        $mytime=Carbon::now()->format("Y-m-d");
+        $input['ngayTao']=$mytime;
         $product = san_pham::create($input);
         $arr = ['status' => true,
             'message'=>"Sản phẩm đã lưu thành công",
@@ -92,16 +96,22 @@ class san_phamController extends Controller
         $product->giaBan = $input['giaBan'];
         $product->donVi = $input['donVi'];
         $product->khuyenMai = $input['khuyenMai'];
+        // if($input['khoiLuong']){
+        //     $product->khoiLuong = null;
+        // }
+        // if($input['theTich']){
+        //     $product->theTich = null;
+        // }
         $product->soLuong = $input['soLuong'];
-        $product->khoiLuong = $input['khoiLuong'];
         $product->anHien = $input['anHien'];
         $product->idCh = $input['idCh'];
         $product->idNcc = $input['idNcc'];
         $product->idDm = $input['idDm'];
         $product->idTh = $input['idTh'];
-        $product->idLoaiSp = $input['idLoaiSp'];
+        $product->idLoai = $input['idLoai'];
         $product->maSp = $input['maSp'];
-
+        $mytime=Carbon::now()->format("Y-m-d");
+        $product->ngayTao=$mytime;
         $product->save();
         $arr = [
             'status' => true,

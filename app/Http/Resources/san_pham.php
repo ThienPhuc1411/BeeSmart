@@ -28,7 +28,7 @@ class san_pham extends JsonResource
           'idNcc' => $this->idNcc,
           'idDm' => $this->idDm,
           'idTh' => $this->idTh,
-          'idLoaiSp' => $this->idLoaiSp,
+          'idLoai' => $this->idLoai,
           'maSp' => $this->maSp,
           'ngayTao' => $this->ngayTao
         ];

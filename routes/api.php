@@ -17,6 +17,7 @@ Route::post('san-pham',[san_phamController::class,'store']);
 Route::get('san-pham',[san_phamController::class,'index']);
 Route::get('san-pham/{id}',[san_phamController::class,'show']);
 Route::put('san-pham/{id}',[san_phamController::class,'update']);
+Route::patch('san-pham/{id}',[san_phamController::class,'update']);
 Route::delete('san-pham/{id}',[san_phamController::class,'destroy']);
 
 Route::get('sp-dm/{id}',[san_phamController::class,'sptheoDm']);

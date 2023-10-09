@@ -77,6 +77,7 @@ return new class extends Migration
             $table->double('khuyenMai')->nullable();
             $table->integer('soLuong')->default(1);
             $table->integer('theTich')->nullable();
+            $table->tinyInteger('donVi',2);
             $table->date('ngayTao');
             $table->integer('khoiLuong')->nullable();
             $table->tinyInteger('anHien')->default(1);

@@ -37,6 +37,7 @@ class nhaCungCapController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
+        // dd($input);
         $validator = Validator::make($input, [
             'ten' => 'required',
             'diaChi' => 'required',
@@ -44,6 +45,18 @@ class nhaCungCapController extends Controller
             'email' => 'required|unique:nha_cung_cap|email',
             'MST' => 'required',
             'idCh' => 'required'
+        ], [
+            'required' => 'Trường :attribute không được để trống',
+            'max' => 'Trường :attribute không được hơn :max ký tự',
+            'min' => 'Trường :attribute không được ít hơn :min ký tự',
+            'email' => 'Trường :attribute không đúng định dạng',
+            'unique' => ':attribute đã tồn tại'
+        ], [
+            'ten' => 'Tên nhà cung cấp',
+            'diaChi' => 'Địa chỉ',
+            'sdt' => 'Số điện thoại',
+            'email' => 'Địa chỉ email',
+            'MST' => 'Mã số thuế',
         ]);
         if ($validator->fails()) {
             $arr = [
@@ -104,7 +117,7 @@ class nhaCungCapController extends Controller
             'diaChi' => 'required',
             'sdt' => 'required|max:11|min:10',
             'email' => 'required|email',
-            'mst' => 'required',
+            'MST' => 'required',
             'idCh' => 'required'
         ], [
             'required' => 'Trường :attribute không được để trống',
@@ -116,7 +129,7 @@ class nhaCungCapController extends Controller
             'diaChi' => 'Địa chỉ',
             'sdt' => 'Số điện thoại',
             'email' => 'Địa chỉ email',
-            'mst' => 'Mã số thuế',
+            'MST' => 'Mã số thuế',
         ]);
         if ($validator->fails()) {
             $arr = [
@@ -130,7 +143,7 @@ class nhaCungCapController extends Controller
         $ncc->diaChi = $input['diaChi'];
         $ncc->email = $input['email'];
         $ncc->sdt = $input['sdt'];
-        $ncc->MST = $input['mst'];
+        $ncc->MST = $input['MST'];
         $ncc->idCh = $input['idCh'];
         $ncc->save();
         // $ncc = nhaCungCap::update($input);

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Resources\san_pham as san_phamResource;
 use App\Models\san_pham;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 class san_phamController extends Controller
 {
@@ -121,4 +122,131 @@ class san_phamController extends Controller
         ];
         return response()->json($arr, 200);
     }
+    public function sptheoDm(string $id)
+    {
+        // $product = san_pham::find($id);
+        $product=DB::table('san_pham')->where('idDm','=',$id);
+        if (is_null($product)) {
+            $arr = [
+            'success' => false,
+            'message' => 'Không có sản phẩm này',
+            'dara' => []
+            ];
+            return response()->json($arr, 200);
+        }
+        $arr = [
+        'status' => true,
+        'message' => "Chi tiết sản phẩm ",
+        'data'=> new san_phamResource($product)
+        ];
+        return response()->json($arr, 201);
+    }
+    public function sptheoTh(string $id)
+    {
+        // $product = san_pham::find($id);
+        $product=DB::table('san_pham')->where('idTh','=',$id);
+        if (is_null($product)) {
+            $arr = [
+            'success' => false,
+            'message' => 'Không có sản phẩm này',
+            'dara' => []
+            ];
+            return response()->json($arr, 200);
+        }
+        $arr = [
+        'status' => true,
+        'message' => "Chi tiết sản phẩm ",
+        'data'=> new san_phamResource($product)
+        ];
+        return response()->json($arr, 201);
+    }
+    public function sptheoCh(string $id)
+    {
+        // $product = san_pham::find($id);
+        $product=DB::table('san_pham')->where('idCh','=',$id);
+        if (is_null($product)) {
+            $arr = [
+            'success' => false,
+            'message' => 'Không có sản phẩm này',
+            'dara' => []
+            ];
+            return response()->json($arr, 200);
+        }
+        $arr = [
+        'status' => true,
+        'message' => "Chi tiết sản phẩm ",
+        'data'=> new san_phamResource($product)
+        ];
+        return response()->json($arr, 201);
+    }
+    public function sptheoNcc(string $id)
+    {
+        // $product = san_pham::find($id);
+        $product=DB::table('san_pham')->where('idNcc','=',$id);
+        if (is_null($product)) {
+            $arr = [
+            'success' => false,
+            'message' => 'Không có sản phẩm này',
+            'dara' => []
+            ];
+            return response()->json($arr, 200);
+        }
+        $arr = [
+        'status' => true,
+        'message' => "Chi tiết sản phẩm ",
+        'data'=> new san_phamResource($product)
+        ];
+        return response()->json($arr, 201);
+    }
+    public function sptheoLoaiSp(string $id)
+    {
+        // $product = san_pham::find($id);
+        $product=DB::table('san_pham')->where('idLoaiSp','=',$id);
+        if (is_null($product)) {
+            $arr = [
+            'success' => false,
+            'message' => 'Không có sản phẩm này',
+            'dara' => []
+            ];
+            return response()->json($arr, 200);
+        }
+        $arr = [
+        'status' => true,
+        'message' => "Chi tiết sản phẩm ",
+        'data'=> new san_phamResource($product)
+        ];
+        return response()->json($arr, 201);
+    }
+    public function spSearch(string $search,$kieu_search)
+    {
+        // $product = san_pham::find($id);
+        if($kieu_search==0)
+        $product=DB::table('san_pham')
+        ->where('ten','like','%'.$search.'%');
+
+        if($kieu_search==1)
+        $product->orWhere('maSp','like','%'.$search.'%');
+
+        if($kieu_search==2){
+        $product->orWhere('ten','like','%'.$search.'%');
+        }
+
+        if (is_null($product)) {
+            $arr = [
+            'success' => false,
+            'message' => 'Không có sản phẩm ban cần tìm',
+            'dara' => []
+            ];
+            return response()->json($arr, 200);
+        }
+        $arr = [
+        'status' => true,
+        'message' => "Danh sách sản phẩm ",
+        'data'=> new san_phamResource($product)
+        ];
+        return response()->json($arr, 201);
+    }
+
+
+
 }

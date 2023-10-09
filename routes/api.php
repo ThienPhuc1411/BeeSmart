@@ -3,6 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\nhaCungCapController;
+use App\Http\Controllers\ThuongHieuController;
+use App\Http\Controllers\LoaiSanPhamController;
+use App\Http\Controllers\DanhMucSanPhamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +23,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::resource('nha-cung-cap', nhaCungCapController::class);
+Route::resources([
+    'thuong-hieu' => ThuongHieuController::class,
+    'loai-san-pham' => LoaiSanPhamController::class,
+    'danh-muc-san-pham' => DanhMucSanPhamController::class
+]);

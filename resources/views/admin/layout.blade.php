@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>BeeSmart - Admin</title>
+    <title>BeeSmart - Admin </title>
 
     <!-- Custom fonts for this template-->
     <link href="/ad/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -141,7 +141,7 @@
                     <span>Tables</span></a>
             </li> --}}
 
-            
+
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 

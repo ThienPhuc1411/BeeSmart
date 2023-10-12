@@ -1,6 +1,7 @@
 {
     "(and :count more error)": "(và :count lỗi khác)",
     "(and :count more errors)": "(và :count lỗi khác)",
+
     "A fresh verification link has been sent to your email address.": "Một liên kết xác minh mới đã được gửi đến địa chỉ email của bạn.",
     "All rights reserved.": "Đã đăng kí bản quyền",
     "Before proceeding, please check your email for a verification link.": "Trước khi tiếp tục, vui lòng kiểm tra email của bạn để biết liên kết xác minh.",

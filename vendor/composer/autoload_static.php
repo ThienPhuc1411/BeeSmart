@@ -590,6 +590,7 @@ class ComposerStaticInit67908f37e10d21a7f9937769c4d1deac
         'App\\Http\\Controllers\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\DanhMucSanPhamController' => __DIR__ . '/../..' . '/app/Http/Controllers/DanhMucSanPhamController.php',
+        'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\LoaiSanPhamController' => __DIR__ . '/../..' . '/app/Http/Controllers/LoaiSanPhamController.php',
         'App\\Http\\Controllers\\ThuongHieuController' => __DIR__ . '/../..' . '/app/Http/Controllers/ThuongHieuController.php',
         'App\\Http\\Controllers\\nhaCungCapController' => __DIR__ . '/../..' . '/app/Http/Controllers/nhaCungCapController.php',

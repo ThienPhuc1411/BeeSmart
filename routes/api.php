@@ -2,16 +2,23 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CuaHangController;
+use App\Http\Controllers\LoaiCHController;
+use App\Http\Controllers\DanhMucTinController;
+use App\Http\Controllers\TinController;
 use App\Http\Controllers\nhaCungCapController;
 use App\Http\Controllers\ThuongHieuController;
 use App\Http\Controllers\LoaiSanPhamController;
 use App\Http\Controllers\DanhMucSanPhamController;
 
 
-
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::resource('cuahang', CuaHangController::class);
+Route::resource('loaicuahang',LoaiCHController::class);
+Route::resource('danhmuctin',DanhMucTinController::class);
+Route::resource('tin',TinController::class);
 
 
 use App\Http\Controllers\san_phamController;
@@ -37,4 +44,3 @@ Route::resources([
     'loai-san-pham' => LoaiSanPhamController::class,
     'danh-muc-san-pham' => DanhMucSanPhamController::class
 ]);
-

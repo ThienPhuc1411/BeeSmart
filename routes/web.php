@@ -29,3 +29,9 @@ Route::prefix('admin')->group(function(){
     Route::get('list-profit-month',[AdminController::class,'list_profit_month']);
 });
 
+
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

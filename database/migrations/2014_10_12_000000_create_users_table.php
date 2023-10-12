@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->Increments('id');
-            $table->string('HoTen');
-            $table->string('Avatar');
+            $table->string('name');
+            $table->string('Avatar')->nullable();
             $table->string('email')->unique();
             $table->string('Diachi')->nullable();
             $table->string('sdt',13);

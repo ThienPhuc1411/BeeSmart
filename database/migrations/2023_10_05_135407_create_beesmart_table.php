@@ -77,10 +77,9 @@ return new class extends Migration
             $table->double('khuyenMai')->nullable();
             $table->integer('soLuong')->default(1);
             $table->integer('theTich')->nullable();
-            $table->tinyInteger('donVi',2);
-            $table->date('ngayTao');
             $table->integer('khoiLuong')->nullable();
             $table->tinyInteger('anHien')->default(1);
+            $table->tinyInteger('donVi');
             $table->integer('idCh')->unsigned();
             $table->foreign('idCh')->references('id')->on('cua_hang')->onDelete('cascade')->onDelete('restrict');
             $table->integer('idTh')->unsigned();

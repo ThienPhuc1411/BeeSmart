@@ -46,9 +46,9 @@ class LoaiCHController extends Controller
         // Tạo một cửa hàng mới và lưu vào cơ sở dữ liệu
         $store = LoaiCuaHang::create($input);
         $arr = ['status' => true,
-        'message'=>"Sản phẩm đã lưu thành công",
+        'message'=>"Loại cửa hàng đã lưu thành công",
         'data'=> new LoaiStore($store)
-    ];
+        ];
         return response()->json($arr, 201);
     }
 
@@ -96,6 +96,10 @@ class LoaiCHController extends Controller
         }
 
         $store->delete();
-        return response()->json(['message' => 'Xóa cửa hàng thành công'], 204);
+        $arr = ['status' => true,
+        'message'=>"Loại cửa hàng đã xóa thành công",
+        'data'=> []
+        ];
+        return response()->json($arr, 204);
     }
 }

@@ -49,7 +49,7 @@ class CuaHangController extends Controller
         // Tạo một cửa hàng mới và lưu vào cơ sở dữ liệu
         $store = CuaHang::create($input);
         $arr = ['status' => true,
-        'message'=>"Sản phẩm đã lưu thành công",
+        'message'=>"Cửa hàng đã lưu thành công",
         'data'=> new Store($store)
     ];
         return response()->json($arr, 201);

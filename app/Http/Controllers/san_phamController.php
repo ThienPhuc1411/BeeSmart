@@ -9,6 +9,7 @@ use App\Models\san_pham;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 class san_phamController extends Controller
 {
 
@@ -40,7 +41,8 @@ class san_phamController extends Controller
           'idDm' => 'required',
           'idTh' => 'required',
           'idLoai' => 'required',
-          'maSp' => 'required'
+          'maSp' => 'required',
+          'donVi'=>'required'
         ]);
         if($validator->fails()){
             $arr = [
@@ -50,13 +52,43 @@ class san_phamController extends Controller
             ];
             return response()->json($arr, 200);
         }
-
+        if(empty($input['khoiLuong'])){
+            $input['khoiLuong']=null;
+        }else{
+           $input['theTich']=null;
+        }
+        $img=$request->file('img');
+        $destination=public_path('/upload');
+        $ext=$img->getClientOriginalExtension();
+        $fileName= Str::random(6).'_'.time().'.'.$ext;
+        $img->move($destination,$fileName);
+        $input['img']=$fileName;
         $mytime=Carbon::now()->format("Y-m-d");
         $input['ngayTao']=$mytime;
         $product = san_pham::create($input);
+
+        $datalink=DB::table('san_pham')
+        ->join('cua_hang','cua_hang.id','san_pham.idCh')
+        ->join('dm_san_pham','dm_san_pham.id','san_pham.idDm')
+        ->join('loai_san_pham','loai_san_pham.id','san_pham.idLoai')
+        ->join('nha_cung_cap','nha_cung_cap.id','san_pham.idNcc')
+        ->join('thuong_hieu','thuong_hieu.id','san_pham.idTh')
+        ->join('loai_cua_hang','loai_cua_hang.id','cua_hang.idLoaiCh')
+        ->where('san_pham.id','=',$product->id)
+        ->select(
+        'cua_hang.tenCh as tenCh',
+        'dm_san_pham.ten as tenDm',
+        'loai_san_pham.ten as tenLoaiSp',
+        'nha_cung_cap.ten as tenNcc',
+        'thuong_hieu.ten as tenTh',
+        'loai_cua_hang.ten as tenLoaiCh'
+        )->first();
+
+
         $arr = ['status' => true,
             'message'=>"Sản phẩm đã lưu thành công",
-            'data'=> new san_phamResource($product)
+            'data'=>new san_phamResource($product),
+            'datalink'=> $datalink
         ];
         return response()->json($arr, 201);
     }
@@ -70,7 +102,7 @@ class san_phamController extends Controller
             $arr = [
             'success' => false,
             'message' => 'Không có sản phẩm này',
-            'dara' => []
+            'data' => []
             ];
             return response()->json($arr, 200);
         }
@@ -95,13 +127,22 @@ class san_phamController extends Controller
         $product->giaVon = $input['giaVon'];
         $product->giaBan = $input['giaBan'];
         $product->donVi = $input['donVi'];
-        $product->khuyenMai = $input['khuyenMai'];
-        // if($input['khoiLuong']){
-        //     $product->khoiLuong = null;
-        // }
-        // if($input['theTich']){
-        //     $product->theTich = null;
-        // }
+        if(!empty($input['khoiLuong'])){
+            $product->khoiLuong=$input['khoiLuong'];
+         }
+        if(!empty($input['theTich'])){
+            $product->theTich=  $input['theTich'];
+        }
+        if(!empty($input['khoiLuong'])&&!empty($input['theTich'])){
+            $arr = [
+                'success' => false,
+                'message' => '1 sản phẩm không thể vừa có Khối Lượng và Thể Tích',
+                'data' => []
+                ];
+                return response()->json($arr, 200);
+
+
+        }
         $product->soLuong = $input['soLuong'];
         $product->anHien = $input['anHien'];
         $product->idCh = $input['idCh'];
@@ -111,12 +152,36 @@ class san_phamController extends Controller
         $product->idLoai = $input['idLoai'];
         $product->maSp = $input['maSp'];
         $mytime=Carbon::now()->format("Y-m-d");
+        $img=$request->file('img');
+        $destination=public_path('/upload');
+        $ext=$img->getClientOriginalExtension();
+        $fileName= Str::random(6).'_'.time().'.'.$ext;
+        $img->move($destination,$fileName);
+        $product->img=$fileName;
         $product->ngayTao=$mytime;
         $product->save();
+
+        $datalink=DB::table('san_pham')
+        ->join('cua_hang','cua_hang.id','san_pham.idCh')
+        ->join('dm_san_pham','dm_san_pham.id','san_pham.idDm')
+        ->join('loai_san_pham','loai_san_pham.id','san_pham.idLoai')
+        ->join('nha_cung_cap','nha_cung_cap.id','san_pham.idNcc')
+        ->join('thuong_hieu','thuong_hieu.id','san_pham.idTh')
+        ->join('loai_cua_hang','loai_cua_hang.id','cua_hang.idLoaiCh')
+        ->where('san_pham.id','=',$product->id)
+        ->select(
+        'cua_hang.tenCh as tenCh',
+        'dm_san_pham.ten as tenDm',
+        'loai_san_pham.ten as tenLoaiSp',
+        'nha_cung_cap.ten as tenNcc',
+        'thuong_hieu.ten as tenTh',
+        'loai_cua_hang.ten as tenLoaiCh'
+        )->first();
         $arr = [
             'status' => true,
             'message' => 'Sản phẩm cập nhật thành công',
-            'data' => new san_phamResource($product)
+            'data' => new san_phamResource($product),
+            'datalink'=>$datalink
         ];
         return response()->json($arr, 200);
     }
@@ -134,46 +199,66 @@ class san_phamController extends Controller
     }
     public function sptheoDm(string $id)
     {
-        // $product = san_pham::find($id);
-        $product=DB::table('san_pham')->where('idDm','=',$id);
+
+        $product=DB::table('san_pham')
+        ->join('cua_hang','cua_hang.id','san_pham.idCh')
+        ->join('dm_san_pham','dm_san_pham.id','san_pham.idDm')
+        ->join('loai_san_pham','loai_san_pham.id','san_pham.idLoai')
+        ->join('nha_cung_cap','nha_cung_cap.id','san_pham.idNcc')
+        ->join('thuong_hieu','thuong_hieu.id','san_pham.idTh')
+        ->join('loai_cua_hang','loai_cua_hang.id','cua_hang.idLoaiCh')
+        // ->where('san_pham.id','=',$product->id)
+        ->where('idDm','=',$id)
+        ->select(
+            'san_pham.*',
+            'cua_hang.tenCh as tenCh',
+            'dm_san_pham.ten as tenDm',
+            'loai_san_pham.ten as tenLoaiSp',
+            'nha_cung_cap.ten as tenNcc',
+            'thuong_hieu.ten as tenTh',
+            'loai_cua_hang.ten as tenLoaiCh'
+            )
+        ->get();
+        dd($product);
         if (is_null($product)) {
             $arr = [
             'success' => false,
             'message' => 'Không có sản phẩm này',
-            'dara' => []
+            'data' => []
             ];
             return response()->json($arr, 200);
         }
         $arr = [
         'status' => true,
         'message' => "Chi tiết sản phẩm ",
-        'data'=> new san_phamResource($product)
+        'data'=> $product
         ];
+
         return response()->json($arr, 201);
     }
     public function sptheoTh(string $id)
     {
-        // $product = san_pham::find($id);
-        $product=DB::table('san_pham')->where('idTh','=',$id);
+
+        $product=DB::table('san_pham')->where('idTh','=',$id)->get();;
         if (is_null($product)) {
             $arr = [
             'success' => false,
             'message' => 'Không có sản phẩm này',
-            'dara' => []
+            'data' => []
             ];
             return response()->json($arr, 200);
         }
         $arr = [
         'status' => true,
         'message' => "Chi tiết sản phẩm ",
-        'data'=> new san_phamResource($product)
+        'data'=> $product
         ];
         return response()->json($arr, 201);
     }
     public function sptheoCh(string $id)
     {
-        // $product = san_pham::find($id);
-        $product=DB::table('san_pham')->where('idCh','=',$id);
+
+        $product=DB::table('san_pham')->where('idCh','=',$id)->get();;
         if (is_null($product)) {
             $arr = [
             'success' => false,
@@ -185,14 +270,14 @@ class san_phamController extends Controller
         $arr = [
         'status' => true,
         'message' => "Chi tiết sản phẩm ",
-        'data'=> new san_phamResource($product)
+        'data'=> $product
         ];
         return response()->json($arr, 201);
     }
     public function sptheoNcc(string $id)
     {
-        // $product = san_pham::find($id);
-        $product=DB::table('san_pham')->where('idNcc','=',$id);
+
+        $product=DB::table('san_pham')->where('idNcc','=',$id)->get();;
         if (is_null($product)) {
             $arr = [
             'success' => false,
@@ -204,14 +289,14 @@ class san_phamController extends Controller
         $arr = [
         'status' => true,
         'message' => "Chi tiết sản phẩm ",
-        'data'=> new san_phamResource($product)
+        'data'=> $product
         ];
         return response()->json($arr, 201);
     }
     public function sptheoLoaiSp(string $id)
     {
-        // $product = san_pham::find($id);
-        $product=DB::table('san_pham')->where('idLoaiSp','=',$id);
+
+        $product=DB::table('san_pham')->where('idLoai','=',$id)->get();;
         if (is_null($product)) {
             $arr = [
             'success' => false,
@@ -223,13 +308,13 @@ class san_phamController extends Controller
         $arr = [
         'status' => true,
         'message' => "Chi tiết sản phẩm ",
-        'data'=> new san_phamResource($product)
+        'data'=> $product
         ];
         return response()->json($arr, 201);
     }
     public function spSearch(string $search,$kieu_search)
     {
-        // $product = san_pham::find($id);
+
         if($kieu_search==0)
         $product=DB::table('san_pham')
         ->where('ten','like','%'.$search.'%');

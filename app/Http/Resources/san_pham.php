@@ -30,6 +30,7 @@ class san_pham extends JsonResource
           'idTh' => $this->idTh,
           'idLoai' => $this->idLoai,
           'maSp' => $this->maSp,
+          'img'=>$this->img,
           'ngayTao' => $this->ngayTao
         ];
       }

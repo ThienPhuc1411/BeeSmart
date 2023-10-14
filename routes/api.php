@@ -26,10 +26,10 @@ Route::patch('san-pham/{id}',[san_phamController::class,'update']);
 Route::delete('san-pham/{id}',[san_phamController::class,'destroy']);
 
 Route::get('sp-dm/{id}',[san_phamController::class,'sptheoDm']);
-Route::get('sp-th',[san_phamController::class,'sptheoTh']);
-Route::get('sp-ch',[san_phamController::class,'sptheoCh']);
-Route::get('sp-loaiSp',[san_phamController::class,'sptheoLoaiSp']);
-Route::get('sp-ncc',[san_phamController::class,'sptheoNcc']);
+Route::get('sp-th/{id}',[san_phamController::class,'sptheoTh']);
+Route::get('sp-ch/{id}',[san_phamController::class,'sptheoCh']);
+Route::get('sp-loaiSp/{id}',[san_phamController::class,'sptheoLoaiSp']);
+Route::get('sp-ncc/{id}',[san_phamController::class,'sptheoNcc']);
 
 Route::resource('nha-cung-cap', nhaCungCapController::class);
 Route::resources([

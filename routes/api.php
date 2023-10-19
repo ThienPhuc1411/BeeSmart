@@ -24,6 +24,7 @@ Route::get('san-pham/{id}',[san_phamController::class,'show']);
 Route::put('san-pham/{id}',[san_phamController::class,'update']);
 Route::patch('san-pham/{id}',[san_phamController::class,'update']);
 Route::delete('san-pham/{id}',[san_phamController::class,'destroy']);
+Route::get('test',[san_phamController::class,'sort_search']);
 
 Route::get('sp-dm/{id}',[san_phamController::class,'sptheoDm']);
 Route::get('sp-th/{id}',[san_phamController::class,'sptheoTh']);

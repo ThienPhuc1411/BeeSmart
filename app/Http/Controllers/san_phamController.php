@@ -57,12 +57,14 @@ class san_phamController extends Controller
         }else{
            $input['theTich']=null;
         }
-        $img=$request->file('img');
-        $destination=public_path('/upload');
-        $ext=$img->getClientOriginalExtension();
-        $fileName= Str::random(6).'_'.time().'.'.$ext;
-        $img->move($destination,$fileName);
-        $input['img']=$fileName;
+        if(!empty($input['img'])){
+            $img=$request->file('img');
+            $destination=public_path('/upload');
+            $ext=$img->getClientOriginalExtension();
+            $fileName= Str::random(6).'_'.time().'.'.$ext;
+            $img->move($destination,$fileName);
+            $input['img']=$fileName;
+        }
         $mytime=Carbon::now()->format("Y-m-d");
         $input['ngayTao']=$mytime;
         $product = san_pham::create($input);
@@ -73,15 +75,13 @@ class san_phamController extends Controller
         ->join('loai_san_pham','loai_san_pham.id','san_pham.idLoai')
         ->join('nha_cung_cap','nha_cung_cap.id','san_pham.idNcc')
         ->join('thuong_hieu','thuong_hieu.id','san_pham.idTh')
-        ->join('loai_cua_hang','loai_cua_hang.id','cua_hang.idLoaiCh')
         ->where('san_pham.id','=',$product->id)
         ->select(
         'cua_hang.tenCh as tenCh',
         'dm_san_pham.ten as tenDm',
         'loai_san_pham.ten as tenLoaiSp',
         'nha_cung_cap.ten as tenNcc',
-        'thuong_hieu.ten as tenTh',
-        'loai_cua_hang.ten as tenLoaiCh'
+        'thuong_hieu.ten as tenTh'
         )->first();
 
 
@@ -342,6 +342,119 @@ class san_phamController extends Controller
         return response()->json($arr, 201);
     }
 
+    public function sort_search(Request $request){
+
+        $input = $request->all();
+        $query=DB::table('san_pham')->select('*');
+        $dm=[];
+
+
+
+        // dd($input);
+        if(!empty($input['keyword'])){
+            $query=$query->where('ten','=',$input['keyword']);
+            $check=DB::table('san_pham')->select('san_pham.ten')->get();
+            foreach($check as $c){
+                if($input['keyword']==$c){
+                    if(!empty($input['dm'])){
+                        $query=$query->where('idDm','=',$input['dm']);
+
+                    }
+                    if(!empty($input['th'])){
+                        $query=$query->where('idTh','=',$input['th']);
+                    }
+                    if(!empty($input['ch'])){
+                        $query=$query->where('idCh','=',$input['ch']);
+                        $ch = [];
+                        $ch = $input['ch'];
+                        $ch = explode(',',$ch);
+                        foreach($ch as $ch){
+                            $query=$query->orWhere('idCh','=',$ch);
+                        }
+                    }
+                    if(!empty($input['ncc'])){
+                        $query=$query->where('idNcc','=',$input['ncc']);
+                    }
+                    if(!empty($input['loai'])){
+                        $query=$query->where('idLoai','=',$input['loai']);
+                    }
+                }else{
+                    $arr = [
+                        'status' => true,
+                        'message' => "Danh sách sản phẩm",
+                        'data'=>$query
+                        ];
+                }
+            }
+
+
+        }else{
+            if(!empty($input['dm'])){
+                $query=$query->where('idDm','=',$input['dm']);
+
+            }
+            if(!empty($input['th'])){
+                $query=$query->where('idTh','=',$input['th']);
+            }
+            if(!empty($input['ch'])){
+                $query=$query->where('idCh','=',$input['ch']);
+                $ch = [];
+                $ch = $input['ch'];
+                $ch = explode(',',$ch);
+                foreach($ch as $ch){
+                    $query=$query->orWhere('idCh','=',$ch);
+                }
+            }
+            if(!empty($input['ncc'])){
+                $query=$query->where('idNcc','=',$input['ncc']);
+            }
+            if(!empty($input['loai'])){
+                $query=$query->where('idLoai','=',$input['loai']);
+            }
+        }
+        if(!empty($input['dm'])){
+            $query=$query->where('idDm','=',$input['dm']);
+
+        }
+        if(!empty($input['th'])){
+            $query=$query->where('idTh','=',$input['th']);
+        }
+        if(!empty($input['ch'])){
+            $query=$query->where('idCh','=',$input['ch']);
+            $ch = [];
+            $ch = $input['ch'];
+            $ch = explode(',',$ch);
+            foreach($ch as $ch){
+                $query=$query->orWhere('idCh','=',$ch);
+            }
+        }
+        if(!empty($input['ncc'])){
+            $query=$query->where('idNcc','=',$input['ncc']);
+        }
+        if(!empty($input['loai'])){
+            $query=$query->where('idLoai','=',$input['loai']);
+        }
+
+
+        $query=$query->get();
+        if(count($query)!=0){
+            $arr = [
+                'status' => true,
+                'message' => "Danh sách sản phẩm",
+                'data'=>$query
+                ];
+        }else{
+            $arr = [
+                'status' => false,
+                'message' => "Khong kiem dc san pham"
+                ];
+        }
+
+
+        // $products = san_pham::all();
+
+        return response()->json($arr, 200);
+    }
 
 
 }

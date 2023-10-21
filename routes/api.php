@@ -10,6 +10,7 @@ use App\Http\Controllers\nhaCungCapController;
 use App\Http\Controllers\ThuongHieuController;
 use App\Http\Controllers\LoaiSanPhamController;
 use App\Http\Controllers\DanhMucSanPhamController;
+use Laravel\Socialite\Facades\Socialite;
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -44,3 +45,11 @@ Route::resources([
     'loai-san-pham' => LoaiSanPhamController::class,
     'danh-muc-san-pham' => DanhMucSanPhamController::class
 ]);
+
+Route::get('chinh-sach-rieng-tu',function(){
+    return '<h1>Chính sách riêng tư</h1>';
+});
+
+Route::get('auth/facebook',function(){
+    return Socialite::driver('facebook')->redirect();
+});

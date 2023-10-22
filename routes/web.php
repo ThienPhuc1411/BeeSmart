@@ -19,7 +19,6 @@ Route::get('/', function () {
 
 
 Use App\Http\Controllers\AdminController;
-Route::prefix('admin')->group(function(){
     Route::get('/',[AdminController::class,'index_admin']);
     Route::get('list-client',[AdminController::class,'list_client']);
     Route::get('list-post',[AdminController::class,'list_post']);
@@ -27,7 +26,6 @@ Route::prefix('admin')->group(function(){
     Route::get('list-reg',[AdminController::class,'list_reg']);
     Route::get('list-profit-day',[AdminController::class,'list_profit_day']);
     Route::get('list-profit-month',[AdminController::class,'list_profit_month']);
-});
 
 
 

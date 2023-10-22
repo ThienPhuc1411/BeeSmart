@@ -12,7 +12,12 @@ class CuaHangController extends Controller
     public function index()
     {
         $stores = CuaHang::all();
-        return response()->json(['stores' => $stores], 200);
+        $arr = [
+            'status' => true,
+            'message' => "Danh sách cửa hàng",
+            'data' => CuaHang::collection($stores)
+        ];
+        return response()->json($arr, 200);
     }
 
     // Hiển thị thông tin của một cửa hàng cụ thể
@@ -33,7 +38,7 @@ class CuaHangController extends Controller
         $input=$request->all();
         // Validate dữ liệu đầu vào
         $validatedData =Validator::make($input,[
-            'ten_ch' => 'required|string|max:50',
+            'tenCh' => 'required|string|max:50',
             'diaChi' => 'required|string|max:255',
             'Member' => 'required|boolean',
             'idLoaiCh' => 'required|integer',
@@ -62,7 +67,7 @@ class CuaHangController extends Controller
 
         // Validate dữ liệu đầu vào
         $validator = Validator::make($input, [
-            'ten_ch' => 'required|string|max:50',
+            'tenCh' => 'required|string|max:50',
             'diaChi' => 'required|string|max:255',
             'Member' => 'required|boolean',
             'idLoaiCh' => 'required|integer',
@@ -82,7 +87,7 @@ class CuaHangController extends Controller
             return response()->json(['message' => 'Cửa hàng không tồn tại'], 404);
         }
         // Cập nhật thông tin cửa hàng
-        $store->ten_ch = $input['ten_ch'];
+        $store->tenCh = $input['tenCh'];
         $store->diaChi = $input['diaChi'];
         $store->Member = $input['Member'];
         $store->idLoaiCh = $input['idLoaiCh'];

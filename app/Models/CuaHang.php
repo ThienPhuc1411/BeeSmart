@@ -4,6 +4,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 class CuaHang extends Model {
    use HasFactory;
-   protected $table='cuahang';
+   protected $table='cua_hang';
    protected $fillable = ['ten_ch', 'diaChi','Member','idLoaiCh'];
 }

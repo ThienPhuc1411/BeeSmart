@@ -15,12 +15,12 @@ class CuaHangController extends Controller
         $arr = [
             'status' => true,
             'message' => "Danh sách cửa hàng",
-            'data' => CuaHang::collection($stores)
+            'data' => Store::collection($stores)
         ];
         return response()->json($arr, 200);
     }
 
-    // Hiển thị thông tin của một cửa hàng cụ thể
+    // Hiển thị thông tin của một cửa hàng cụ thể 
     public function show($id)
     {
         $store = CuaHang::find($id);

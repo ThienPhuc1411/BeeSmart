@@ -10,16 +10,38 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
+use app\Models\CuaHang;
+use App\Models\nhaCungCap;
 class san_phamController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $products = san_pham::all();
+        // $products = san_pham::all();
+
+        $idCh=$request->idCh;
+        $supplier=nhaCungCap::where('idCh','=',$idCh)->get();
+        $data=DB::table('san_pham')
+        ->join('cua_hang','cua_hang.id','san_pham.idCh')
+        ->join('dm_san_pham','dm_san_pham.id','san_pham.idDm')
+        ->join('loai_san_pham','loai_san_pham.id','san_pham.idLoai')
+        ->join('nha_cung_cap','nha_cung_cap.id','san_pham.idNcc')
+        ->join('thuong_hieu','thuong_hieu.id','san_pham.idTh')
+        ->select(
+            'san_pham.*',
+        'cua_hang.tenCh as tenCh',
+        'dm_san_pham.ten as tenDm',
+        'loai_san_pham.ten as tenLoaiSp',
+        'nha_cung_cap.ten as tenNcc',
+        'thuong_hieu.ten as tenTh'
+        )
+        ->where('san_pham.idCh','=',$idCh)
+        ->get();
         $arr = [
         'status' => true,
         'message' => "Danh sách sản phẩm",
-        'data'=>san_phamResource::collection($products)
+        'datalink'=>$data,
+        'supplier' => $supplier,
         ];
         return response()->json($arr, 200);
     }
@@ -82,7 +104,7 @@ class san_phamController extends Controller
         'loai_san_pham.ten as tenLoaiSp',
         'nha_cung_cap.ten as tenNcc',
         'thuong_hieu.ten as tenTh'
-        )->first();
+        )->get();
 
 
         $arr = ['status' => true,
@@ -106,17 +128,63 @@ class san_phamController extends Controller
             ];
             return response()->json($arr, 200);
         }
+        $datalink=DB::table('san_pham')
+        ->join('cua_hang','cua_hang.id','san_pham.idCh')
+        ->join('dm_san_pham','dm_san_pham.id','san_pham.idDm')
+        ->join('loai_san_pham','loai_san_pham.id','san_pham.idLoai')
+        ->join('nha_cung_cap','nha_cung_cap.id','san_pham.idNcc')
+        ->join('thuong_hieu','thuong_hieu.id','san_pham.idTh')
+        ->where('san_pham.id','=',$id)
+        ->select(
+            'san_pham.*',
+        'cua_hang.tenCh as tenCh',
+        'dm_san_pham.ten as tenDm',
+        'loai_san_pham.ten as tenLoaiSp',
+        'nha_cung_cap.ten as tenNcc',
+        'thuong_hieu.ten as tenTh'
+        )->get();
         $arr = [
         'status' => true,
         'message' => "Chi tiết sản phẩm ",
-        'data'=> new san_phamResource($product)
+        // 'data'=> new san_phamResource($product),
+        'datalink'=>$datalink
         ];
         return response()->json($arr, 201);
     }
 
     public function edit(string $id)
     {
-        //
+        $product = san_pham::find($id);
+        if (is_null($product)) {
+            $arr = [
+            'success' => false,
+            'message' => 'Không có sản phẩm này',
+            'data' => []
+            ];
+            return response()->json($arr, 200);
+        }
+        $datalink=DB::table('san_pham')
+        ->join('cua_hang','cua_hang.id','san_pham.idCh')
+        ->join('dm_san_pham','dm_san_pham.id','san_pham.idDm')
+        ->join('loai_san_pham','loai_san_pham.id','san_pham.idLoai')
+        ->join('nha_cung_cap','nha_cung_cap.id','san_pham.idNcc')
+        ->join('thuong_hieu','thuong_hieu.id','san_pham.idTh')
+        ->where('san_pham.id','=',$id)
+        ->select(
+            'san_pham.*',
+        'cua_hang.tenCh as tenCh',
+        'dm_san_pham.ten as tenDm',
+        'loai_san_pham.ten as tenLoaiSp',
+        'nha_cung_cap.ten as tenNcc',
+        'thuong_hieu.ten as tenTh'
+        )->get();
+        $arr = [
+        'status' => true,
+        'message' => "Chi tiết sản phẩm ",
+        // 'data'=> new san_phamResource($product),
+        'datalink'=>$datalink
+        ];
+        return response()->json($arr, 201);
     }
 
     public function update(Request $request, $id)
@@ -167,20 +235,19 @@ class san_phamController extends Controller
         ->join('loai_san_pham','loai_san_pham.id','san_pham.idLoai')
         ->join('nha_cung_cap','nha_cung_cap.id','san_pham.idNcc')
         ->join('thuong_hieu','thuong_hieu.id','san_pham.idTh')
-        ->join('loai_cua_hang','loai_cua_hang.id','cua_hang.idLoaiCh')
         ->where('san_pham.id','=',$product->id)
         ->select(
+        'san_pham.*',
         'cua_hang.tenCh as tenCh',
         'dm_san_pham.ten as tenDm',
         'loai_san_pham.ten as tenLoaiSp',
         'nha_cung_cap.ten as tenNcc',
-        'thuong_hieu.ten as tenTh',
-        'loai_cua_hang.ten as tenLoaiCh'
+        'thuong_hieu.ten as tenTh'
         )->first();
         $arr = [
             'status' => true,
             'message' => 'Sản phẩm cập nhật thành công',
-            'data' => new san_phamResource($product),
+            // 'data' => new san_phamResource($product),
             'datalink'=>$datalink
         ];
         return response()->json($arr, 200);
@@ -236,82 +303,7 @@ class san_phamController extends Controller
 
         return response()->json($arr, 201);
     }
-    public function sptheoTh(string $id)
-    {
 
-        $product=DB::table('san_pham')->where('idTh','=',$id)->get();;
-        if (is_null($product)) {
-            $arr = [
-            'success' => false,
-            'message' => 'Không có sản phẩm này',
-            'data' => []
-            ];
-            return response()->json($arr, 200);
-        }
-        $arr = [
-        'status' => true,
-        'message' => "Chi tiết sản phẩm ",
-        'data'=> $product
-        ];
-        return response()->json($arr, 201);
-    }
-    public function sptheoCh(string $id)
-    {
-
-        $product=DB::table('san_pham')->where('idCh','=',$id)->get();;
-        if (is_null($product)) {
-            $arr = [
-            'success' => false,
-            'message' => 'Không có sản phẩm này',
-            'dara' => []
-            ];
-            return response()->json($arr, 200);
-        }
-        $arr = [
-        'status' => true,
-        'message' => "Chi tiết sản phẩm ",
-        'data'=> $product
-        ];
-        return response()->json($arr, 201);
-    }
-    public function sptheoNcc(string $id)
-    {
-
-        $product=DB::table('san_pham')->where('idNcc','=',$id)->get();;
-        if (is_null($product)) {
-            $arr = [
-            'success' => false,
-            'message' => 'Không có sản phẩm này',
-            'dara' => []
-            ];
-            return response()->json($arr, 200);
-        }
-        $arr = [
-        'status' => true,
-        'message' => "Chi tiết sản phẩm ",
-        'data'=> $product
-        ];
-        return response()->json($arr, 201);
-    }
-    public function sptheoLoaiSp(string $id)
-    {
-
-        $product=DB::table('san_pham')->where('idLoai','=',$id)->get();;
-        if (is_null($product)) {
-            $arr = [
-            'success' => false,
-            'message' => 'Không có sản phẩm này',
-            'dara' => []
-            ];
-            return response()->json($arr, 200);
-        }
-        $arr = [
-        'status' => true,
-        'message' => "Chi tiết sản phẩm ",
-        'data'=> $product
-        ];
-        return response()->json($arr, 201);
-    }
     public function spSearch(string $search,$kieu_search)
     {
 
@@ -346,7 +338,7 @@ class san_phamController extends Controller
 
         $input = $request->all();
         $query=DB::table('san_pham')->select('*');
-        $dm=[];
+
 
 
 
@@ -412,28 +404,28 @@ class san_phamController extends Controller
                 $query=$query->where('idLoai','=',$input['loai']);
             }
         }
-        if(!empty($input['dm'])){
-            $query=$query->where('idDm','=',$input['dm']);
+        // if(!empty($input['dm'])){
+        //     $query=$query->where('idDm','=',$input['dm']);
 
-        }
-        if(!empty($input['th'])){
-            $query=$query->where('idTh','=',$input['th']);
-        }
-        if(!empty($input['ch'])){
-            $query=$query->where('idCh','=',$input['ch']);
-            $ch = [];
-            $ch = $input['ch'];
-            $ch = explode(',',$ch);
-            foreach($ch as $ch){
-                $query=$query->orWhere('idCh','=',$ch);
-            }
-        }
-        if(!empty($input['ncc'])){
-            $query=$query->where('idNcc','=',$input['ncc']);
-        }
-        if(!empty($input['loai'])){
-            $query=$query->where('idLoai','=',$input['loai']);
-        }
+        // }
+        // if(!empty($input['th'])){
+        //     $query=$query->where('idTh','=',$input['th']);
+        // }
+        // if(!empty($input['ch'])){
+        //     $query=$query->where('idCh','=',$input['ch']);
+        //     $ch = [];
+        //     $ch = $input['ch'];
+        //     $ch = explode(',',$ch);
+        //     foreach($ch as $ch){
+        //         $query=$query->orWhere('idCh','=',$ch);
+        //     }
+        // }
+        // if(!empty($input['ncc'])){
+        //     $query=$query->where('idNcc','=',$input['ncc']);
+        // }
+        // if(!empty($input['loai'])){
+        //     $query=$query->where('idLoai','=',$input['loai']);
+        // }
 
 
         $query=$query->get();

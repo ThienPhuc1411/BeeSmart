@@ -15,9 +15,9 @@ use App\Http\Controllers\DanhMucSanPhamController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::resource('cuahang', CuaHangController::class);
-Route::resource('loaicuahang',LoaiCHController::class);
-Route::resource('danhmuctin',DanhMucTinController::class);
+Route::resource('cua-hang', CuaHangController::class);
+Route::resource('loai-cua-hang',LoaiCHController::class);
+Route::resource('danh-muc-tin',DanhMucTinController::class);
 Route::resource('tin',TinController::class);
 
 

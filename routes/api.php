@@ -11,18 +11,18 @@ use App\Http\Controllers\ThuongHieuController;
 use App\Http\Controllers\LoaiSanPhamController;
 use App\Http\Controllers\DanhMucSanPhamController;
 use Laravel\Socialite\Facades\Socialite;
+use App\Http\Controllers\san_phamController;
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::resource('cuahang', CuaHangController::class);
-Route::resource('loaicuahang',LoaiCHController::class);
-Route::resource('danhmuctin',DanhMucTinController::class);
+Route::resource('cua-hang', CuaHangController::class);
+Route::resource('loai-cua-hang',LoaiCHController::class);
+Route::resource('danh-muc-tin',DanhMucTinController::class);
 Route::resource('tin',TinController::class);
 
 
-use App\Http\Controllers\san_phamController;
 
 
 // Route::resource('san-pham', san_phamController::class);
@@ -52,4 +52,8 @@ Route::get('chinh-sach-rieng-tu',function(){
 
 Route::get('auth/facebook',function(){
     return Socialite::driver('facebook')->redirect();
+});
+
+Route::get('/test',function(){
+    return bcrypt('longcho');
 });

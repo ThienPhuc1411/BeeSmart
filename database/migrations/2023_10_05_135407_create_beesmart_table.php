@@ -20,7 +20,7 @@ return new class extends Migration
         Schema::create('cua_hang', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->timestamps();
-            $table->string('tenCh',50);
+            $table->string('ten',50);
             $table->string('diaChi');
             $table->tinyInteger('member')->default(1);
             $table->integer('idLoaiCh')->unsigned();
@@ -77,6 +77,8 @@ return new class extends Migration
             $table->double('khuyenMai')->nullable();
             $table->integer('soLuong')->default(1);
             $table->integer('theTich')->nullable();
+            $table->tinyInteger('donVi',1);
+            $table->date('ngayTao');
             $table->integer('khoiLuong')->nullable();
             $table->date('ngayTao');
             $table->tinyInteger('anHien')->default(1);

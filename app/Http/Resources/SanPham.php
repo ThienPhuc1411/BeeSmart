@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class san_pham extends JsonResource
+class SanPham extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -30,6 +30,7 @@ class san_pham extends JsonResource
           'idTh' => $this->idTh,
           'idLoai' => $this->idLoai,
           'maSp' => $this->maSp,
+          'img'=>$this->img,
           'ngayTao' => $this->ngayTao
         ];
       }

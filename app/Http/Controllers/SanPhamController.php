@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Resources\san_pham as san_phamResource;
-use App\Models\san_pham;
+use App\Http\Resources\SanPham as SanPhamResource;
+use App\Models\SanPham;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use app\Models\CuaHang;
 use App\Models\nhaCungCap;
-class san_phamController extends Controller
+class SanPhamController extends Controller
 {
 
     public function index(Request $request)
@@ -122,7 +122,7 @@ class san_phamController extends Controller
         $mytime=Carbon::now()->format("Y-m-d");
         $input['ngayTao']=$mytime;
         //
-        $product = san_pham::create($input);
+        $product = SanPham::create($input);
         $datalink=DB::table('san_pham')
         ->join('cua_hang','cua_hang.id','san_pham.idCh')
         ->join('dm_san_pham','dm_san_pham.id','san_pham.idDm')
@@ -152,7 +152,7 @@ class san_phamController extends Controller
 
     public function show(string $id)
     {
-        $product = san_pham::find($id);
+        $product = SanPham::find($id);
         if (is_null($product)) {
             $arr = [
             'success' => false,
@@ -187,7 +187,7 @@ class san_phamController extends Controller
 
     public function edit(string $id)
     {
-        $product = san_pham::find($id);
+        $product = SanPham::find($id);
         if (is_null($product)) {
             $arr = [
             'success' => false,
@@ -222,7 +222,7 @@ class san_phamController extends Controller
 
     public function update(Request $request, $id)
     {
-        $product=san_pham::find($id);
+        $product=SanPham::find($id);
         $input = $request->all();
         $validator = Validator::make($input, [
             'ten' => 'required',
@@ -338,7 +338,7 @@ class san_phamController extends Controller
 
     public function destroy(string $id)
     {
-        $product=san_pham::find($id);
+        $product=SanPham::find($id);
         $product->delete();
         $arr = [
             'status' => true,

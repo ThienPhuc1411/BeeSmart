@@ -10,6 +10,7 @@ use App\Http\Controllers\nhaCungCapController;
 use App\Http\Controllers\ThuongHieuController;
 use App\Http\Controllers\LoaiSanPhamController;
 use App\Http\Controllers\DanhMucSanPhamController;
+use App\Http\Controllers\san_phamController;
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -19,10 +20,6 @@ Route::resource('cua-hang', CuaHangController::class);
 Route::resource('loai-cua-hang',LoaiCHController::class);
 Route::resource('danh-muc-tin',DanhMucTinController::class);
 Route::resource('tin',TinController::class);
-
-
-use App\Http\Controllers\san_phamController;
-
 
 // Route::resource('san-pham', san_phamController::class);
 Route::post('san-pham',[san_phamController::class,'store']);

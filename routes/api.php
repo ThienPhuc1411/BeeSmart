@@ -21,8 +21,8 @@ use App\Http\Controllers\san_phamController;
 Route::post('san-pham',[san_phamController::class,'store']);
 Route::get('san-pham',[san_phamController::class,'index']);
 Route::get('san-pham/{id}',[san_phamController::class,'show']);
-Route::put('san-pham/{id}',[san_phamController::class,'update']);
-Route::patch('san-pham/{id}',[san_phamController::class,'update']);
+Route::post('san-pham/{id}',[san_phamController::class,'update']);
+// Route::patch('san-pham/{id}',[san_phamController::class,'update']);
 Route::delete('san-pham/{id}',[san_phamController::class,'destroy']);
 Route::get('test',[san_phamController::class,'sort_search']);
 

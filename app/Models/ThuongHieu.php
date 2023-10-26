@@ -9,5 +9,5 @@ class ThuongHieu extends Model
 {
     use HasFactory;
     protected $table = 'thuong_hieu';
-    protected $fillable = ['ten'];
+    protected $fillable = ['ten', 'idCh'];
 }

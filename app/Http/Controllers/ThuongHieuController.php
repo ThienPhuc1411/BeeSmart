@@ -37,7 +37,8 @@ class ThuongHieuController extends Controller
     public function store(Request $request) {
         $input = $request->all();
         $validator = Validator::make($input, [
-            'ten' => 'required|max:225'
+            'ten' => 'required|max:225',
+            'idCh' => 'required|numeric'
         ]);
         if ($validator->fails()) {
             $arr = [
@@ -92,7 +93,8 @@ class ThuongHieuController extends Controller
     public function update(Request $request, ThuongHieu $thuong_hieu) {
         $input = $request->all();
         $validator = Validator::make($input, [
-            'ten' => 'required'
+            'ten' => 'required',
+            'idCh' => 'required|numeric'
         ]);
         if ($validator->fails()) {
             $arr = [

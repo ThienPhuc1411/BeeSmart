@@ -37,7 +37,8 @@ class DanhMucSanPhamController extends Controller
     public function store(Request $request) {
         $input = $request->all();
         $validator = Validator::make($input, [
-            'ten' => 'required'
+            'ten' => 'required',
+            'idCh' => 'required|numeric'
         ]);
         if ($validator->fails()) {
             $arr = [
@@ -51,7 +52,7 @@ class DanhMucSanPhamController extends Controller
         $arr = [
             'status' => true,
             'message' => 'Thêm danh mục sản phẩm thành công',
-            'data' => new DMSPResource($danhmucsp)
+            'data' => $danhmucsp
         ];
         return response()->json($arr, 201);
     }
@@ -60,7 +61,8 @@ class DanhMucSanPhamController extends Controller
      * Display the specified resource.
      */
     public function show(string $id) {
-        $danhmucsp = DanhMucSanPham::find($id);
+        // $danhmucsp = DanhMucSanPham::find($id);
+        $danhmucsp = DanhMucSanPham::where('id', $id)->withCount('sanPham')->get();
         if (is_null($danhmucsp)) {
             $arr = [
                 'status' => false,
@@ -72,8 +74,8 @@ class DanhMucSanPhamController extends Controller
         $arr = [
             'status' => true,
             'message' => 'Chi tiết danh mục sản phẩm',
-            'data' => new DMSPResource($danhmucsp)
-            // 'data' => $danhmucsp
+            // 'data' => new DMSPResource($danhmucsp)
+            'data' => $danhmucsp
         ];
         return response()->json($arr, 200);
     }
@@ -107,7 +109,7 @@ class DanhMucSanPhamController extends Controller
         $arr = [
             'status' => true,
             'message' => 'Cập nhật thành công',
-            'data' => new DMSPResource($danh_muc_san_pham)
+            'data' => $danh_muc_san_pham
         ];
         return response()->json($arr, 200);
     }

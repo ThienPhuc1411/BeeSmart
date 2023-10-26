@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HoaDonController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CuaHangController;
@@ -42,5 +43,6 @@ Route::resource('nha-cung-cap', nhaCungCapController::class);
 Route::resources([
     'thuong-hieu' => ThuongHieuController::class,
     'loai-san-pham' => LoaiSanPhamController::class,
-    'danh-muc-san-pham' => DanhMucSanPhamController::class
+    'danh-muc-san-pham' => DanhMucSanPhamController::class,
+    'hoa-don' => HoaDonController::class
 ]);

@@ -19,6 +19,7 @@ Route::resource('cuahang', CuaHangController::class);
 Route::resource('loaicuahang',LoaiCHController::class);
 Route::resource('danhmuctin',DanhMucTinController::class);
 Route::resource('tin',TinController::class);
+Route::get('searchByTitle',[TinController::class,'searchByTitle']);
 
 
 use App\Http\Controllers\san_phamController;

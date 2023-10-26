@@ -5,5 +5,5 @@ use Illuminate\Database\Eloquent\Model;
 class CuaHang extends Model {
    use HasFactory;
    protected $table='cua_hang';
-   protected $fillable = ['ten_ch', 'diaChi','Member','idLoaiCh'];
+   protected $fillable = ['tenCh', 'diaChi','member','idLoaiCh','slug'];
 }

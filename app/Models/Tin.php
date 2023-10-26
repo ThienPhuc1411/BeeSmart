@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Tin extends Model
 {
     use HasFactory;
-    protected $table='tin';
+    protected $table='tin_tuc';
     protected $fillable = ['tieuDe','tomTat','noiDung','view','idDmTin','idUsers', 'anHien'];
 }

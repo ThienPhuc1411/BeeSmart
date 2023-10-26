@@ -20,7 +20,7 @@ class CuaHangController extends Controller
         return response()->json($arr, 200);
     }
 
-    // Hiển thị thông tin của một cửa hàng cụ thể 
+    // Hiển thị thông tin của một cửa hàng cụ thể
     public function show($id)
     {
         $store = CuaHang::find($id);
@@ -99,7 +99,7 @@ class CuaHangController extends Controller
             'data' => new Store($store)
         ], 200);
     }
-    
+
     // Xóa một cửa hàng
     public function destroy($id)
     {

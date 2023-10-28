@@ -14,8 +14,8 @@ class CuaHang extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return['ID'=>$this->id,'TenCH'=>$this->ten_ch,
+        return['ID'=>$this->id,'TenCH'=>$this->tenCh,
         'DIACHI'=>$this->diaChi,'IDLCH'=>$this->idLoaiCh,
-        'CR'=>$this->created_at,'UD'=>$this->updated_at,];
+        'CR'=>$this->created_at,'UD'=>$this->updated_at,'Slug'=>$this->slug];
     }
 }

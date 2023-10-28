@@ -6,23 +6,28 @@ use Illuminate\Http\Request;
 use App\Models\Tin;
 use App\Http\Resources\Tin as Tintuc;
 use Validator;
+use DB;
 class TinController extends Controller
 {
     public function index()
      {
          $tintuc = Tin::all();
-         return response()->json(['danhmuctin' => $tintuc], 200);
+         return response()->json(['danhsachtin' => $tintuc], 200);
      }
 
-     // Hiển thị thông tin của một cửa hàng cụ thể
+     // Hiển thị thông tin của một tin cụ thể
      public function show($id)
      {
-         $tintuc = Tin::find($id);
- 
+        $tintuc = Tin::find($id);
+        $tintuc->increment('view', 1);
+        $tintuc->save();
          if (!$tintuc) {
              return response()->json(['message' => 'Tin không tồn tại'], 404);
          }
- 
+        // // Tăng số lượng view của tin tức
+        // DB::table('tin_tuc')->where('id', $id)->increment('view');
+        // DB::table('tin_tuc')->where('id', $id)->increment('view');
+
          return response()->json(['tintuc' => $tintuc], 200);
      }
  
@@ -48,7 +53,7 @@ class TinController extends Controller
              ];
              return response()->json($arr, 200);
           }
-         // Tạo một cửa hàng mới và lưu vào cơ sở dữ liệu
+         // Tạo một tin mới và lưu vào cơ sở dữ liệu
          $tintuc = Tin::create($input);
          $arr = ['status' => true,
          'message'=>"Tin đã lưu thành công",
@@ -57,7 +62,7 @@ class TinController extends Controller
          return response()->json($arr, 201);
      }
  
-     // Sửa thông tin của một cửa hàng
+     // Sửa thông tin của một tin tức
      public function update(Request $request, $id)
  {
          $input = $request->all();
@@ -86,7 +91,7 @@ class TinController extends Controller
          if (!$tintuc) {
              return response()->json(['message' => 'Tin không tồn tại'], 404);
          }
-         // Cập nhật thông tin cửa hàng
+         // Cập nhật tin tức
          $tintuc->tieuDe = $input['tieuDe'];
          $tintuc->tomTat = $input['tomTat'];
          $tintuc->noiDung = $input['noiDung'];
@@ -103,7 +108,7 @@ class TinController extends Controller
          ], 200);
      }
      
-     // Xóa một cửa hàng
+     // Xóa một tin
      public function destroy($id)
      {
          $tintuc = Tin::find($id);
@@ -115,4 +120,18 @@ class TinController extends Controller
          $tintuc->delete();
          return response()->json(['message' => 'Tin xóa thành công'], 204);
      }
+
+     public function searchByTitle(Request $request)
+     {
+         $keyword = $request->input('keyword');
+         
+         $tintuc = Tin::where('tieuDe', 'like', "%$keyword%")->get();
+         
+         if ($tintuc->isEmpty()) {
+             return response()->json(['message' => 'Không tìm thấy tin'], 404);
+         }
+         
+         return response()->json(['tincuabanla' => $tintuc], 200);
+     }
+     
 }

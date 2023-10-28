@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\CuaHang;
 use App\Http\Resources\CuaHang as Store;
 use Validator;
+use Illuminate\Support\Str;
 class CuaHangController extends Controller
 {
     // Hiển thị danh sách cửa hàng
@@ -21,9 +22,9 @@ class CuaHangController extends Controller
     }
 
     // Hiển thị thông tin của một cửa hàng cụ thể
-    public function show($id)
+    public function show($slug)
     {
-        $store = CuaHang::find($id);
+        $store = CuaHang::where('slug', $slug)->first();
 
         if (!$store) {
             return response()->json(['message' => 'Cửa hàng không tồn tại'], 404);
@@ -36,11 +37,12 @@ class CuaHangController extends Controller
     public function store(Request $request)
     {
         $input=$request->all();
+        // dd($input);
         // Validate dữ liệu đầu vào
         $validatedData =Validator::make($input,[
             'tenCh' => 'required|string|max:50',
             'diaChi' => 'required|string|max:255',
-            'Member' => 'required|boolean',
+            'Member' => 'boolean',
             'idLoaiCh' => 'required|integer',
         ]);
         if($validatedData->fails()){
@@ -51,6 +53,12 @@ class CuaHangController extends Controller
             ];
             return response()->json($arr, 200);
          }
+          // Tạo slug từ tên cửa hàng
+        $slug = str::slug($input['tenCh']);
+        // dd($slug);
+        $input['slug'] = $slug;
+        // dd($input['slug']);
+
         // Tạo một cửa hàng mới và lưu vào cơ sở dữ liệu
         $store = CuaHang::create($input);
         $arr = ['status' => true,

@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit08287fb7c0027c5621a3c45de84a8848
+class ComposerStaticInite5ca27660cf06089ed38932a67b80085
 {
     public static $files = array (
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
@@ -372,8 +372,8 @@ class ComposerStaticInit08287fb7c0027c5621a3c45de84a8848
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -612,10 +612,10 @@ class ComposerStaticInit08287fb7c0027c5621a3c45de84a8848
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\LoaiCHController' => __DIR__ . '/../..' . '/app/Http/Controllers/LoaiCHController.php',
         'App\\Http\\Controllers\\LoaiSanPhamController' => __DIR__ . '/../..' . '/app/Http/Controllers/LoaiSanPhamController.php',
+        'App\\Http\\Controllers\\SanPhamController' => __DIR__ . '/../..' . '/app/Http/Controllers/SanPhamController.php',
         'App\\Http\\Controllers\\ThuongHieuController' => __DIR__ . '/../..' . '/app/Http/Controllers/ThuongHieuController.php',
         'App\\Http\\Controllers\\TinController' => __DIR__ . '/../..' . '/app/Http/Controllers/TinController.php',
         'App\\Http\\Controllers\\nhaCungCapController' => __DIR__ . '/../..' . '/app/Http/Controllers/nhaCungCapController.php',
-        'App\\Http\\Controllers\\san_phamController' => __DIR__ . '/../..' . '/app/Http/Controllers/san_phamController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
@@ -627,15 +627,16 @@ class ComposerStaticInit08287fb7c0027c5621a3c45de84a8848
         'App\\Http\\Middleware\\ValidateSignature' => __DIR__ . '/../..' . '/app/Http/Middleware/ValidateSignature.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Http\\Resources\\CuaHang' => __DIR__ . '/../..' . '/app/Http/Resources/CuaHang.php',
+        'App\\Http\\Resources\\DanhMucSanPham' => __DIR__ . '/../..' . '/app/Http/Resources/DanhMucSanPham.php',
         'App\\Http\\Resources\\DanhMucTin' => __DIR__ . '/../..' . '/app/Http/Resources/DanhMucTin.php',
         'App\\Http\\Resources\\HDCTResource' => __DIR__ . '/../..' . '/app/Http/Resources/HDCTResource.php',
         'App\\Http\\Resources\\HoaDonResource' => __DIR__ . '/../..' . '/app/Http/Resources/HoaDonResource.php',
         'App\\Http\\Resources\\LoaiCuaHang' => __DIR__ . '/../..' . '/app/Http/Resources/LoaiCuaHang.php',
         'App\\Http\\Resources\\LoaiSanPham' => __DIR__ . '/../..' . '/app/Http/Resources/LoaiSanPham.php',
+        'App\\Http\\Resources\\SanPham' => __DIR__ . '/../..' . '/app/Http/Resources/SanPham.php',
         'App\\Http\\Resources\\ThuongHieu' => __DIR__ . '/../..' . '/app/Http/Resources/ThuongHieu.php',
         'App\\Http\\Resources\\Tin' => __DIR__ . '/../..' . '/app/Http/Resources/Tin.php',
         'App\\Http\\Resources\\nhaCungCapResource' => __DIR__ . '/../..' . '/app/Http/Resources/nhaCungCapResource.php',
-        'App\\Http\\Resources\\san_pham' => __DIR__ . '/../..' . '/app/Http/Resources/san_pham.php',
         'App\\Models\\CuaHang' => __DIR__ . '/../..' . '/app/Models/CuaHang.php',
         'App\\Models\\DanhMucSanPham' => __DIR__ . '/../..' . '/app/Models/DanhMucSanPham.php',
         'App\\Models\\DanhMucTin' => __DIR__ . '/../..' . '/app/Models/DanhMucTin.php',
@@ -643,11 +644,11 @@ class ComposerStaticInit08287fb7c0027c5621a3c45de84a8848
         'App\\Models\\HoaDonCT' => __DIR__ . '/../..' . '/app/Models/HoaDonCT.php',
         'App\\Models\\LoaiCuaHang' => __DIR__ . '/../..' . '/app/Models/LoaiCuaHang.php',
         'App\\Models\\LoaiSanPham' => __DIR__ . '/../..' . '/app/Models/LoaiSanPham.php',
+        'App\\Models\\SanPham' => __DIR__ . '/../..' . '/app/Models/SanPham.php',
         'App\\Models\\ThuongHieu' => __DIR__ . '/../..' . '/app/Models/ThuongHieu.php',
         'App\\Models\\Tin' => __DIR__ . '/../..' . '/app/Models/Tin.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\nhaCungCap' => __DIR__ . '/../..' . '/app/Models/nhaCungCap.php',
-        'App\\Models\\san_pham' => __DIR__ . '/../..' . '/app/Models/san_pham.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
@@ -3087,7 +3088,7 @@ class ComposerStaticInit08287fb7c0027c5621a3c45de84a8848
         'Laravel\\Prompts\\Concerns\\FakesInputOutput' => __DIR__ . '/..' . '/laravel/prompts/src/Concerns/FakesInputOutput.php',
         'Laravel\\Prompts\\Concerns\\Fallback' => __DIR__ . '/..' . '/laravel/prompts/src/Concerns/Fallback.php',
         'Laravel\\Prompts\\Concerns\\Interactivity' => __DIR__ . '/..' . '/laravel/prompts/src/Concerns/Interactivity.php',
-        'Laravel\\Prompts\\Concerns\\ReducesScrollingToFitTerminal' => __DIR__ . '/..' . '/laravel/prompts/src/Concerns/ReducesScrollingToFitTerminal.php',
+        'Laravel\\Prompts\\Concerns\\Scrolling' => __DIR__ . '/..' . '/laravel/prompts/src/Concerns/Scrolling.php',
         'Laravel\\Prompts\\Concerns\\Termwind' => __DIR__ . '/..' . '/laravel/prompts/src/Concerns/Termwind.php',
         'Laravel\\Prompts\\Concerns\\Themes' => __DIR__ . '/..' . '/laravel/prompts/src/Concerns/Themes.php',
         'Laravel\\Prompts\\Concerns\\Truncation' => __DIR__ . '/..' . '/laravel/prompts/src/Concerns/Truncation.php',
@@ -3683,6 +3684,7 @@ class ComposerStaticInit08287fb7c0027c5621a3c45de84a8848
         'Mockery\\VerificationDirector' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/VerificationDirector.php',
         'Mockery\\VerificationExpectation' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/VerificationExpectation.php',
         'Monolog\\Attribute\\AsMonologProcessor' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Attribute/AsMonologProcessor.php',
+        'Monolog\\Attribute\\WithMonologChannel' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Attribute/WithMonologChannel.php',
         'Monolog\\DateTimeImmutable' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/DateTimeImmutable.php',
         'Monolog\\ErrorHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/ErrorHandler.php',
         'Monolog\\Formatter\\ChromePHPFormatter' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Formatter/ChromePHPFormatter.php',
@@ -4285,6 +4287,7 @@ class ComposerStaticInit08287fb7c0027c5621a3c45de84a8848
         'PHPUnit\\Framework\\MockObject\\MockObject' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/MockObject/Runtime/Interface/MockObject.php',
         'PHPUnit\\Framework\\MockObject\\MockObjectApi' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/MockObject/Runtime/Api/MockObjectApi.php',
         'PHPUnit\\Framework\\MockObject\\MockObjectInternal' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/MockObject/Runtime/Interface/MockObjectInternal.php',
+        'PHPUnit\\Framework\\MockObject\\NeverReturningMethodException' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/MockObject/Exception/NeverReturningMethodException.php',
         'PHPUnit\\Framework\\MockObject\\ProxiedCloneMethod' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/MockObject/Runtime/Api/ProxiedCloneMethod.php',
         'PHPUnit\\Framework\\MockObject\\ReflectionException' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/MockObject/Exception/ReflectionException.php',
         'PHPUnit\\Framework\\MockObject\\ReturnValueGenerator' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/MockObject/Runtime/ReturnValueGenerator.php',
@@ -6868,9 +6871,9 @@ class ComposerStaticInit08287fb7c0027c5621a3c45de84a8848
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit3891ae2faf62508af925d6bb56d01a45::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit3891ae2faf62508af925d6bb56d01a45::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit3891ae2faf62508af925d6bb56d01a45::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInite5ca27660cf06089ed38932a67b80085::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInite5ca27660cf06089ed38932a67b80085::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInite5ca27660cf06089ed38932a67b80085::$classMap;
 
         }, null, ClassLoader::class);
     }

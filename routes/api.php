@@ -10,6 +10,7 @@ use App\Http\Controllers\nhaCungCapController;
 use App\Http\Controllers\ThuongHieuController;
 use App\Http\Controllers\LoaiSanPhamController;
 use App\Http\Controllers\DanhMucSanPhamController;
+use App\Http\Controllers\API\UserController;
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -44,3 +45,13 @@ Route::resources([
     'loai-san-pham' => LoaiSanPhamController::class,
     'danh-muc-san-pham' => DanhMucSanPhamController::class
 ]);
+
+
+
+Route::post('login',[UserController::class,'loginUser']);
+
+
+Route::group(['middleware' => 'auth:sanctum'],function(){
+    Route::get('user',[UserController::class,'userDetails']);
+    Route::get('logout',[UserController::class,'logout']);
+});

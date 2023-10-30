@@ -74,6 +74,7 @@ return array(
     'Laravel\\Sail\\' => array($vendorDir . '/laravel/sail/src'),
     'Laravel\\Prompts\\' => array($vendorDir . '/laravel/prompts/src'),
     'LaravelLang\\Publisher\\' => array($vendorDir . '/laravel-lang/publisher/src'),
+    'LaravelLang\\Locales\\' => array($vendorDir . '/laravel-lang/locales/src'),
     'LaravelLang\\Lang\\' => array($vendorDir . '/laravel-lang/lang/src'),
     'LaravelLang\\HttpStatuses\\' => array($vendorDir . '/laravel-lang/http-statuses/src'),
     'LaravelLang\\Attributes\\' => array($vendorDir . '/laravel-lang/attributes/src'),

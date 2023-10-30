@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInite5ca27660cf06089ed38932a67b80085
+class ComposerStaticInit8948f64051b2a5dbf31ea4709f4dab3c
 {
     public static $files = array (
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
@@ -136,6 +136,7 @@ class ComposerStaticInite5ca27660cf06089ed38932a67b80085
             'Laravel\\Sail\\' => 13,
             'Laravel\\Prompts\\' => 16,
             'LaravelLang\\Publisher\\' => 22,
+            'LaravelLang\\Locales\\' => 20,
             'LaravelLang\\Lang\\' => 17,
             'LaravelLang\\HttpStatuses\\' => 25,
             'LaravelLang\\Attributes\\' => 23,
@@ -466,6 +467,10 @@ class ComposerStaticInite5ca27660cf06089ed38932a67b80085
         'LaravelLang\\Publisher\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel-lang/publisher/src',
+        ),
+        'LaravelLang\\Locales\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laravel-lang/locales/src',
         ),
         'LaravelLang\\Lang\\' => 
         array (
@@ -3041,6 +3046,18 @@ class ComposerStaticInite5ca27660cf06089ed38932a67b80085
         'LaravelLang\\Lang\\Plugins\\UI\\Master' => __DIR__ . '/..' . '/laravel-lang/lang/src/Plugins/UI/Master.php',
         'LaravelLang\\Lang\\Plugins\\UI\\V4' => __DIR__ . '/..' . '/laravel-lang/lang/src/Plugins/UI/V4.php',
         'LaravelLang\\Lang\\ServiceProvider' => __DIR__ . '/..' . '/laravel-lang/lang/src/ServiceProvider.php',
+        'LaravelLang\\Locales\\Concerns\\About' => __DIR__ . '/..' . '/laravel-lang/locales/src/Concerns/About.php',
+        'LaravelLang\\Locales\\Concerns\\Aliases' => __DIR__ . '/..' . '/laravel-lang/locales/src/Concerns/Aliases.php',
+        'LaravelLang\\Locales\\Concerns\\Mapping' => __DIR__ . '/..' . '/laravel-lang/locales/src/Concerns/Mapping.php',
+        'LaravelLang\\Locales\\Concerns\\Pathable' => __DIR__ . '/..' . '/laravel-lang/locales/src/Concerns/Pathable.php',
+        'LaravelLang\\Locales\\Concerns\\Registry' => __DIR__ . '/..' . '/laravel-lang/locales/src/Concerns/Registry.php',
+        'LaravelLang\\Locales\\Data\\Locale' => __DIR__ . '/..' . '/laravel-lang/locales/src/Data/Locale.php',
+        'LaravelLang\\Locales\\Enums\\Config' => __DIR__ . '/..' . '/laravel-lang/locales/src/Enums/Config.php',
+        'LaravelLang\\Locales\\Enums\\Locale' => __DIR__ . '/..' . '/laravel-lang/locales/src/Enums/Locale.php',
+        'LaravelLang\\Locales\\Facades\\Locales' => __DIR__ . '/..' . '/laravel-lang/locales/src/Facades/Locales.php',
+        'LaravelLang\\Locales\\ServiceProvider' => __DIR__ . '/..' . '/laravel-lang/locales/src/ServiceProvider.php',
+        'LaravelLang\\Locales\\Services\\Locales' => __DIR__ . '/..' . '/laravel-lang/locales/src/Services/Locales.php',
+        'LaravelLang\\Locales\\Services\\RawLocales' => __DIR__ . '/..' . '/laravel-lang/locales/src/Services/RawLocales.php',
         'LaravelLang\\Publisher\\Concerns\\About' => __DIR__ . '/..' . '/laravel-lang/publisher/src/Concerns/About.php',
         'LaravelLang\\Publisher\\Concerns\\Aliases' => __DIR__ . '/..' . '/laravel-lang/publisher/src/Concerns/Aliases.php',
         'LaravelLang\\Publisher\\Concerns\\Decorator' => __DIR__ . '/..' . '/laravel-lang/publisher/src/Concerns/Decorator.php',
@@ -3847,6 +3864,7 @@ class ComposerStaticInite5ca27660cf06089ed38932a67b80085
         'Nette\\Utils\\Html' => __DIR__ . '/..' . '/nette/utils/src/Utils/Html.php',
         'Nette\\Utils\\IHtmlString' => __DIR__ . '/..' . '/nette/utils/src/compatibility.php',
         'Nette\\Utils\\Image' => __DIR__ . '/..' . '/nette/utils/src/Utils/Image.php',
+        'Nette\\Utils\\ImageColor' => __DIR__ . '/..' . '/nette/utils/src/Utils/ImageColor.php',
         'Nette\\Utils\\ImageException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
         'Nette\\Utils\\ImageType' => __DIR__ . '/..' . '/nette/utils/src/Utils/ImageType.php',
         'Nette\\Utils\\Json' => __DIR__ . '/..' . '/nette/utils/src/Utils/Json.php',
@@ -3855,6 +3873,7 @@ class ComposerStaticInite5ca27660cf06089ed38932a67b80085
         'Nette\\Utils\\Paginator' => __DIR__ . '/..' . '/nette/utils/src/Utils/Paginator.php',
         'Nette\\Utils\\Random' => __DIR__ . '/..' . '/nette/utils/src/Utils/Random.php',
         'Nette\\Utils\\Reflection' => __DIR__ . '/..' . '/nette/utils/src/Utils/Reflection.php',
+        'Nette\\Utils\\ReflectionMethod' => __DIR__ . '/..' . '/nette/utils/src/Utils/ReflectionMethod.php',
         'Nette\\Utils\\RegexpException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
         'Nette\\Utils\\Strings' => __DIR__ . '/..' . '/nette/utils/src/Utils/Strings.php',
         'Nette\\Utils\\Type' => __DIR__ . '/..' . '/nette/utils/src/Utils/Type.php',
@@ -6871,9 +6890,9 @@ class ComposerStaticInite5ca27660cf06089ed38932a67b80085
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInite5ca27660cf06089ed38932a67b80085::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInite5ca27660cf06089ed38932a67b80085::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInite5ca27660cf06089ed38932a67b80085::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit8948f64051b2a5dbf31ea4709f4dab3c::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit8948f64051b2a5dbf31ea4709f4dab3c::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit8948f64051b2a5dbf31ea4709f4dab3c::$classMap;
 
         }, null, ClassLoader::class);
     }

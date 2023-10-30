@@ -24,22 +24,19 @@ Route::resource('tin',TinController::class);
 Route::get('searchByTitle',[TinController::class,'searchByTitle']);
 
 
-use App\Http\Controllers\san_phamController;
-
-
 // Route::resource('san-pham', san_phamController::class);
-Route::post('san-pham',[san_phamController::class,'store']);
-Route::get('san-pham',[san_phamController::class,'index']);
-Route::get('san-pham/{id}',[san_phamController::class,'show']);
-Route::put('san-pham/{id}',[san_phamController::class,'update']);
-Route::patch('san-pham/{id}',[san_phamController::class,'update']);
-Route::delete('san-pham/{id}',[san_phamController::class,'destroy']);
+Route::post('san-pham',[SanPhamController::class,'store']);
+Route::get('san-pham',[SanPhamController::class,'index']);
+Route::get('san-pham/{id}',[SanPhamController::class,'show']);
+Route::put('san-pham/{id}',[SanPhamController::class,'update']);
+Route::patch('san-pham/{id}',[SanPhamController::class,'update']);
+Route::delete('san-pham/{id}',[SanPhamController::class,'destroy']);
 
-Route::get('sp-dm/{id}',[san_phamController::class,'sptheoDm']);
-Route::get('sp-th',[san_phamController::class,'sptheoTh']);
-Route::get('sp-ch',[san_phamController::class,'sptheoCh']);
-Route::get('sp-loaiSp',[san_phamController::class,'sptheoLoaiSp']);
-Route::get('sp-ncc',[san_phamController::class,'sptheoNcc']);
+Route::get('sp-dm/{id}',[SanPhamController::class,'sptheoDm']);
+Route::get('sp-th',[SanPhamController::class,'sptheoTh']);
+Route::get('sp-ch',[SanPhamController::class,'sptheoCh']);
+Route::get('sp-loaiSp',[SanPhamController::class,'sptheoLoaiSp']);
+Route::get('sp-ncc',[SanPhamController::class,'sptheoNcc']);
 
 Route::resource('nha-cung-cap', nhaCungCapController::class);
 Route::resources([

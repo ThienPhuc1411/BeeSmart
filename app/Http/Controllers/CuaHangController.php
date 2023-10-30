@@ -7,16 +7,25 @@ use App\Models\CuaHang;
 use App\Http\Resources\CuaHang as Store;
 use Validator;
 use Illuminate\Support\Str;
+use App\Models\subCuaHang;
+
 class CuaHangController extends Controller
 {
     // Hiển thị danh sách cửa hàng
-    public function index()
+    public function index(Request $request)
     {
-        $stores = CuaHang::all();
+        $idUser = $request->idUsers;
+        // dd($request->idUsers);
+        $stores = CuaHang::where('sub_cua_hang.idUsers','=',$idUser)
+        ->join('sub_cua_hang','sub_cua_hang.idCh','cua_hang.id')
+        ->join('users','sub_cua_hang.idUsers','users.id')
+        ->select('cua_hang.*')
+        ->get();
+        // dd($stores);
         $arr = [
             'status' => true,
             'message' => "Danh sách cửa hàng",
-            'data' => Store::collection($stores)
+            'data' => $stores
         ];
         return response()->json($arr, 200);
     }
@@ -36,24 +45,28 @@ class CuaHangController extends Controller
     // Thêm một cửa hàng mới
     public function store(Request $request)
     {
-        $input=$request->all();
+        $input = $request->all();
         // dd($input);
         // Validate dữ liệu đầu vào
-        $validatedData =Validator::make($input,[
+        $validatedData = Validator::make($input, [
             'tenCh' => 'required|string|max:50',
             'diaChi' => 'required|string|max:255',
-            'Member' => 'boolean',
-            'idLoaiCh' => 'required|integer',
+            'idLoaiCh' => 'required',
+        ], [
+            'required' => ':attribute không được để trống',
+        ], [
+            'tenCh' => 'Tên cửa hàng',
+            'diaChi' => 'Địa chỉ cửa hàng'
         ]);
-        if($validatedData->fails()){
+        if ($validatedData->fails()) {
             $arr = [
-              'status' => false,
-              'message' => 'Lỗi kiểm tra dữ liệu',
-              'data' => $validatedData->errors()
+                'status' => false,
+                'message' => 'Lỗi kiểm tra dữ liệu',
+                'data' => $validatedData->errors()
             ];
             return response()->json($arr, 200);
-         }
-          // Tạo slug từ tên cửa hàng
+        }
+        // Tạo slug từ tên cửa hàng
         $slug = str::slug($input['tenCh']);
         // dd($slug);
         $input['slug'] = $slug;
@@ -61,16 +74,23 @@ class CuaHangController extends Controller
 
         // Tạo một cửa hàng mới và lưu vào cơ sở dữ liệu
         $store = CuaHang::create($input);
-        $arr = ['status' => true,
-        'message'=>"Cửa hàng đã lưu thành công",
-        'data'=> new Store($store)
-    ];
+        $lastId = $store->id;
+        $subChInput = [
+            'idUsers' => $input['idUsers'],
+            'idCh' => $lastId,
+        ];
+        $subCh = subCuaHang::create($subChInput);
+        $arr = [
+            'status' => true,
+            'message' => "Cửa hàng đã lưu thành công",
+            'data' => new Store($store)
+        ];
         return response()->json($arr, 201);
     }
 
     // Sửa thông tin của một cửa hàng
     public function update(Request $request, $id)
-{
+    {
         $input = $request->all();
 
         // Validate dữ liệu đầu vào

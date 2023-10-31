@@ -13,12 +13,13 @@ class DanhMucSanPhamController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index() {
-        $danhmucsp = DanhMucSanPham::all();
+    public function index(Request $request) {
+        $idCh = $request->id;
+        $danhmucsp = DanhMucSanPham::where('idCh',$idCh)->get();
         $arr = [
             'status' => true,
             'message' => 'Danh sách danh mục sản phẩm',
-            'data' => DMSPResource::collection($danhmucsp)
+            'data' => $danhmucsp
         ];
         return response()->json($arr, 200);
     }

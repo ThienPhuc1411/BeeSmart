@@ -39,9 +39,13 @@ Route::get('sp-loaiSp',[SanPhamController::class,'sptheoLoaiSp']);
 Route::get('sp-ncc',[SanPhamController::class,'sptheoNcc']);
 
 Route::resource('nha-cung-cap', nhaCungCapController::class);
-Route::resources([
-    'thuong-hieu' => ThuongHieuController::class,
-    'loai-san-pham' => LoaiSanPhamController::class,
-    'danh-muc-san-pham' => DanhMucSanPhamController::class,
-    'hoa-don' => HoaDonController::class
-]);
+// Route::resources([
+//     'thuong-hieu' => ThuongHieuController::class,
+//     'loai-san-pham' => LoaiSanPhamController::class,
+//     'danh-muc-san-pham' => DanhMucSanPhamController::class,
+//     'hoa-don' => HoaDonController::class
+// ]);
+Route::resource('thuong-hieu', ThuongHieuController::class);
+Route::resource('loai-san-pham', LoaiSanPhamController::class);
+Route::resource('danh-muc-san-pham', DanhMucSanPhamController::class);
+Route::resource('hoa-don', HoaDonController::class);

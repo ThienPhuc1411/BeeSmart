@@ -13,12 +13,14 @@ class ThuongHieuController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index() {
-        $brands = ThuongHieu::all();
+    public function index(Request $request) {
+        $idCh = $request->id;
+        // dd($request->id);
+        $brands = ThuongHieu::where('idCh',$idCh)->get();
         $arr = [
             'status' => true,
             'message' => 'Danh sách thương hiệu',
-            'data' => BrandResource::collection($brands)
+            'data' => $brands
         ];
         return response()->json($arr, 200);
     }

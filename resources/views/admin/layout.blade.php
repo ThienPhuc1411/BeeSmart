@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>BeeSmart - Admin </title>
+    <title>BeeSmart - Admin - @yield('title') </title>
 
     <!-- Custom fonts for this template-->
     <link href="/ad/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -94,6 +94,36 @@
                         <h6 class="collapse-header">Danh sách</h6>
                         <a class="collapse-item" href="{{ route('user.index') }}">Khách Hàng</a>
                         <a class="collapse-item" href="{{ route('post') }}">Tin</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse3"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fa-solid fa-hand-holding-dollar"></i>
+                    <span>Loại cửa hàng</span>
+                </a>
+                <div id="collapse3" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('store-type.index') }}">Danh sách</a>
+                        <a class="collapse-item" href="">Thêm</a>
+                        <a class="collapse-item" href="{{ route('store-type.trash') }}">Thùng rác</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse4"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fa-solid fa-hand-holding-dollar"></i>
+                    <span>Loại Tin</span>
+                </a>
+                <div id="collapse4" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('post-type.index') }}">Danh sách</a>
+                        <a class="collapse-item" href="">Thêm</a>
+                        <a class="collapse-item" href="{{ route('store-type.trash') }}">Thùng rác</a>
                     </div>
                 </div>
             </li>
@@ -578,7 +608,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>Copyright &copy; BeeSmart 2023</span>
                     </div>
                 </div>
             </footer>

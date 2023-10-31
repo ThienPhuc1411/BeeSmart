@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\sanPham;
+use App\Models\SanPham;
 
 class DanhMucSanPham extends Model
 {
@@ -13,6 +13,6 @@ class DanhMucSanPham extends Model
     protected $fillable = ['ten', 'idCh'];
 
     function sanPham() {
-        return $this->hasMany(sanPham::class, 'idDm', 'id');
+        return $this->hasMany(SanPham::class, 'idDm', 'id');
     }
 }

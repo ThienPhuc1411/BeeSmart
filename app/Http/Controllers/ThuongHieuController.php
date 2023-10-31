@@ -13,10 +13,11 @@ class ThuongHieuController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         $idCh = $request->id;
         // dd($request->id);
-        $brands = ThuongHieu::where('idCh',$idCh)->get();
+        $brands = ThuongHieu::where('idCh', $idCh)->get();
         $arr = [
             'status' => true,
             'message' => 'Danh sách thương hiệu',
@@ -36,12 +37,22 @@ class ThuongHieuController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $input = $request->all();
-        $validator = Validator::make($input, [
-            'ten' => 'required|max:225',
-            'idCh' => 'required|numeric'
-        ]);
+        $validator = Validator::make(
+            $input,
+            [
+                'ten' => 'required|max:225',
+                'idCh' => 'required|numeric'
+            ],
+            [
+                'required' => ':attribute không được bỏ trống'
+            ],
+            [
+                'ten' => 'Tên thương hiệu'
+            ]
+        );
         if ($validator->fails()) {
             $arr = [
                 'status' => false,
@@ -63,7 +74,8 @@ class ThuongHieuController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id) {
+    public function show($id)
+    {
         $brand = ThuongHieu::find($id);
         if (is_null($brand)) {
             $arr = [
@@ -76,7 +88,7 @@ class ThuongHieuController extends Controller
         $arr = [
             'status' => true,
             'message' => 'Chi tiết thương hiệu',
-            'data' => new BrandResource($brand)
+            'data' => $brand
         ];
         return response()->json($arr, 201);
     }
@@ -92,7 +104,8 @@ class ThuongHieuController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ThuongHieu $thuong_hieu) {
+    public function update(Request $request, ThuongHieu $thuong_hieu)
+    {
         $input = $request->all();
         $validator = Validator::make($input, [
             'ten' => 'required',
@@ -120,7 +133,8 @@ class ThuongHieuController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ThuongHieu $thuong_hieu) {
+    public function destroy(ThuongHieu $thuong_hieu)
+    {
         $thuong_hieu->delete();
         $arr = [
             'status' => true,

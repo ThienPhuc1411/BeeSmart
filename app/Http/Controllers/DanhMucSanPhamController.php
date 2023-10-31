@@ -14,7 +14,7 @@ class DanhMucSanPhamController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request) {
-        $idCh = $request->id;
+        $idCh = $request->idCh;
         $danhmucsp = DanhMucSanPham::where('idCh',$idCh)->get();
         $arr = [
             'status' => true,

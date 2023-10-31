@@ -28,8 +28,8 @@ Route::get('searchByTitle',[TinController::class,'searchByTitle']);
 Route::post('san-pham',[SanPhamController::class,'store']);
 Route::get('san-pham',[SanPhamController::class,'index']);
 Route::get('san-pham/{id}',[SanPhamController::class,'show']);
-Route::put('san-pham/{id}',[SanPhamController::class,'update']);
-Route::patch('san-pham/{id}',[SanPhamController::class,'update']);
+// Route::put('san-pham/{id}',[SanPhamController::class,'update']);
+Route::post('san-pham/{id}',[SanPhamController::class,'update']);
 Route::delete('san-pham/{id}',[SanPhamController::class,'destroy']);
 
 Route::get('sp-dm/{id}',[SanPhamController::class,'sptheoDm']);

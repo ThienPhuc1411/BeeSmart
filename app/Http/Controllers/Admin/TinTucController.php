@@ -82,10 +82,12 @@ class TinTucController extends Controller
                 } else {
                     $msg = 'Không upload được Ảnh';
                 }
+                $slug = \Str::slug($request->tieuDe);
                 $post->tieuDe = $request->tieuDe;
                 $post->tomTat = $request->tomTat;
                 $post->noiDung = $request->noiDung;
                 $post->idDmTin = $request->idDmTin;
+                $post->slug = $slug;
                 $post->urlHinh = $fileDestinationPath . '/' . $file->getClientOriginalName();
                 $post->save();
             }else{
@@ -133,10 +135,12 @@ class TinTucController extends Controller
             } else {
                 $msg = 'Không upload được Ảnh';
             }
+            $slug = \Str::slug($request->tieuDe);
             $post->tieuDe = $request->tieuDe;
             $post->tomTat = $request->tomTat;
             $post->noiDung = $request->noiDung;
             $post->idDmTin = $request->idDmTin;
+            $post->slug= $slug;
             $post->urlHinh = $fileDestinationPath . '/' . $file->getClientOriginalName();
             $post->save();
         }else{

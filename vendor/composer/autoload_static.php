@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit8948f64051b2a5dbf31ea4709f4dab3c
+class ComposerStaticInit6d346ad64dd1cf7f0275e2617a4f0f47
 {
     public static $files = array (
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
@@ -603,6 +603,9 @@ class ComposerStaticInit8948f64051b2a5dbf31ea4709f4dab3c
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminController.php',
+        'App\\Http\\Controllers\\Admin\\DanhMucTinController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/DanhMucTinController.php',
+        'App\\Http\\Controllers\\Admin\\LoaiCuaHangController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/LoaiCuaHangController.php',
+        'App\\Http\\Controllers\\Admin\\TinTucController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/TinTucController.php',
         'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
@@ -620,9 +623,11 @@ class ComposerStaticInit8948f64051b2a5dbf31ea4709f4dab3c
         'App\\Http\\Controllers\\SanPhamController' => __DIR__ . '/../..' . '/app/Http/Controllers/SanPhamController.php',
         'App\\Http\\Controllers\\ThuongHieuController' => __DIR__ . '/../..' . '/app/Http/Controllers/ThuongHieuController.php',
         'App\\Http\\Controllers\\TinController' => __DIR__ . '/../..' . '/app/Http/Controllers/TinController.php',
+        'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Controllers\\nhaCungCapController' => __DIR__ . '/../..' . '/app/Http/Controllers/nhaCungCapController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
+        'App\\Http\\Middleware\\Cors' => __DIR__ . '/../..' . '/app/Http/Middleware/Cors.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\PreventRequestsDuringMaintenance' => __DIR__ . '/../..' . '/app/Http/Middleware/PreventRequestsDuringMaintenance.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
@@ -654,6 +659,7 @@ class ComposerStaticInit8948f64051b2a5dbf31ea4709f4dab3c
         'App\\Models\\Tin' => __DIR__ . '/../..' . '/app/Models/Tin.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\nhaCungCap' => __DIR__ . '/../..' . '/app/Models/nhaCungCap.php',
+        'App\\Models\\subCuaHang' => __DIR__ . '/../..' . '/app/Models/subCuaHang.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
@@ -2038,6 +2044,8 @@ class ComposerStaticInit8948f64051b2a5dbf31ea4709f4dab3c
         'Illuminate\\Contracts\\Encryption\\Encrypter' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Encryption/Encrypter.php',
         'Illuminate\\Contracts\\Encryption\\StringEncrypter' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Encryption/StringEncrypter.php',
         'Illuminate\\Contracts\\Events\\Dispatcher' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Events/Dispatcher.php',
+        'Illuminate\\Contracts\\Events\\ShouldDispatchAfterCommit' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Events/ShouldDispatchAfterCommit.php',
+        'Illuminate\\Contracts\\Events\\ShouldHandleEventsAfterCommit' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Events/ShouldHandleEventsAfterCommit.php',
         'Illuminate\\Contracts\\Filesystem\\Cloud' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Filesystem/Cloud.php',
         'Illuminate\\Contracts\\Filesystem\\Factory' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Filesystem/Factory.php',
         'Illuminate\\Contracts\\Filesystem\\FileNotFoundException' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Filesystem/FileNotFoundException.php',
@@ -2077,6 +2085,7 @@ class ComposerStaticInit8948f64051b2a5dbf31ea4709f4dab3c
         'Illuminate\\Contracts\\Queue\\ShouldBeUnique' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Queue/ShouldBeUnique.php',
         'Illuminate\\Contracts\\Queue\\ShouldBeUniqueUntilProcessing' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Queue/ShouldBeUniqueUntilProcessing.php',
         'Illuminate\\Contracts\\Queue\\ShouldQueue' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Queue/ShouldQueue.php',
+        'Illuminate\\Contracts\\Queue\\ShouldQueueAfterCommit' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Queue/ShouldQueueAfterCommit.php',
         'Illuminate\\Contracts\\Redis\\Connection' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Redis/Connection.php',
         'Illuminate\\Contracts\\Redis\\Connector' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Redis/Connector.php',
         'Illuminate\\Contracts\\Redis\\Factory' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Contracts/Redis/Factory.php',
@@ -2173,6 +2182,7 @@ class ComposerStaticInit8948f64051b2a5dbf31ea4709f4dab3c
         'Illuminate\\Database\\DetectsLostConnections' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/DetectsLostConnections.php',
         'Illuminate\\Database\\Eloquent\\BroadcastableModelEventOccurred' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Eloquent/BroadcastableModelEventOccurred.php',
         'Illuminate\\Database\\Eloquent\\BroadcastsEvents' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Eloquent/BroadcastsEvents.php',
+        'Illuminate\\Database\\Eloquent\\BroadcastsEventsAfterCommit' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Eloquent/BroadcastsEventsAfterCommit.php',
         'Illuminate\\Database\\Eloquent\\Builder' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php',
         'Illuminate\\Database\\Eloquent\\Casts\\ArrayObject' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Eloquent/Casts/ArrayObject.php',
         'Illuminate\\Database\\Eloquent\\Casts\\AsArrayObject' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Eloquent/Casts/AsArrayObject.php',
@@ -3051,7 +3061,7 @@ class ComposerStaticInit8948f64051b2a5dbf31ea4709f4dab3c
         'LaravelLang\\Locales\\Concerns\\Mapping' => __DIR__ . '/..' . '/laravel-lang/locales/src/Concerns/Mapping.php',
         'LaravelLang\\Locales\\Concerns\\Pathable' => __DIR__ . '/..' . '/laravel-lang/locales/src/Concerns/Pathable.php',
         'LaravelLang\\Locales\\Concerns\\Registry' => __DIR__ . '/..' . '/laravel-lang/locales/src/Concerns/Registry.php',
-        'LaravelLang\\Locales\\Data\\Locale' => __DIR__ . '/..' . '/laravel-lang/locales/src/Data/Locale.php',
+        'LaravelLang\\Locales\\Data\\LocaleData' => __DIR__ . '/..' . '/laravel-lang/locales/src/Data/LocaleData.php',
         'LaravelLang\\Locales\\Enums\\Config' => __DIR__ . '/..' . '/laravel-lang/locales/src/Enums/Config.php',
         'LaravelLang\\Locales\\Enums\\Locale' => __DIR__ . '/..' . '/laravel-lang/locales/src/Enums/Locale.php',
         'LaravelLang\\Locales\\Facades\\Locales' => __DIR__ . '/..' . '/laravel-lang/locales/src/Facades/Locales.php',
@@ -6890,9 +6900,9 @@ class ComposerStaticInit8948f64051b2a5dbf31ea4709f4dab3c
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit8948f64051b2a5dbf31ea4709f4dab3c::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit8948f64051b2a5dbf31ea4709f4dab3c::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit8948f64051b2a5dbf31ea4709f4dab3c::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit6d346ad64dd1cf7f0275e2617a4f0f47::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit6d346ad64dd1cf7f0275e2617a4f0f47::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit6d346ad64dd1cf7f0275e2617a4f0f47::$classMap;
 
         }, null, ClassLoader::class);
     }

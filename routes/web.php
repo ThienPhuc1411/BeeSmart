@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use  App\Http\Controllers\Admin\LoaiCuaHangController;
 use  App\Http\Controllers\Admin\DanhMucTinController;
 use  App\Http\Controllers\Admin\TinTucController;
+use App\Http\Controllers\AuthController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,22 +18,20 @@ use  App\Http\Controllers\Admin\TinTucController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Route::group(['middleware' => 'guest'],function(){
     Route::get('/login',[AuthController::class,'login'])->name('login');
     Route::post('/login',[AuthController::class,'loginPost'])->name('login');
 });
 
-Route::get('/', [AdminController::class, 'index_admin'])->name('index');
+Route::get('', [AdminController::class, 'index_admin'])->name('index')->middleware(['admin','auth']);
 
 Route::prefix('user')->name('user.')->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('index');
     Route::get('/block/{id}',[UserController::class, 'block'])->name('block');
     Route::get('/unblock/{id}',[UserController::class, 'unblock'])->name('unblock');
-});
+})->middleware(['admin','auth']);
 
 Route::prefix('loai-cua-hang')->name('store-type.')->group(function () {
     Route::get('/',[LoaiCuaHangController::class,'index'])->name('index');
@@ -44,7 +43,7 @@ Route::prefix('loai-cua-hang')->name('store-type.')->group(function () {
     Route::get('/restore/{id}',[LoaiCuaHangController::class,'restore'])->name('restore');
     Route::get('/trash',[LoaiCuaHangController::class,'trash'])->name('trash');
     Route::get('/force-delete/{id}',[LoaiCuaHangController::class,'forceDelete'])->name('force-delete');
-});
+})->middleware(['admin','auth']);
 
 Route::prefix('loai-tin')->name('post-type.')->group(function () {
     Route::get('/',[DanhMucTinController::class,'index'])->name('index');
@@ -56,7 +55,7 @@ Route::prefix('loai-tin')->name('post-type.')->group(function () {
     Route::get('/restore/{id}',[DanhMucTinController::class,'restore'])->name('restore');
     Route::get('/trash',[DanhMucTinController::class,'trash'])->name('trash');
     Route::get('/force-delete/{id}',[DanhMucTinController::class,'forceDelete'])->name('force-delete');
-});
+})->middleware(['admin','auth']);
 
 Route::prefix('tin-tuc')->name('post.')->group(function () {
     Route::get('/',[TinTucController::class,'index'])->name('index');
@@ -70,12 +69,13 @@ Route::prefix('tin-tuc')->name('post.')->group(function () {
     Route::get('/restore/{id}',[TinTucController::class,'restore'])->name('restore');
     Route::get('/trash',[TinTucController::class,'trash'])->name('trash');
     Route::get('/force-delete/{id}',[TinTucController::class,'forceDelete'])->name('force-delete');
-});
+})->middleware(['admin','auth']);
 
-Route::get('post', [AdminController::class, 'list_post'])->name('post');
-Route::get('store', [AdminController::class, 'list_reg'])->name('store');
-Route::get('list-profit-day', [AdminController::class, 'list_profit_day'])->name('profit-day');
-Route::get('list-profit-month', [AdminController::class, 'list_profit_month'])->name('profit-month');
+Route::delete('logout',[AuthController::class,'logout'])->name('logout')->middleware(['admin','auth']);
+
+Route::get('store', [AdminController::class, 'list_reg'])->name('store')->middleware(['admin','auth']);
+Route::get('list-profit-day', [AdminController::class, 'list_profit_day'])->name('profit-day')->middleware(['admin','auth']);
+Route::get('list-profit-month', [AdminController::class, 'list_profit_month'])->name('profit-month')->middleware(['admin','auth']);
 
 Route::get('pass',function(){
     return bcrypt('hihi');

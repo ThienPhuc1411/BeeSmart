@@ -15,7 +15,7 @@ class Admin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(\Auth::user()->role_id == 0){
+        if(\Auth::user()->vaiTro == 0){
             return $next($request);
         }else{
             return back()->with('error','Bạn không có quyền truy cập admin');

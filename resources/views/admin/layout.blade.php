@@ -39,7 +39,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('/admin') }}">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('index') }}">
                 <div class="sidebar-brand-icon rotate-n-15">
                    <img src="/ad/img/logo_bee.jpg" alt="">
                 </div>
@@ -124,6 +124,21 @@
                         <a class="collapse-item" href="{{ route('post-type.index') }}">Danh sách</a>
                         <a class="collapse-item" href="">Thêm</a>
                         <a class="collapse-item" href="{{ route('store-type.trash') }}">Thùng rác</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse5"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fa-solid fa-hand-holding-dollar"></i>
+                    <span>Tin Tức</span>
+                </a>
+                <div id="collapse5" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('post.index') }}">Danh sách</a>
+                        <a class="collapse-item" href="{{route('post.add')}}">Thêm</a>
+                        <a class="collapse-item" href="{{ route('post.trash') }}">Thùng rác</a>
                     </div>
                 </div>
             </li>

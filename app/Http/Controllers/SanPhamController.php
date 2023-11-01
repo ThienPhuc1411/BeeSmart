@@ -305,7 +305,7 @@ class SanPhamController extends Controller
         $mytime = Carbon::now()->format("Y-m-d");
         if (!empty($input['img'])) {
             $img = $request->file('img');
-            $destination = public_path('/upload');
+            $destination = public_path('/upload/products');
             $ext = $img->getClientOriginalExtension();
             $fileName = Str::random(6) . '_' . time() . '.' . $ext;
             $img->move($destination, $fileName);

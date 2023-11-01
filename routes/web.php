@@ -1,4 +1,4 @@
-<?php
+y<?php
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
@@ -21,6 +21,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::group(['middleware' => 'guest'],function(){
+    Route::get('/login',[AuthController::class,'login'])->name('login');
+    Route::post('/login',[AuthController::class,'loginPost'])->name('login');
+});
 
 Route::get('/', [AdminController::class, 'index_admin'])->name('index');
 
@@ -78,14 +82,22 @@ Route::get('pass',function(){
 });
 
 
-Auth::routes();
+// Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
+// // Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
+// // Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// // Auth::routes();
+
+// // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+

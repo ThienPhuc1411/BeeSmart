@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit6d346ad64dd1cf7f0275e2617a4f0f47
+class ComposerStaticInit5e65959a51b439a12250d6fe2970529f
 {
     public static $files = array (
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
@@ -606,6 +606,7 @@ class ComposerStaticInit6d346ad64dd1cf7f0275e2617a4f0f47
         'App\\Http\\Controllers\\Admin\\DanhMucTinController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/DanhMucTinController.php',
         'App\\Http\\Controllers\\Admin\\LoaiCuaHangController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/LoaiCuaHangController.php',
         'App\\Http\\Controllers\\Admin\\TinTucController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/TinTucController.php',
+        'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
         'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
@@ -626,6 +627,7 @@ class ComposerStaticInit6d346ad64dd1cf7f0275e2617a4f0f47
         'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Controllers\\nhaCungCapController' => __DIR__ . '/../..' . '/app/Http/Controllers/nhaCungCapController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
+        'App\\Http\\Middleware\\Admin' => __DIR__ . '/../..' . '/app/Http/Middleware/Admin.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\Cors' => __DIR__ . '/../..' . '/app/Http/Middleware/Cors.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
@@ -802,6 +804,7 @@ class ComposerStaticInit6d346ad64dd1cf7f0275e2617a4f0f47
         'Cron\\MonthField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
         'Database\\Factories\\UserFactory' => __DIR__ . '/../..' . '/database/factories/UserFactory.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
+        'Database\\Seeders\\users' => __DIR__ . '/../..' . '/database/seeders/users.php',
         'DateError' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateError.php',
         'DateException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateException.php',
         'DateInvalidOperationException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateInvalidOperationException.php',
@@ -6900,9 +6903,9 @@ class ComposerStaticInit6d346ad64dd1cf7f0275e2617a4f0f47
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit6d346ad64dd1cf7f0275e2617a4f0f47::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit6d346ad64dd1cf7f0275e2617a4f0f47::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit6d346ad64dd1cf7f0275e2617a4f0f47::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit5e65959a51b439a12250d6fe2970529f::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit5e65959a51b439a12250d6fe2970529f::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit5e65959a51b439a12250d6fe2970529f::$classMap;
 
         }, null, ClassLoader::class);
     }

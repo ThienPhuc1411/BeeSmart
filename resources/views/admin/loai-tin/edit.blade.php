@@ -22,13 +22,13 @@
 
         </div>
         <div class="card-body">
-            <form method="POST" action="{{ route('loai-tin.edit', ['id' => $data->id]) }}">
+            <form method="POST" action="">
                 @csrf
                 @method('PUT') <!--  PUT để cập nhật -->
         
                 <div class="form-group">
                     <label for="ten">Tên loại tin:</label>
-                    <input type="text" class="form-control" id="ten" name="ten" required value="{{ $data->ten }}">
+                    <input type="text" class="form-control" id="ten" name="ten" required value="">
                 </div>
         
                 <button type="submit" class="btn btn-primary">Cập Nhật Loại Tin</button>

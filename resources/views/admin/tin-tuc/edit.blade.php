@@ -22,36 +22,36 @@
 
         </div>
         <div class="card-body">
-            <form method="POST" action="{{ route('tin-tuc.edit', ['id' => $post->id]) }}">
+            <form method="POST" action="">
                 @csrf
                 @method('PUT') 
         
                 <div class="form-group">
                     <label for="tieuDe">Tiêu Đề:</label>
-                    <input type="text" class="form-control" id="tieuDe" name="tieuDe" required value="{{ $post->tieuDe }}">
+                    <input type="text" class="form-control" id="tieuDe" name="tieuDe" required value="">
                 </div>
         
                 <div class="form-group">
                     <label for="loaiTin">Loại Tin:</label>
                     <select class="form-control" id="loaiTin" name="loaiTin" required>
-                        @if (!empty($post))
+                        {{-- @if (!empty($post))
                             @foreach($post as $key=>$item)
                                 <option value="{{ $item->id }}" {{ $item->id == $item->loaiTinId ? 'selected' : '' }}>{{ $item->ten }}</option>
                             @endforeach
                         @else
                             <option>Không có dữ liệu</option>
-                        @endif
+                        @endif --}}
                     </select>
                 </div>
         
                 <div class="form-group">
                     <label for="tomTat">Tóm Tắt:</label>
-                    <textarea class="form-control" id="tomTat" name="tomTat" rows="3" required>{{ $item->tomTat }}</textarea>
+                    <textarea class="form-control" id="tomTat" name="tomTat" rows="3" required></textarea>
                 </div>
         
                 <div class="form-group">
                     <label for="noiDung">Nội Dung:</label>
-                    <textarea class="form-control" id="noiDung" name="noiDung" rows="6" required>{{ $item->noiDung }}</textarea>
+                    <textarea class="form-control" id="noiDung" name="noiDung" rows="6" required></textarea>
                 </div>
         
                 <button type="submit" class="btn btn-primary">Cập Nhật Tin Tức</button>

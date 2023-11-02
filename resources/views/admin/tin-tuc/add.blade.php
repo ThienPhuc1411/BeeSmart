@@ -31,13 +31,13 @@
                 <div class="form-group">
                     <label for="loaiTin">Loại Tin:</label>
                     <select class="form-control" id="loaiTin" name="loaiTin" required>
-                        @if (!empty($post))
+                        {{-- @if (!empty($post))
                             @foreach($post as $key=>$item)
                                 <option value="{{ $item->id }}">{{ $item->ten }}</option>
                             @endforeach
                         @else
                             <option>Không có dữ liệu</option>   
-                        @endif
+                        @endif --}}
                     </select>
                 </div>
                 

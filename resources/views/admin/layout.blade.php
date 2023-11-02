@@ -107,7 +107,7 @@
                 <div id="collapse3" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ route('store-type.index') }}">Danh sách</a>
-                        <a class="collapse-item" href="">Thêm</a>
+                        <a class="collapse-item" href="{{route('store-type.add')}}">Thêm</a>
                         <a class="collapse-item" href="{{ route('store-type.trash') }}">Thùng rác</a>
                     </div>
                 </div>
@@ -122,7 +122,7 @@
                 <div id="collapse4" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ route('post-type.index') }}">Danh sách</a>
-                        <a class="collapse-item" href="">Thêm</a>
+                        <a class="collapse-item" href="{{route('post-type.add')}}">Thêm</a>
                         <a class="collapse-item" href="{{ route('store-type.trash') }}">Thùng rác</a>
                     </div>
                 </div>

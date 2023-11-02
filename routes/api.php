@@ -50,6 +50,8 @@ Route::resources([
 
 Route::post('login',[UserController::class,'loginUser']);
 
+Route::post('register',[UserController::class,'register']);
+
 
 Route::group(['middleware' => 'auth:sanctum'],function(){
     Route::get('user',[UserController::class,'userDetails']);

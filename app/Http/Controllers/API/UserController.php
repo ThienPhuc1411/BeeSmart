@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 Use Illuminate\Http\Response;
 Use Illuminate\Support\Facades\Auth;
 Use Illuminate\Support\Facades\Validator;
+Use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -64,6 +65,34 @@ class UserController extends Controller
 
         $user->currentAccessToken()->delete();
 
-        return Response(['data' => 'User Logout successfully.'],200);
+        return Response(['data' => 'Đăng xuất thành công'],200);
+    }
+    public function register(Request $request)
+    {
+        $rules = [
+            'name' => 'required',
+            'email'    => 'unique:users|required|email',
+            'password' => 'required',
+            'sdt' => 'required',
+            'quan' => 'required',
+        ];
+
+        $input     = $request->all();
+        $validator = Validator::make($input, $rules);
+
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'error' => $validator->messages()]);
+        }
+
+
+        $user     = User::create($input);
+        $arr=[
+            'status'=>true,
+            'message'=>'Bạn đã đăng ký thành công',
+            'data'=>$user,
+        ];
+        // dd($input);
+        return response()->json($arr,201);
+
     }
 }

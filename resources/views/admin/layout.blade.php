@@ -43,7 +43,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                    <img src="/ad/img/logo_bee.jpg" alt="">
                 </div>
-                <div class="sidebar-brand-text mx-3">Bee Smart <sup></sup></div>
+                <div class="sidebar-brand-text mx-3">Bee Smart </div>
             </a>
 
             <!-- Divider -->
@@ -93,7 +93,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Danh sách</h6>
                         <a class="collapse-item" href="{{ route('user.index') }}">Khách Hàng</a>
-                        <a class="collapse-item" href="{{ route('post') }}">Tin</a>
+                        <a class="collapse-item" href="{{ route('post.index') }}">Tin</a>
                     </div>
                 </div>
             </li>

@@ -22,7 +22,14 @@
 
         </div>
         <div class="card-body">
-            
+            <form method="POST" action="">
+                @csrf
+                <div class="form-group">
+                    <label for="tieuDe">Tên loại tin:</label>
+                    <input type="text" class="form-control" id="ten" name="ten" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Thêm Loại Tin Mới</button>
+            </form>
         </div>
     </div>
 

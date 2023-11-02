@@ -55,6 +55,8 @@ Route::prefix('loai-tin')->name('post-type.')->group(function () {
     Route::get('/restore/{id}',[DanhMucTinController::class,'restore'])->name('restore');
     Route::get('/trash',[DanhMucTinController::class,'trash'])->name('trash');
     Route::get('/force-delete/{id}',[DanhMucTinController::class,'forceDelete'])->name('force-delete');
+    Route::get('/show/{id}',[DanhMucTinController::class,'show'])->name('show');
+    Route::get('/hide/{id}',[DanhMucTinController::class,'hide'])->name('hide');
 })->middleware(['admin','auth']);
 
 Route::prefix('tin-tuc')->name('post.')->group(function () {

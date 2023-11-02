@@ -27,6 +27,10 @@
                 <div class="form-group">
                     <label for="ten">Tên danh mục:</label>
                     <input type="text" class="form-control" id="ten" name="ten">
+                    @error('ten')
+                        <div class="badge" style="color:red" role="alert">
+                        <strong>* {{$message}}</strong></div>
+                    @enderror
                 </div>
                 <button type="submit" class="btn btn-primary">Thêm</button>
             </form>

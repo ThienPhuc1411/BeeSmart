@@ -6,7 +6,7 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Danh Sách Loại Tin</h1>
+        <h1 class="h3 mb-2 text-gray-800">Danh Sách Danh mục tin</h1>
 
 
         <!-- DataTales Example -->
@@ -45,20 +45,20 @@
                                     @if ($item->anHien == 1)
                                         <td>
                                             <div>
-                                                <a href="" class="btn btn-primary">Đang hiện</a>
+                                                <a href="{{route('post-type.hide',$item->id)}}" class="btn btn-primary">Đang hiện</a>
                                             </div>
                                         </td>
                                     @else
                                     <td>
                                         <div>
-                                            <a href="" class="btn btn-warning">Đang ẩn</a>
+                                            <a href="{{route('post-type.show',$item->id)}}" class="btn btn-warning">Đang ẩn</a>
                                         </div>
                                     </td>
                                     @endif
                                     <td>
-                                        <div><a href="{{route('store-type.edit',$item->id)}}" ><i class="fa-solid fa-pencil" style="color:blue"></i></a></div>
+                                        <div><a href="{{route('post-type.edit',$item->id)}}" ><i class="fa-solid fa-pencil" style="color:blue"></i></a></div>
                                         
-                                        <div><a href="{{route('store-type.delete',$item->id)}}" onclick="return confirm('Bạn có chắc muốn xóa')"><i class="fa-solid fa-trash"  style="color:red"></i></a></div>
+                                        <div><a href="{{route('post-type.delete',$item->id)}}" onclick="return confirm('Bạn có chắc muốn xóa')"><i class="fa-solid fa-trash"  style="color:red"></i></a></div>
                                     </td>
                                     
                                 </tbody>

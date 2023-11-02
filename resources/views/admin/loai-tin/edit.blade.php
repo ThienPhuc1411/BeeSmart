@@ -22,16 +22,20 @@
 
         </div>
         <div class="card-body">
-            <form method="POST" action="">
-                @csrf
-                @method('PUT') <!--  PUT để cập nhật -->
+            <form method="POST" action="{{route('post-type.edit',$loaitin->id)}}">
+                @csrf<!--  PUT để cập nhật -->
         
                 <div class="form-group">
                     <label for="ten">Tên loại tin:</label>
-                    <input type="text" class="form-control" id="ten" name="ten" required value="">
+                    <input type="text" class="form-control" id="ten" name="ten" value="{{old('ten') ?? $loaitin->ten }}">
+                    @error('ten')
+                            <div class="badge" style="color:red" role="alert">
+                                <strong>* {{ $message }}</strong>
+                            </div>
+                        @enderror
                 </div>
         
-                <button type="submit" class="btn btn-primary">Cập Nhật Loại Tin</button>
+                <button type="submit" class="btn btn-primary">Cập Nhật</button>
             </form>
         </div>
     </div>

@@ -58,7 +58,7 @@ class DanhMucTinController extends Controller
         ], [
             'required' => ':attribute không được để trống'
         ], [
-            'ten' => 'Tên loại cửa hàng'
+            'ten' => 'Tên Danh mục tin'
         ]);
         $loaitin->update($request->all());
         $loaitin->save();
@@ -75,7 +75,7 @@ class DanhMucTinController extends Controller
             $loaitin->delete();
             $msg = "Danh mục tin " . $loaitin->ten . " đã được đưa vào thùng rác";
         }
-        return redirect()->route('admin.post-type.index')->with('msg', $msg);
+        return redirect()->route('post-type.index')->with('msg', $msg);
     }
 
     public function trash()
@@ -107,5 +107,23 @@ class DanhMucTinController extends Controller
             $msg = 'Loại cửa hàng không tồn tại';
         }
         return redirect()->route('post-type.trash')->with('msg', $msg);
+    }
+
+    public function show($id)
+    {
+        $post = DanhMucTin::find($id);
+        $post->anHien = 1;
+        $post->save();
+        $msg = "Đã thay đổi trạng thái bài viết";
+        return redirect()->route('post-type.index')->with('msg', $msg);
+    }
+
+    public function hide($id)
+    {
+        $post = DanhMucTin::find($id);
+        $post->anHien = 0;
+        $post->save();
+        $msg = "Đã thay đổi trạng thái bài viết";
+        return redirect()->route('post-type.index')->with('msg', $msg);
     }
 }

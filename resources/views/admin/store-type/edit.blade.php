@@ -22,7 +22,17 @@
 
         </div>
         <div class="card-body">
-            
+            <form method="POST" action="{{ route('loai-cua-hang.edit', ['id' => $loaiCh->id]) }}">
+                @csrf
+                @method('PUT') 
+        
+                <div class="form-group">
+                    <label for="ten">Tên loại cửa hàng:</label>
+                    <input type="text" class="form-control" id="ten" name="ten" required value="{{ $loaiCh->ten }}">
+                </div>
+        
+                <button type="submit" class="btn btn-primary">Cập Nhật Loại Cửa Hàng</button>
+            </form>
         </div>
     </div>
 

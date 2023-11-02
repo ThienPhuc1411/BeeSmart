@@ -27,7 +27,7 @@
 
     <!-- data table -->
     <link href="/ad/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
+    <script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
 </head>
 
 <body id="page-top">
@@ -93,7 +93,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Danh sách</h6>
                         <a class="collapse-item" href="{{ route('user.index') }}">Khách Hàng</a>
-                        <a class="collapse-item" href="{{ route('post') }}">Tin</a>
+                        <a class="collapse-item" href="{{ route('post.index') }}">Tin</a>
                     </div>
                 </div>
             </li>
@@ -385,7 +385,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
 
-                                       Chào {{ Auth::user()->name }}
+                                       Chào {{ Auth::user()->HoTen }}
 
 
                                   
@@ -692,7 +692,7 @@
     <script src="/ad/vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <!-- Page level custom scripts -->
     <script src="/ad/js/demo/datatables-demo.js"></script>
-
+    @yield('js-custom')
 </body>
 
 </html>

@@ -20,10 +20,10 @@ use App\Http\Controllers\AuthController;
 
 
 
-Route::group(['middleware' => 'guest'],function(){
+
     Route::get('/login',[AuthController::class,'login'])->name('login');
     Route::post('/login',[AuthController::class,'loginPost'])->name('login');
-});
+
 
 Route::get('', [AdminController::class, 'index_admin'])->name('index')->middleware(['admin','auth']);
 

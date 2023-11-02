@@ -88,7 +88,7 @@ class CuaHangController extends Controller
         $userMail = '19.trantienanh.99@gmail.com'; //temp
         $mailData = [
             'title' => 'Đã tạo cửa hàng thành công',
-            'body' => 'Cửa hàng '. $store->tenCh. 'đã được tạo thành công'
+            'body' => $store->tenCh
         ];
         Mail::to($userMail)->send(new TaoCuaHang($mailData));
 

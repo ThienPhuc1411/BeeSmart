@@ -28,7 +28,7 @@ class TaoCuaHang extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Tao Cua Hang',
+            subject: 'BeeSmart - Tạo Cửa Hàng Thành Công',
         );
     }
 

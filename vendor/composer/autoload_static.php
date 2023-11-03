@@ -373,8 +373,8 @@ class ComposerStaticInitc907a51287082e7c79dc56bbdbd23e27
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -3071,6 +3071,7 @@ class ComposerStaticInitc907a51287082e7c79dc56bbdbd23e27
         'LaravelLang\\Locales\\ServiceProvider' => __DIR__ . '/..' . '/laravel-lang/locales/src/ServiceProvider.php',
         'LaravelLang\\Locales\\Services\\Locales' => __DIR__ . '/..' . '/laravel-lang/locales/src/Services/Locales.php',
         'LaravelLang\\Locales\\Services\\RawLocales' => __DIR__ . '/..' . '/laravel-lang/locales/src/Services/RawLocales.php',
+        'LaravelLang\\Locales\\Services\\Resolver' => __DIR__ . '/..' . '/laravel-lang/locales/src/Services/Resolver.php',
         'LaravelLang\\Publisher\\Concerns\\About' => __DIR__ . '/..' . '/laravel-lang/publisher/src/Concerns/About.php',
         'LaravelLang\\Publisher\\Concerns\\Aliases' => __DIR__ . '/..' . '/laravel-lang/publisher/src/Concerns/Aliases.php',
         'LaravelLang\\Publisher\\Concerns\\Decorator' => __DIR__ . '/..' . '/laravel-lang/publisher/src/Concerns/Decorator.php',

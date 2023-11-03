@@ -2477,6 +2477,7 @@ return array(
     'LaravelLang\\Locales\\ServiceProvider' => $vendorDir . '/laravel-lang/locales/src/ServiceProvider.php',
     'LaravelLang\\Locales\\Services\\Locales' => $vendorDir . '/laravel-lang/locales/src/Services/Locales.php',
     'LaravelLang\\Locales\\Services\\RawLocales' => $vendorDir . '/laravel-lang/locales/src/Services/RawLocales.php',
+    'LaravelLang\\Locales\\Services\\Resolver' => $vendorDir . '/laravel-lang/locales/src/Services/Resolver.php',
     'LaravelLang\\Publisher\\Concerns\\About' => $vendorDir . '/laravel-lang/publisher/src/Concerns/About.php',
     'LaravelLang\\Publisher\\Concerns\\Aliases' => $vendorDir . '/laravel-lang/publisher/src/Concerns/Aliases.php',
     'LaravelLang\\Publisher\\Concerns\\Decorator' => $vendorDir . '/laravel-lang/publisher/src/Concerns/Decorator.php',

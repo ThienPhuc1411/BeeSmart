@@ -915,17 +915,17 @@
         },
         {
             "name": "filp/whoops",
-            "version": "2.15.3",
-            "version_normalized": "2.15.3.0",
+            "version": "2.15.4",
+            "version_normalized": "2.15.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "c83e88a30524f9360b11f585f71e6b17313b7187"
+                "reference": "a139776fa3f5985a50b509f2a02ff0f709d2a546"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/c83e88a30524f9360b11f585f71e6b17313b7187",
-                "reference": "c83e88a30524f9360b11f585f71e6b17313b7187",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/a139776fa3f5985a50b509f2a02ff0f709d2a546",
+                "reference": "a139776fa3f5985a50b509f2a02ff0f709d2a546",
                 "shasum": ""
             },
             "require": {
@@ -941,7 +941,7 @@
                 "symfony/var-dumper": "Pretty print complex values better with var-dumper available",
                 "whoops/soap": "Formats errors as SOAP responses"
             },
-            "time": "2023-07-13T12:00:00+00:00",
+            "time": "2023-11-03T12:00:00+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -977,7 +977,7 @@
             ],
             "support": {
                 "issues": "https://github.com/filp/whoops/issues",
-                "source": "https://github.com/filp/whoops/tree/2.15.3"
+                "source": "https://github.com/filp/whoops/tree/2.15.4"
             },
             "funding": [
                 {
@@ -1843,17 +1843,17 @@
         },
         {
             "name": "laravel-lang/lang",
-            "version": "13.3.0",
-            "version_normalized": "13.3.0.0",
+            "version": "13.4.0",
+            "version_normalized": "13.4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/lang.git",
-                "reference": "15776be325aafc14d2914b9073740a6a7b737019"
+                "reference": "47aaf37dd005b9d047d92008eaf3aad1982e3fc5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/15776be325aafc14d2914b9073740a6a7b737019",
-                "reference": "15776be325aafc14d2914b9073740a6a7b737019",
+                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/47aaf37dd005b9d047d92008eaf3aad1982e3fc5",
+                "reference": "47aaf37dd005b9d047d92008eaf3aad1982e3fc5",
                 "shasum": ""
             },
             "require": {
@@ -1866,7 +1866,7 @@
                 "phpunit/phpunit": "^10.0",
                 "symfony/var-dumper": "^6.0"
             },
-            "time": "2023-10-30T12:14:48+00:00",
+            "time": "2023-11-03T14:35:44+00:00",
             "type": "library",
             "extra": {
                 "laravel": {
@@ -1902,27 +1902,21 @@
                 "issues": "https://github.com/Laravel-Lang/lang/issues",
                 "source": "https://github.com/Laravel-Lang/lang"
             },
-            "funding": [
-                {
-                    "url": "https://opencollective.com/laravel-lang",
-                    "type": "open_collective"
-                }
-            ],
             "install-path": "../laravel-lang/lang"
         },
         {
             "name": "laravel-lang/locales",
-            "version": "1.5.0",
-            "version_normalized": "1.5.0.0",
+            "version": "1.6.0",
+            "version_normalized": "1.6.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/locales.git",
-                "reference": "ddb08a2f0c33e77a6e8c49c0140150df835e7371"
+                "reference": "e7f68118f130c6d7f2f49e35a233075826972559"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/locales/zipball/ddb08a2f0c33e77a6e8c49c0140150df835e7371",
-                "reference": "ddb08a2f0c33e77a6e8c49c0140150df835e7371",
+                "url": "https://api.github.com/repos/Laravel-Lang/locales/zipball/e7f68118f130c6d7f2f49e35a233075826972559",
+                "reference": "e7f68118f130c6d7f2f49e35a233075826972559",
                 "shasum": ""
             },
             "require": {
@@ -1937,7 +1931,7 @@
                 "pestphp/pest": "^2.24.1",
                 "symfony/var-dumper": "^6.0"
             },
-            "time": "2023-10-30T10:40:51+00:00",
+            "time": "2023-11-03T09:47:59+00:00",
             "type": "library",
             "extra": {
                 "laravel": {
@@ -1979,12 +1973,6 @@
                 "issues": "https://github.com/Laravel-Lang/locales/issues",
                 "source": "https://github.com/Laravel-Lang/locales"
             },
-            "funding": [
-                {
-                    "url": "https://opencollective.com/laravel-lang",
-                    "type": "open_collective"
-                }
-            ],
             "install-path": "../laravel-lang/locales"
         },
         {
@@ -2099,17 +2087,17 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v10.30.0",
-            "version_normalized": "10.30.0.0",
+            "version": "v10.30.1",
+            "version_normalized": "10.30.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "3dd85d9dbea82b937f8eaf344b50d613c5d1127a"
+                "reference": "7a2da50258c4d0f693b738d3f3c69b2693aea6c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/3dd85d9dbea82b937f8eaf344b50d613c5d1127a",
-                "reference": "3dd85d9dbea82b937f8eaf344b50d613c5d1127a",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/7a2da50258c4d0f693b738d3f3c69b2693aea6c1",
+                "reference": "7a2da50258c4d0f693b738d3f3c69b2693aea6c1",
                 "shasum": ""
             },
             "require": {
@@ -2256,7 +2244,7 @@
                 "symfony/postmark-mailer": "Required to enable support for the Postmark mail transport (^6.2).",
                 "symfony/psr-http-message-bridge": "Required to use PSR-7 bridging features (^2.0)."
             },
-            "time": "2023-10-31T13:19:45+00:00",
+            "time": "2023-11-01T13:52:17+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {

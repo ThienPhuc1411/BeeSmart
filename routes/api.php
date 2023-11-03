@@ -12,6 +12,7 @@ use App\Http\Controllers\ThuongHieuController;
 use App\Http\Controllers\LoaiSanPhamController;
 use App\Http\Controllers\DanhMucSanPhamController;
 use App\Http\Controllers\SanPhamController;
+use App\Http\Controllers\VnPayController;
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -49,3 +50,6 @@ Route::resource('thuong-hieu', ThuongHieuController::class);
 Route::resource('loai-san-pham', LoaiSanPhamController::class);
 Route::resource('danh-muc-san-pham', DanhMucSanPhamController::class);
 Route::resource('hoa-don', HoaDonController::class);
+
+//Thanh toán VNPay
+Route::post('/vnpay_payment',[VnPayController::class,'vnpay_payment']);

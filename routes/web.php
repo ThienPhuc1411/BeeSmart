@@ -8,6 +8,7 @@ use  App\Http\Controllers\Admin\DanhMucTinController;
 use  App\Http\Controllers\Admin\TinTucController;
 use App\Http\Controllers\Admin\BinhLuanController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\VnPayController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -93,7 +94,7 @@ Route::get('pass',function(){
     return bcrypt('hihi');
 });
 
-
+Route::post('/vnpay_payment',[VnPayController::class,'vnpay_payment'])->name('vnpay');
 // Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

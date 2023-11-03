@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use  App\Http\Controllers\Admin\LoaiCuaHangController;
 use  App\Http\Controllers\Admin\DanhMucTinController;
 use  App\Http\Controllers\Admin\TinTucController;
+use App\Http\Controllers\Admin\BinhLuanController;
 use App\Http\Controllers\AuthController;
 /*
 |--------------------------------------------------------------------------
@@ -71,6 +72,15 @@ Route::prefix('tin-tuc')->name('post.')->group(function () {
     Route::get('/restore/{id}',[TinTucController::class,'restore'])->name('restore');
     Route::get('/trash',[TinTucController::class,'trash'])->name('trash');
     Route::get('/force-delete/{id}',[TinTucController::class,'forceDelete'])->name('force-delete');
+})->middleware(['admin','auth']);
+
+Route::prefix('binh-luan')->name('cmt.')->group(function () {
+    Route::get('/',[BinhLuanController::class,'index'])->name('index');
+    Route::get('/approve/{id}',[BinhLuanController::class,'approve'])->name('approve');
+    Route::get('/trash',[BinhLuanController::class,'trash'])->name('trash');
+    Route::get('/delete/{id}',[BinhLuanController::class,'delete'])->name('delete');
+    Route::get('/force-delete/{id}',[BinhLuanController::class,'force-delete'])->name('force-delete');
+    Route::get('restore/{id}',[BinhLuanController::class,'restore'])->name('restore');
 })->middleware(['admin','auth']);
 
 Route::delete('logout',[AuthController::class,'logout'])->name('logout')->middleware(['admin','auth']);

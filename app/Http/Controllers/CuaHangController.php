@@ -8,6 +8,8 @@ use App\Http\Resources\CuaHang as Store;
 use Validator;
 use Illuminate\Support\Str;
 use App\Models\subCuaHang;
+use Mail;
+use App\Mail\TaoCuaHang;
 
 class CuaHangController extends Controller
 {
@@ -80,9 +82,24 @@ class CuaHangController extends Controller
             'idCh' => $lastId,
         ];
         $subCh = subCuaHang::create($subChInput);
+
+
+        //Gửi mail thông báo tạo cửa hàng thành công
+        $userMail = '19.trantienanh.99@gmail.com'; //temp
+        $mailData = [
+            'title' => 'Đã tạo cửa hàng thành công',
+            'body' => $store->tenCh
+        ];
+        Mail::to($userMail)->send(new TaoCuaHang($mailData));
+
+
         $arr = [
             'status' => true,
-            'message' => "Cửa hàng đã lưu thành công",
+            // 'message' => "Cửa hàng đã lưu thành công",
+            'message' => [
+                'Cửa hàng đã được lưu thành công',
+                'Mail thông báo đã được gửi đi'
+            ],
             'data' => new Store($store)
         ];
         return response()->json($arr, 201);

@@ -17,7 +17,7 @@ class LoaiSanPhamController extends Controller
         $arr = [
             'status' => true,
             'message' => 'Danh sách loại sản phẩm',
-            'data' => LoaiSPResource::collection($loaisp)
+            'data' => $loaisp
         ];
         return response()->json($arr, 200);
     }

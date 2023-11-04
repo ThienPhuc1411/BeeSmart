@@ -19,7 +19,7 @@ class nhaCungCapController extends Controller
         $arr = [
             'status' => true,
             'message' => "Danh sách nhà cung cấp",
-            'data' => NCC::collection($ncc)
+            'data' => $ncc
         ];
         return response()->json($arr, 200);
     }

@@ -15,12 +15,13 @@ class HoaDonController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index() {
-        $bills = HoaDon::all();
+    public function index(Request $request) {
+        $idCh = $request->idCh;
+        $bills = HoaDon::where('idCh',$idCh)->get();
         $arr = [
             'status' => true,
             'message' => 'Danh sách hóa đơn',
-            'data' => HoaDonResource::collection($bills)
+            'data' => $bills
         ];
         return response()->json($arr, 200);
     }

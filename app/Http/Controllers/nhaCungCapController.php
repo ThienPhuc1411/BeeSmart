@@ -12,9 +12,10 @@ class nhaCungCapController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $ncc = nhaCungCap::all();
+        $idCh = $request->idCh;
+        $ncc = nhaCungCap::where('idCh',$idCh)->get();
         $arr = [
             'status' => true,
             'message' => "Danh sách nhà cung cấp",

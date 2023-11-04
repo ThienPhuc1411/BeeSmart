@@ -15,7 +15,7 @@ class ThuongHieuController extends Controller
      */
     public function index(Request $request)
     {
-        $idCh = $request->id;
+        $idCh = $request->idCh;
         // dd($request->id);
         $brands = ThuongHieu::where('idCh', $idCh)->get();
         $arr = [

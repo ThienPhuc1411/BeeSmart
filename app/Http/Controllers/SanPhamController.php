@@ -108,7 +108,7 @@ class SanPhamController extends Controller
             $ext = $img->getClientOriginalExtension();
             $fileName = Str::random(6) . '_' . time() . '.' . $ext;
             $img->move($destination, $fileName);
-            $input['img'] = $destination.'/'.$fileName;
+            $input['img'] = $destination . '/' . $fileName;
         }
         //check số lượng
         if (!empty($input['soLuong']) && $input['soLuong'] < 0) {
@@ -309,7 +309,7 @@ class SanPhamController extends Controller
             $ext = $img->getClientOriginalExtension();
             $fileName = Str::random(6) . '_' . time() . '.' . $ext;
             $img->move($destination, $fileName);
-            $product->img = $destination.'/'.$fileName;
+            $product->img = $destination . '/' . $fileName;
         }
         $product->ngayTao = $mytime;
         $product->save();
@@ -392,42 +392,26 @@ class SanPhamController extends Controller
 
         // dd($input);
         if (!empty($input['keyword'])) {
-            $query = $query->where('ten', '=', $input['keyword']);
-            $check = DB::table('san_pham')->select('san_pham.ten')->get();
-            foreach ($check as $c) {
-                if ($input['keyword'] == $c) {
-                    if (!empty($input['dm'])) {
-                        $query = $query->where('idDm', '=', $input['dm']);
 
-                    }
-                    if (!empty($input['th'])) {
-                        $query = $query->where('idTh', '=', $input['th']);
-                    }
-                    if (!empty($input['ch'])) {
-                        $query = $query->where('idCh', '=', $input['ch']);
-                        $ch = [];
-                        $ch = $input['ch'];
-                        $ch = explode(',', $ch);
-                        foreach ($ch as $ch) {
-                            $query = $query->orWhere('idCh', '=', $ch);
-                        }
-                    }
-                    if (!empty($input['ncc'])) {
-                        $query = $query->where('idNcc', '=', $input['ncc']);
-                    }
-                    if (!empty($input['loai'])) {
-                        $query = $query->where('idLoai', '=', $input['loai']);
-                    }
-                } else {
-                    $arr = [
-                        'status' => true,
-                        'message' => "Danh sách sản phẩm",
-                        'data' => $query
-                    ];
-                }
+
+            if (!empty($input['dm'])) {
+                $query = $query->where('idDm', '=', $input['dm']);
+
             }
+            if (!empty($input['th'])) {
+                $query = $query->where('idTh', '=', $input['th']);
+            }
+            if (!empty($input['ch'])) {
+                $query = $query->where('idCh', '=', $input['ch']);
 
-
+            }
+            if (!empty($input['ncc'])) {
+                $query = $query->where('idNcc', '=', $input['ncc']);
+            }
+            if (!empty($input['loai'])) {
+                $query = $query->where('idLoai', '=', $input['loai']);
+            }
+            $query = $query->where('ten', 'like', $input['keyword'] . '%');
         } else {
             if (!empty($input['dm'])) {
                 $query = $query->where('idDm', '=', $input['dm']);
@@ -438,12 +422,7 @@ class SanPhamController extends Controller
             }
             if (!empty($input['ch'])) {
                 $query = $query->where('idCh', '=', $input['ch']);
-                $ch = [];
-                $ch = $input['ch'];
-                $ch = explode(',', $ch);
-                foreach ($ch as $ch) {
-                    $query = $query->orWhere('idCh', '=', $ch);
-                }
+
             }
             if (!empty($input['ncc'])) {
                 $query = $query->where('idNcc', '=', $input['ncc']);
@@ -452,30 +431,9 @@ class SanPhamController extends Controller
                 $query = $query->where('idLoai', '=', $input['loai']);
             }
         }
-        // if(!empty($input['dm'])){
-        //     $query=$query->where('idDm','=',$input['dm']);
-
-        // }
-        // if(!empty($input['th'])){
-        //     $query=$query->where('idTh','=',$input['th']);
-        // }
-        // if(!empty($input['ch'])){
-        //     $query=$query->where('idCh','=',$input['ch']);
-        //     $ch = [];
-        //     $ch = $input['ch'];
-        //     $ch = explode(',',$ch);
-        //     foreach($ch as $ch){
-        //         $query=$query->orWhere('idCh','=',$ch);
-        //     }
-        // }
-        // if(!empty($input['ncc'])){
-        //     $query=$query->where('idNcc','=',$input['ncc']);
-        // }
-        // if(!empty($input['loai'])){
-        //     $query=$query->where('idLoai','=',$input['loai']);
-        // }
 
 
+        // dd($query);
         $query = $query->get();
         if (count($query) != 0) {
             $arr = [
@@ -491,7 +449,6 @@ class SanPhamController extends Controller
         }
 
 
-        // $products = san_pham::all();
 
         return response()->json($arr, 200);
     }

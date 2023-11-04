@@ -32,7 +32,7 @@ Route::get('san-pham/{id}',[SanPhamController::class,'show']);
 // Route::put('san-pham/{id}',[SanPhamController::class,'update']);
 Route::post('san-pham/{id}',[SanPhamController::class,'update']);
 Route::delete('san-pham/{id}',[SanPhamController::class,'destroy']);
-
+Route::get('sort_search',[SanPhamController::class,'sort_search']);
 Route::get('sp-dm/{id}',[SanPhamController::class,'sptheoDm']);
 Route::get('sp-th',[SanPhamController::class,'sptheoTh']);
 Route::get('sp-ch',[SanPhamController::class,'sptheoCh']);

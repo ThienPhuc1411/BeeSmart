@@ -144,12 +144,12 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse5"
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse6"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fa-solid fa-hand-holding-dollar"></i>
                     <span>Bình luận</span>
                 </a>
-                <div id="collapse5" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapse6" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ route('cmt.index') }}">Danh sách</a>
                         <a class="collapse-item" href="{{ route('cmt.trash') }}">Thùng rác</a>
@@ -402,7 +402,7 @@
                                        Chào {{ Auth::user()->HoTen }}
 
 
-                                  
+
                                 </span>
                                 <img class="img-profile rounded-circle"
                                     src="/ad/img/undraw_profile.svg">

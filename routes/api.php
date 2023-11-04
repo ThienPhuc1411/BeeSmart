@@ -13,7 +13,7 @@ use App\Http\Controllers\LoaiSanPhamController;
 use App\Http\Controllers\DanhMucSanPhamController;
 use App\Http\Controllers\SanPhamController;
 use App\Http\Controllers\VnPayController;
-
+use App\Http\Controllers\UserController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -53,3 +53,18 @@ Route::resource('hoa-don', HoaDonController::class);
 
 //Thanh toán VNPay
 Route::post('/vnpay_payment',[VnPayController::class,'vnpay_payment']);
+
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
+
+
+Route::post('login',[UserController::class,'loginUser']);
+
+
+Route::group(['middleware' => 'auth:sanctum'],function(){
+    Route::get('user',[UserController::class,'userDetails']);
+    Route::get('logout',[UserController::class,'logout']);
+});
+// register api
+Route::post('register',[UserController::class,'register']);

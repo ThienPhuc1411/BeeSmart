@@ -9,6 +9,7 @@ use App\Http\Resources\HoaDonResource;
 use App\Http\Resources\HDCTResource;
 use Validator;
 use Carbon\Carbon;
+use App\Models\CuaHang;
 
 class HoaDonController extends Controller
 {
@@ -16,13 +17,28 @@ class HoaDonController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request) {
-        $idCh = $request->idCh;
-        $bills = HoaDon::where('idCh',$idCh)->get();
-        $arr = [
-            'status' => true,
-            'message' => 'Danh sách hóa đơn',
-            'data' => $bills
-        ];
+        if (isset($request->idCh)) {
+            $idCh = $request->idCh;
+            $isExist = CuaHang::select('*')->where('id', $idCh)->exists();
+            if ($isExist) {
+                $bills = HoaDon::where('idCh', $idCh)->get();
+                $arr = [
+                    'status' => true,
+                    'message' => 'Danh sách hóa đơn',
+                    'data' => HoaDonResource::collection($bills)
+                ];
+            } else {
+                $arr = [
+                    'status' => false,
+                    'message' => 'Cửa hàng không tồn tại'
+                ];
+            }
+        } else {
+            $arr = [
+                'status' => false,
+                'message' => 'Thiếu thông tin'
+            ];
+        }
         return response()->json($arr, 200);
     }
 

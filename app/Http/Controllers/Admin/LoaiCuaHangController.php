@@ -36,7 +36,7 @@ class LoaiCuaHangController extends Controller
         $loaiCuaHang->fill($request->all());
         $loaiCuaHang->save();
         $msg = "Đã thêm loại cửa hàng thành công";
-        return redirect()->route('admin.store-type.index')->with('msg', $msg);
+        return redirect()->route('store-type.index')->with('msg', $msg);
     }
 
     public function edit($id)
@@ -59,7 +59,7 @@ class LoaiCuaHangController extends Controller
         $loaiCh->update($request->all());
         $loaiCh->save();
         $msg = "Đã cập nhật loại cửa hàng thành công";
-        return redirect()->route("admin.store-type.index")->with("msg", $msg);
+        return redirect()->route("store-type.index")->with("msg", $msg);
     }
 
     public function delete($id)

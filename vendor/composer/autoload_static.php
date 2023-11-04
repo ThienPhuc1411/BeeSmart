@@ -373,8 +373,8 @@ class ComposerStaticInit7c1922305c50c46f54826e8ced57fdf7
         ),
         'Psr\\Http\\Message\\' =>
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' =>
         array (
@@ -649,6 +649,7 @@ class ComposerStaticInit7c1922305c50c46f54826e8ced57fdf7
         'App\\Http\\Resources\\ThuongHieu' => __DIR__ . '/../..' . '/app/Http/Resources/ThuongHieu.php',
         'App\\Http\\Resources\\Tin' => __DIR__ . '/../..' . '/app/Http/Resources/Tin.php',
         'App\\Http\\Resources\\nhaCungCapResource' => __DIR__ . '/../..' . '/app/Http/Resources/nhaCungCapResource.php',
+        'App\\Models\\BinhLuan' => __DIR__ . '/../..' . '/app/Models/BinhLuan.php',
         'App\\Models\\CuaHang' => __DIR__ . '/../..' . '/app/Models/CuaHang.php',
         'App\\Models\\DanhMucSanPham' => __DIR__ . '/../..' . '/app/Models/DanhMucSanPham.php',
         'App\\Models\\DanhMucTin' => __DIR__ . '/../..' . '/app/Models/DanhMucTin.php',

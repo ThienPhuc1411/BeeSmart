@@ -6,7 +6,9 @@ use App\Http\Controllers\UserController;
 use  App\Http\Controllers\Admin\LoaiCuaHangController;
 use  App\Http\Controllers\Admin\DanhMucTinController;
 use  App\Http\Controllers\Admin\TinTucController;
+use App\Http\Controllers\Admin\BinhLuanController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\VnPayController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,6 +57,8 @@ Route::prefix('loai-tin')->name('post-type.')->group(function () {
     Route::get('/restore/{id}',[DanhMucTinController::class,'restore'])->name('restore');
     Route::get('/trash',[DanhMucTinController::class,'trash'])->name('trash');
     Route::get('/force-delete/{id}',[DanhMucTinController::class,'forceDelete'])->name('force-delete');
+    Route::get('/show/{id}',[DanhMucTinController::class,'show'])->name('show');
+    Route::get('/hide/{id}',[DanhMucTinController::class,'hide'])->name('hide');
 })->middleware(['admin','auth']);
 
 Route::prefix('tin-tuc')->name('post.')->group(function () {
@@ -71,6 +75,15 @@ Route::prefix('tin-tuc')->name('post.')->group(function () {
     Route::get('/force-delete/{id}',[TinTucController::class,'forceDelete'])->name('force-delete');
 })->middleware(['admin','auth']);
 
+Route::prefix('binh-luan')->name('cmt.')->group(function () {
+    Route::get('/',[BinhLuanController::class,'index'])->name('index');
+    Route::get('/approve/{id}',[BinhLuanController::class,'approve'])->name('approve');
+    Route::get('/trash',[BinhLuanController::class,'trash'])->name('trash');
+    Route::get('/delete/{id}',[BinhLuanController::class,'delete'])->name('delete');
+    Route::get('/force-delete/{id}',[BinhLuanController::class,'force-delete'])->name('force-delete');
+    Route::get('restore/{id}',[BinhLuanController::class,'restore'])->name('restore');
+})->middleware(['admin','auth']);
+
 Route::delete('logout',[AuthController::class,'logout'])->name('logout')->middleware(['admin','auth']);
 
 Route::get('store', [AdminController::class, 'list_reg'])->name('store')->middleware(['admin','auth']);
@@ -81,7 +94,7 @@ Route::get('pass',function(){
     return bcrypt('hihi');
 });
 
-
+Route::post('/vnpay_payment',[VnPayController::class,'vnpay_payment'])->name('vnpay');
 // Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

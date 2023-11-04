@@ -446,6 +446,9 @@
             'pretty_version' => '1.6.0',
             'version' => '1.6.0.0',
             'reference' => 'e7f68118f130c6d7f2f49e35a233075826972559',
+            'pretty_version' => '1.6.0',
+            'version' => '1.6.0.0',
+            'reference' => 'e7f68118f130c6d7f2f49e35a233075826972559',
             'type' => 'library',
             'install_path' => __DIR__ . '/../laravel-lang/locales',
             'aliases' => array(),
@@ -461,6 +464,9 @@
             'dev_requirement' => true,
         ),
         'laravel/framework' => array(
+            'pretty_version' => 'v10.30.1',
+            'version' => '10.30.1.0',
+            'reference' => '7a2da50258c4d0f693b738d3f3c69b2693aea6c1',
             'pretty_version' => 'v10.30.1',
             'version' => '10.30.1.0',
             'reference' => '7a2da50258c4d0f693b738d3f3c69b2693aea6c1',
@@ -874,8 +880,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0|2.0|3.0',
-                1 => '3.0.0',
+                0 => '3.0.0',
+                1 => '1.0|2.0|3.0',
             ),
         ),
         'psr/simple-cache' => array(

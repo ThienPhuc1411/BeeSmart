@@ -22,13 +22,17 @@
 
         </div>
         <div class="card-body">
-            <form method="POST" action="">
+            <form method="POST" action="{{route('post-type.add')}}">
                 @csrf
                 <div class="form-group">
-                    <label for="tieuDe">Tên loại tin:</label>
-                    <input type="text" class="form-control" id="ten" name="ten" required>
+                    <label for="ten">Tên danh mục:</label>
+                    <input type="text" class="form-control" id="ten" name="ten">
+                    @error('ten')
+                        <div class="badge" style="color:red" role="alert">
+                        <strong>* {{$message}}</strong></div>
+                    @enderror
                 </div>
-                <button type="submit" class="btn btn-primary">Thêm Loại Tin Mới</button>
+                <button type="submit" class="btn btn-primary">Thêm</button>
             </form>
         </div>
     </div>

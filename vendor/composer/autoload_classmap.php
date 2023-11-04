@@ -55,6 +55,7 @@ return array(
     'App\\Http\\Resources\\ThuongHieu' => $baseDir . '/app/Http/Resources/ThuongHieu.php',
     'App\\Http\\Resources\\Tin' => $baseDir . '/app/Http/Resources/Tin.php',
     'App\\Http\\Resources\\nhaCungCapResource' => $baseDir . '/app/Http/Resources/nhaCungCapResource.php',
+    'App\\Models\\BinhLuan' => $baseDir . '/app/Models/BinhLuan.php',
     'App\\Models\\CuaHang' => $baseDir . '/app/Models/CuaHang.php',
     'App\\Models\\DanhMucSanPham' => $baseDir . '/app/Models/DanhMucSanPham.php',
     'App\\Models\\DanhMucTin' => $baseDir . '/app/Models/DanhMucTin.php',

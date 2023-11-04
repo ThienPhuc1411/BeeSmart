@@ -108,7 +108,7 @@ class SanPhamController extends Controller
             $ext = $img->getClientOriginalExtension();
             $fileName = Str::random(6) . '_' . time() . '.' . $ext;
             $img->move($destination, $fileName);
-            $input['img'] = $fileName;
+            $input['img'] = $destination.'/'.$fileName;
         }
         //check số lượng
         if (!empty($input['soLuong']) && $input['soLuong'] < 0) {
@@ -309,7 +309,7 @@ class SanPhamController extends Controller
             $ext = $img->getClientOriginalExtension();
             $fileName = Str::random(6) . '_' . time() . '.' . $ext;
             $img->move($destination, $fileName);
-            $product->img = $fileName;
+            $product->img = $destination.'/'.$fileName;
         }
         $product->ngayTao = $mytime;
         $product->save();

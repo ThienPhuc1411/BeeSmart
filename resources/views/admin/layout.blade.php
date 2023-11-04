@@ -107,7 +107,7 @@
                 <div id="collapse3" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ route('store-type.index') }}">Danh sách</a>
-                        <a class="collapse-item" href="">Thêm</a>
+                        <a class="collapse-item" href="{{route('store-type.add')}}">Thêm</a>
                         <a class="collapse-item" href="{{ route('store-type.trash') }}">Thùng rác</a>
                     </div>
                 </div>
@@ -117,13 +117,13 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse4"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fa-solid fa-hand-holding-dollar"></i>
-                    <span>Loại Tin</span>
+                    <span>Danh Mục Tin</span>
                 </a>
                 <div id="collapse4" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ route('post-type.index') }}">Danh sách</a>
-                        <a class="collapse-item" href="">Thêm</a>
-                        <a class="collapse-item" href="{{ route('store-type.trash') }}">Thùng rác</a>
+                        <a class="collapse-item" href="{{route('post-type.add')}}">Thêm</a>
+                        <a class="collapse-item" href="{{ route('post-type.trash') }}">Thùng rác</a>
                     </div>
                 </div>
             </li>
@@ -139,6 +139,20 @@
                         <a class="collapse-item" href="{{ route('post.index') }}">Danh sách</a>
                         <a class="collapse-item" href="{{route('post.add')}}">Thêm</a>
                         <a class="collapse-item" href="{{ route('post.trash') }}">Thùng rác</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse5"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fa-solid fa-hand-holding-dollar"></i>
+                    <span>Bình luận</span>
+                </a>
+                <div id="collapse5" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('cmt.index') }}">Danh sách</a>
+                        <a class="collapse-item" href="{{ route('cmt.trash') }}">Thùng rác</a>
                     </div>
                 </div>
             </li>

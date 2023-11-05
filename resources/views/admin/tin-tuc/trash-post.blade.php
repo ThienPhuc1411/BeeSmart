@@ -1,10 +1,9 @@
 @extends('admin.layout')
 @section('title')
-    {{$title}}
+    {{ $title }}
 @endsection
 @section('container')
     <div class="container-fluid">
-
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">Danh Sách Danh Mục Tin</h1>
 
@@ -38,35 +37,41 @@
                                 <th>Hành động</th>
                             </tr>
                         </thead>
-                        @if (!empty($post))
-                            @foreach ($post as $key=>$item)
-                                <tbody class="text-center">
-                                    <td>{{ $item->tenDm }}</td>
-                                    <td>{{$item->tieuDe}}</td>
-                                    <td>{{asset($item->urlHinh)}}</td>
-                                    <td>{{$item->tomTat}}</td>
-                                    <td>{{ date('d-m-Y',strtotime($item->deleted_at)) }}</td>
+                        <tbody class="text-center">
+                            @if (!empty($post))
+                                @foreach ($post as $key => $item)
+                                    <tr>
+                                        <td>{{ $item->tenDm }}</td>
+                                        <td>{{ $item->tieuDe }}</td>
+                                        <td>{{ asset($item->urlHinh) }}</td>
+                                        <td>{{ $item->tomTat }}</td>
+                                        <td>{{ date('d-m-Y', strtotime($item->deleted_at)) }}</td>
                                         <td>
                                             <div>
-                                                <a href="{{route('post.restore',$item->id)}}" class="btn btn-success">Khôi phục</a>
+                                                <a href="{{ route('post.restore', $item->id) }}"
+                                                    class="btn btn-success">Khôi
+                                                    phục</a>
                                             </div>
                                             <div>
-                                                <a href="{{route('post.force-delete',$item->id)}}" class="btn btn-danger">Xóa vĩnh viễn</a>
+                                                <a href="{{ route('post.force-delete', $item->id) }}"
+                                                    class="btn btn-danger">Xóa
+                                                    vĩnh viễn</a>
                                             </div>
                                         </td>
-                                        
-                                    
-                                </tbody>
-                            @endforeach
-                        @else
-                            <td colspan="" class="text-center">Không có dữ liệu</td>
-                        @endif
+                                    </tr>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="" class="text-center">Không có dữ liệu</td>
+                                </tr>
+                            @endif
+                        </tbody>
                     </table>
                     {{-- <div class="d-flex justify-content-end">{{ $loaitin->links() }}</div> --}}
                 </div>
             </div>
         </div>
 
-        
+
     </div>
 @endsection

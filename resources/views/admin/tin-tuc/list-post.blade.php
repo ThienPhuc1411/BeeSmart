@@ -1,6 +1,6 @@
 @extends('admin.layout')
 @section('title')
-    {{$title}}
+    {{ $title }}
 @endsection
 @section('container')
     <div class="container-fluid">
@@ -39,45 +39,55 @@
                                 <th>Hành động</th>
                             </tr>
                         </thead>
-                        @if (!empty($post))
-                            @foreach ($post as $key=>$item)
-                                <tbody class="text-center">
-                                    <td>{{$key+1}}</td>
-                                    <td>{{ $item->tenDm }}</td>
-                                    <td>{{$item->tieuDe}}</td>
-                                    <td>{{asset($item->urlHinh)}}</td>
-                                    <td>{{$item->tomTat}}</td>
-                                    <td>{{ date('d-m-Y',strtotime($item->created_at)) }}</td>
-                                    @if ($item->anHien == 1)
+                        <tbody class="text-center">
+                            @if (!empty($post))
+                                @foreach ($post as $key => $item)
+                                    <tr>
+                                        <td>{{ $key + 1 }}</td>
+                                        <td>{{ $item->tenDm }}</td>
+                                        <td>{{ $item->tieuDe }}</td>
+                                        <td>{{ asset($item->urlHinh) }}</td>
+                                        <td>{{ $item->tomTat }}</td>
+                                        <td>{{ date('d-m-Y', strtotime($item->created_at)) }}</td>
+                                        @if ($item->anHien == 1)
+                                            <td>
+                                                <div>
+                                                    <a href="{{ route('post.hide', $item->id) }}"
+                                                        class="btn btn-primary">Đang
+                                                        hiện</a>
+                                                </div>
+                                            </td>
+                                        @else
+                                            <td>
+                                                <div>
+                                                    <a href="{{ route('post.show', $item->id) }}"
+                                                        class="btn btn-warning">Đang
+                                                        ẩn</a>
+                                                </div>
+                                            </td>
+                                        @endif
                                         <td>
-                                            <div>
-                                                <a href="{{route('post.hide',$item->id)}}" class="btn btn-primary">Đang hiện</a>
-                                            </div>
+                                            <div><a href="{{ route('post.edit', $item->id) }}"><i
+                                                        class="fa-solid fa-pencil" style="color:blue"></i></a></div>
+
+                                            <div><a href="{{ route('post.delete', $item->id) }}"
+                                                    onclick="return confirm('Bạn có chắc muốn xóa')"><i
+                                                        class="fa-solid fa-trash" style="color:red"></i></a></div>
                                         </td>
-                                    @else
-                                    <td>
-                                        <div>
-                                            <a href="{{route('post.show',$item->id)}}" class="btn btn-warning">Đang ẩn</a>
-                                        </div>
-                                    </td>
-                                    @endif
-                                    <td>
-                                        <div><a href="{{route('post.edit',$item->id)}}" ><i class="fa-solid fa-pencil" style="color:blue"></i></a></div>
-                                        
-                                        <div><a href="{{route('post.delete',$item->id)}}" onclick="return confirm('Bạn có chắc muốn xóa')"><i class="fa-solid fa-trash"  style="color:red"></i></a></div>
-                                    </td>
-                                    
-                                </tbody>
-                            @endforeach
-                        @else
-                            <td colspan="" class="text-center">Không có dữ liệu</td>
-                        @endif
+                                    </tr>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="" class="text-center">Không có dữ liệu</td>
+                                </tr>
+                            @endif
+                        </tbody>
                     </table>
                     {{-- <div class="d-flex justify-content-end">{{ $item->links() }}</div> --}}
                 </div>
             </div>
         </div>
 
-        
+
     </div>
 @endsection

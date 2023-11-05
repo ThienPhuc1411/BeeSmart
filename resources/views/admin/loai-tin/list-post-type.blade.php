@@ -1,6 +1,6 @@
 @extends('admin.layout')
 @section('title')
-    {{$title}}
+    {{ $title }}
 @endsection
 @section('container')
     <div class="container-fluid">
@@ -36,42 +36,50 @@
                                 <th>Hành động</th>
                             </tr>
                         </thead>
-                        @if (!empty($data))
-                            @foreach ($data as $item)
-                                <tbody class="text-center">
-                                    <td>{{ $item->ten }}</td>
-                                    <td>{{ date('d-m-Y',strtotime($item->created_at)) }}</td>
-                                    <td>{{ date('d-m-Y',strtotime($item->updated_at)) }}</td>
-                                    @if ($item->anHien == 1)
+                        <tbody class="text-center">
+                            @if (!empty($data))
+                                @foreach ($data as $item)
+                                    <tr>
+                                        <td>{{ $item->ten }}</td>
+                                        <td>{{ date('d-m-Y', strtotime($item->created_at)) }}</td>
+                                        <td>{{ date('d-m-Y', strtotime($item->updated_at)) }}</td>
+                                        @if ($item->anHien == 1)
+                                            <td>
+                                                <div>
+                                                    <a href="{{ route('post-type.hide', $item->id) }}"
+                                                        class="btn btn-primary">Đang hiện</a>
+                                                </div>
+                                            </td>
+                                        @else
+                                            <td>
+                                                <div>
+                                                    <a href="{{ route('post-type.show', $item->id) }}"
+                                                        class="btn btn-warning">Đang ẩn</a>
+                                                </div>
+                                            </td>
+                                        @endif
                                         <td>
-                                            <div>
-                                                <a href="{{route('post-type.hide',$item->id)}}" class="btn btn-primary">Đang hiện</a>
-                                            </div>
+                                            <div><a href="{{ route('post-type.edit', $item->id) }}"><i
+                                                        class="fa-solid fa-pencil" style="color:blue"></i></a></div>
+
+                                            <div><a href="{{ route('post-type.delete', $item->id) }}"
+                                                    onclick="return confirm('Bạn có chắc muốn xóa')"><i
+                                                        class="fa-solid fa-trash" style="color:red"></i></a></div>
                                         </td>
-                                    @else
-                                    <td>
-                                        <div>
-                                            <a href="{{route('post-type.show',$item->id)}}" class="btn btn-warning">Đang ẩn</a>
-                                        </div>
-                                    </td>
-                                    @endif
-                                    <td>
-                                        <div><a href="{{route('post-type.edit',$item->id)}}" ><i class="fa-solid fa-pencil" style="color:blue"></i></a></div>
-                                        
-                                        <div><a href="{{route('post-type.delete',$item->id)}}" onclick="return confirm('Bạn có chắc muốn xóa')"><i class="fa-solid fa-trash"  style="color:red"></i></a></div>
-                                    </td>
-                                    
-                                </tbody>
-                            @endforeach
-                        @else
-                            <td colspan="" class="text-center">Không có dữ liệu</td>
-                        @endif
+                                    </tr>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="" class="text-center">Không có dữ liệu</td>
+                                </tr>
+                            @endif
+                        </tbody>
                     </table>
                     {{-- <div class="d-flex justify-content-end">{{ $item->links() }}</div> --}}
                 </div>
             </div>
         </div>
 
-        
+
     </div>
 @endsection

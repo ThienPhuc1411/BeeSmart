@@ -1,6 +1,6 @@
 @extends('admin.layout')
 @section('title')
-    {{$title}}
+    {{ $title }}
 @endsection
 @section('container')
     <div class="container-fluid">
@@ -35,29 +35,35 @@
                                 <th>Hành động</th>
                             </tr>
                         </thead>
-                        @if (!empty($loaiCh))
-                            @foreach ($loaiCh as $loaiCh)
-                                <tbody class="text-center">
-                                    <td>{{ $loaiCh->ten }}</td>
-                                    <td>{{ date('d-m-Y',strtotime($loaiCh->created_at)) }}</td>
-                                    <td>{{ date('d-m-Y',strtotime($loaiCh->updated_at)) }}</td>
-                                    <td>
-                                        <div><a href="{{route('store-type.edit',$loaiCh->id)}}" ><i class="fa-solid fa-pencil" style="color:blue"></i></a></div>
-                                        
-                                        <div><a href="{{route('store-type.delete',$loaiCh->id)}}" onclick="return confirm('Bạn có chắc muốn xóa')"><i class="fa-solid fa-trash"  style="color:red"></i></a></div>
-                                    </td>
-                                    
-                                </tbody>
-                            @endforeach
-                        @else
-                            <td colspan="" class="text-center">Không có dữ liệu</td>
-                        @endif
+                        <tbody class="text-center">
+                            @if (!empty($loaiCh))
+                                @foreach ($loaiCh as $loaiCh)
+                                    <tr>
+                                        <td>{{ $loaiCh->ten }}</td>
+                                        <td>{{ date('d-m-Y', strtotime($loaiCh->created_at)) }}</td>
+                                        <td>{{ date('d-m-Y', strtotime($loaiCh->updated_at)) }}</td>
+                                        <td>
+                                            <div><a href="{{ route('store-type.edit', $loaiCh->id) }}"><i
+                                                        class="fa-solid fa-pencil" style="color:blue"></i></a></div>
+
+                                            <div><a href="{{ route('store-type.delete', $loaiCh->id) }}"
+                                                    onclick="return confirm('Bạn có chắc muốn xóa')"><i
+                                                        class="fa-solid fa-trash" style="color:red"></i></a></div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="" class="text-center">Không có dữ liệu</td>
+                                </tr>
+                            @endif
+                        </tbody>
                     </table>
                     {{-- <div class="d-flex justify-content-end">{{ $loaiCh->links() }}</div> --}}
                 </div>
             </div>
         </div>
 
-        
+
     </div>
 @endsection

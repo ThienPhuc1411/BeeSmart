@@ -1,10 +1,9 @@
 @extends('admin.layout')
 @section('title')
-    {{$title}}
+    {{ $title }}
 @endsection
 @section('container')
     <div class="container-fluid">
-
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">Danh Sách Danh Mục Tin</h1>
 
@@ -36,33 +35,39 @@
                                 <th>Hành động</th>
                             </tr>
                         </thead>
-                        @if (!empty($binhLuan))
-                            @foreach ($binhLuan as $key => $item)
-                                <tbody class="text-center">
-                                    <td>{{$key + 1 }}</td>
-                                    <td>{{ $item->tenTin }}</td>
-                                    <td>{{$item->noiDung}}</td>
-                                    <td>{{ date('d-m-Y',strtotime($item->deleted_at)) }}</td>
-                                    <td>
-                                        <p>
-                                            <a href="{{route('cmt.force-delete',$item->id)}}" class="btn btn-danger">Xóa vĩnh viễn</a>
-                                        </p>
-                                        <p>
-                                            <a href="{{route('cmt.restore',$item->id)}}" class="btn btn-success">Khôi phục</a>
-                                        </p>
-                                    </td>
-                                    
-                                </tbody>
-                            @endforeach
-                        @else
-                            <td colspan="" class="text-center">Không có dữ liệu</td>
-                        @endif
+                        <tbody class="text-center">
+                            @if (!empty($binhLuan))
+                                @foreach ($binhLuan as $key => $item)
+                                    <tr>
+                                        <td>{{ $key + 1 }}</td>
+                                        <td>{{ $item->tenTin }}</td>
+                                        <td>{{ $item->noiDung }}</td>
+                                        <td>{{ date('d-m-Y', strtotime($item->deleted_at)) }}</td>
+                                        <td>
+                                            <p>
+                                                <a href="{{ route('cmt.force-delete', $item->id) }}"
+                                                    class="btn btn-danger">Xóa
+                                                    vĩnh viễn</a>
+                                            </p>
+                                            <p>
+                                                <a href="{{ route('cmt.restore', $item->id) }}" class="btn btn-success">Khôi
+                                                    phục</a>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="" class="text-center">Không có dữ liệu</td>
+                                </tr>
+                            @endif
+                        </tbody>
                     </table>
                     {{-- <div class="d-flex justify-content-end">{{ $loaitin->links() }}</div> --}}
                 </div>
             </div>
         </div>
 
-        
+
     </div>
 @endsection

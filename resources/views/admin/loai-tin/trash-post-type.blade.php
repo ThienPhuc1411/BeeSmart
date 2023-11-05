@@ -1,10 +1,9 @@
 @extends('admin.layout')
 @section('title')
-    {{$title}}
+    {{ $title }}
 @endsection
 @section('container')
     <div class="container-fluid">
-
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">Danh Sách Danh Mục Tin</h1>
 
@@ -34,31 +33,36 @@
                                 <th>Hành động</th>
                             </tr>
                         </thead>
-                        @if (!empty($loaitin))
-                            @foreach ($loaitin as $loaitin)
-                                <tbody class="text-center">
-                                    <td>{{ $loaitin->ten }}</td>
-                                    <td>{{ date('d-m-Y',strtotime($loaitin->deleted_at)) }}</td>
-                                    <td>
-                                        <p>
-                                            <a href="{{route('post-type.force-delete',$loaitin->id)}}" class="btn btn-danger">Xóa vĩnh viễn</a>
-                                        </p>
-                                        <p>
-                                            <a href="{{route('post-type.restore',$loaitin->id)}}" class="btn btn-success">Khôi phục</a>
-                                        </p>
-                                    </td>
-                                    
-                                </tbody>
-                            @endforeach
-                        @else
-                            <td colspan="" class="text-center">Không có dữ liệu</td>
-                        @endif
+                        <tbody class="text-center">
+                            @if (!empty($loaitin))
+                                @foreach ($loaitin as $loaitin)
+                                    <tr>
+                                        <td>{{ $loaitin->ten }}</td>
+                                        <td>{{ date('d-m-Y', strtotime($loaitin->deleted_at)) }}</td>
+                                        <td>
+                                            <p>
+                                                <a href="{{ route('post-type.force-delete', $loaitin->id) }}"
+                                                    class="btn btn-danger">Xóa vĩnh viễn</a>
+                                            </p>
+                                            <p>
+                                                <a href="{{ route('post-type.restore', $loaitin->id) }}"
+                                                    class="btn btn-success">Khôi phục</a>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="" class="text-center">Không có dữ liệu</td>
+                                </tr>
+                            @endif
+                        </tbody>
                     </table>
                     {{-- <div class="d-flex justify-content-end">{{ $loaitin->links() }}</div> --}}
                 </div>
             </div>
         </div>
 
-        
+
     </div>
 @endsection

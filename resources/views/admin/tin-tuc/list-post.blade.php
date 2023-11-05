@@ -6,7 +6,7 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Danh Sách Loại Tin</h1>
+        <h1 class="h3 mb-2 text-gray-800">Danh Sách Tin tức</h1>
 
 
         <!-- DataTales Example -->
@@ -42,6 +42,7 @@
                         @if (!empty($post))
                             @foreach ($post as $key=>$item)
                                 <tbody class="text-center">
+                                    <td>{{$key+1}}</td>
                                     <td>{{ $item->tenDm }}</td>
                                     <td>{{$item->tieuDe}}</td>
                                     <td>{{asset($item->urlHinh)}}</td>

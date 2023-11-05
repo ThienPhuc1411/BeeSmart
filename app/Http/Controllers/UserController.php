@@ -8,6 +8,8 @@ use App\Models\User;
 use DB;
 use Auth;
 use Validator;
+use App\Models\subCuaHang;
+use App\Models\CuaHang;
 
 class UserController extends Controller
 {
@@ -90,6 +92,36 @@ class UserController extends Controller
 
         return Response(['data' => 'User Logout successfully.'],200);
     }
+    // public function register(Request $request)
+    // {
+    //     $rules = [
+    //         'HoTen' => 'required',
+    //         'email'    => 'unique:users|required|email',
+    //         'password' => 'required',
+    //         'sdt' => 'required',
+    //         'quan' => 'required',
+    //     ];
+
+    //     $input     = $request->all();
+    //     $validator = Validator::make($input, $rules);
+
+    //     if ($validator->fails()) {
+    //         return response()->json(['success' => false, 'error' => $validator->messages()]);
+    //     }
+
+
+    //     $user     = User::create($input);
+    //     $arr=[
+    //         'status'=>true,
+    //         'message'=>'Bạn đã đăng ký thành công',
+    //         'data'=>$user,
+    //     ];
+    //     // dd($input);
+    //     return response()->json($arr,201);
+
+    // }
+
+
     public function register(Request $request)
     {
         $rules = [
@@ -100,7 +132,13 @@ class UserController extends Controller
             'quan' => 'required',
         ];
 
-        $input     = $request->all();
+        $input     = [
+            'HoTen'=>$request->HoTen,
+            'email'=>$request->email,
+            'password'=> $request->password,
+            'sdt'=>$request->sdt,
+            'quan'=>$request->quan
+        ];
         $validator = Validator::make($input, $rules);
 
         if ($validator->fails()) {
@@ -109,14 +147,36 @@ class UserController extends Controller
 
 
         $user     = User::create($input);
+        if(!empty($request->idLoaiCh)){
+
+            $ch=[
+                'tenCh'=>$request->tenCh,
+                'diaChi'=>$request->diaChi,
+                'idLoaiCh'=>$request->idLoaiCh,
+            ];
+            $ch=CuaHang::create($ch);
+            $subch=
+            [
+                'idCh'=>$ch->id,
+                'idUsers'=>$user->id
+            ];
+            subCuaHang::create($subch);
+
+        }
+        $tt_user=DB::table('users')
+        ->join('sub_cua_hang','sub_cua_hang.idUsers','users.id')
+        ->join('cua_hang','cua_hang.id','sub_cua_hang.idCh')
+        ->join('loai_cua_hang','loai_cua_hang.id','cua_hang.idLoaiCh')
+        ->where('users.id',$user->id)
+        ->select('users.*','sub_cua_hang.idCh as idCh','cua_hang.tenCh','loai_cua_hang.ten as tenLoaiCh','loai_cua_hang.id as idLoaiCh')
+        ->get();
         $arr=[
             'status'=>true,
             'message'=>'Bạn đã đăng ký thành công',
-            'data'=>$user,
+            'data'=>$tt_user,
         ];
         // dd($input);
         return response()->json($arr,201);
 
     }
-
 }

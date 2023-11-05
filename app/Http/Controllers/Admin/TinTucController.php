@@ -14,7 +14,7 @@ class TinTucController extends Controller
     public function index()
     {
         $post = Tin::select('tin_tuc.*', 'danh_muc_tin.ten as tenDm')
-            ->join('danh_muc_tin', 'danh_muc_tin.id', 'tin_tuc.id')
+            ->join('danh_muc_tin', 'danh_muc_tin.id', 'tin_tuc.idDmTin')
             ->get();
         $title = "Tin tức";
         // dd($post);

@@ -52,7 +52,7 @@ Route::resource('danh-muc-san-pham', DanhMucSanPhamController::class);
 Route::resource('hoa-don', HoaDonController::class);
 
 //Thanh toán VNPay
-Route::post('/vnpay_payment',[VnPayController::class,'vnpay_payment']);
+Route::post('/vnpay_payment',[VnPayController::class,'vnpay_payment'])->name('vnpay_payment');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

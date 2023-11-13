@@ -9,6 +9,7 @@ use  App\Http\Controllers\Admin\TinTucController;
 use App\Http\Controllers\Admin\BinhLuanController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\VnPayController;
+use App\Http\Controllers\Admin\LoaiSanPhamController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -59,6 +60,18 @@ Route::prefix('loai-tin')->name('post-type.')->group(function () {
     Route::get('/force-delete/{id}',[DanhMucTinController::class,'forceDelete'])->name('force-delete');
     Route::get('/show/{id}',[DanhMucTinController::class,'show'])->name('show');
     Route::get('/hide/{id}',[DanhMucTinController::class,'hide'])->name('hide');
+})->middleware(['admin','auth']);
+
+Route::prefix('loai-san-pham')->name('product-type.')->group(function () {
+    Route::get('/',[LoaiSanPhamController::class,'index'])->name('index');
+    Route::get('/edit/{id}',[LoaiSanPhamController::class,'edit'])->name('edit');
+    Route::post('/edit/{id}',[LoaiSanPhamController::class,'update'])->name('edit');
+    Route::get('add',[LoaiSanPhamController::class,'store'])->name('add');
+    Route::post('add',[LoaiSanPhamController::class,'handleStore'])->name('add');
+    Route::get('/delete/{id}',[LoaiSanPhamController::class,'delete'])->name('delete');
+    Route::get('/restore/{id}',[LoaiSanPhamController::class,'restore'])->name('restore');
+    Route::get('/trash',[LoaiSanPhamController::class,'trash'])->name('trash');
+    Route::get('/force-delete/{id}',[LoaiSanPhamController::class,'forceDelete'])->name('force-delete');
 })->middleware(['admin','auth']);
 
 Route::prefix('tin-tuc')->name('post.')->group(function () {

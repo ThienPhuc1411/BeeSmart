@@ -7,18 +7,20 @@ use Illuminate\Http\Request;
 class VnPayController extends Controller
 {
     //
-    public function vnpay_payment()
+    public function vnpay_payment(Request $request)
     {
+        $data = $request->all();
+        $code_cart = rand(00000,99999);
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = "localhost:8000/";
+        $vnp_Returnurl = "https://www.google.com/";
         $vnp_TmnCode = "YFJ5KAVS"; //Mã website tại VNPAY 
         $vnp_HashSecret = "YZNGDIUGMPEEIOOLRVUOPJDTRVUMZGWN"; //Chuỗi bí mật
 
-        $vnp_TxnRef = $_POST['order_id']; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
+        $vnp_TxnRef = $code_cart; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
         $vnp_OrderInfo = $_POST['order_desc'];//Thông tin đơn hàng
         $vnp_OrderType = $_POST['order_type'];//Loại đơn hàng
-        $vnp_Amount = $_POST['amount'] * 100;//Giá trị đơn hàng
-        $vnp_Locale = $_POST['language'];
+        $vnp_Amount = $data['total'] * 100;//Giá trị đơn hàng
+        $vnp_Locale = $data['language'];
         $vnp_BankCode = $_POST['bank_code'];
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
         //Add Params of 2.0.1 Version

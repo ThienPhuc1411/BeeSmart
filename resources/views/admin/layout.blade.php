@@ -114,6 +114,21 @@
             </li>
 
             <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse7"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fa-solid fa-hand-holding-dollar"></i>
+                    <span>Loại sản phẩm</span>
+                </a>
+                <div id="collapse7" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('product-type.index') }}">Danh sách</a>
+                        <a class="collapse-item" href="{{route('product-type.add')}}">Thêm</a>
+                        <a class="collapse-item" href="{{ route('product-type.trash') }}">Thùng rác</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse4"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fa-solid fa-hand-holding-dollar"></i>

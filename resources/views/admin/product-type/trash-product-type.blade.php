@@ -34,18 +34,18 @@
                             </tr>
                         </thead>
                         <tbody class="text-center">
-                            @if (!empty($loaiCh))
-                                @foreach ($loaiCh as $loaiCh)
+                            @if (!empty($loaiSp))
+                                @foreach ($loaiSp as $loaiSp)
                                     <tr>
-                                        <td>{{ $loaiCh->ten }}</td>
-                                        <td>{{ date('d-m-Y', strtotime($loaiCh->deleted_at)) }}</td>
+                                        <td>{{ $loaiSp->ten }}</td>
+                                        <td>{{ date('d-m-Y', strtotime($loaiSp->deleted_at)) }}</td>
                                         <td>
                                             <p>
-                                                <a href="{{ route('store-type.force-delete', $loaiCh->id) }}"
+                                                <a href="{{ route('product-type.force-delete', $loaiSp->id) }}"
                                                     class="btn btn-danger">Xóa vĩnh viễn</a>
                                             </p>
                                             <p>
-                                                <a href="{{ route('store-type.restore', $loaiCh->id) }}"
+                                                <a href="{{ route('product-type.restore', $loaiSp->id) }}"
                                                     class="btn btn-success">Khôi phục</a>
                                             </p>
                                         </td>
@@ -58,7 +58,7 @@
                             @endif
                         </tbody>
                     </table>
-                    {{-- <div class="d-flex justify-content-end">{{ $loaiCh->links() }}</div> --}}
+                    {{-- <div class="d-flex justify-content-end">{{ $loaiSp->links() }}</div> --}}
                 </div>
             </div>
         </div>

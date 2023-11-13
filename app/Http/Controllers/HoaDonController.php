@@ -10,6 +10,7 @@ use App\Http\Resources\HDCTResource;
 use Validator;
 use Carbon\Carbon;
 use App\Models\CuaHang;
+use App\Models\DoanhThu;
 
 class HoaDonController extends Controller
 {
@@ -83,9 +84,13 @@ class HoaDonController extends Controller
         }
         $hdInput['maHd'] = 'HD'. str_pad($maHd, 7, '0', STR_PAD_LEFT). '-'. Carbon::now()->format('dmY');
         $hd = HoaDon::create($hdInput);
-
-        if (is_array($input['Sp'])) {
+        
+        $ngayTao = Carbon::now()->format("Y-m-d");
+        $statistical = DoanhThu::where('ngayTao',$ngayTao)->where('idCh',$hdInput['idCh'])->first();
+        if($statistical){
+            if (is_array($input['Sp'])) {
             foreach ($input['Sp'] as $sp) {
+                $soLuongDT = $statistical->soLuong + $sp['soLuong'];
                 $hdctInput = [
                     'idSp' => $sp['idSp'],
                     'soLuong' => $sp['soLuong'],
@@ -94,7 +99,12 @@ class HoaDonController extends Controller
                 $hdctInput['idHd'] = $hd->id;
                 $hdct = HoaDonCT::create($hdctInput);
             }
+            
         }
+        
+        }
+       
+        
         $arr = [
             'status' => true,
             'message' => 'Hóa đơn đã tạo thành công',

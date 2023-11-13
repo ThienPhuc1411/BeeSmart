@@ -11,13 +11,15 @@ use Validator;
 use Carbon\Carbon;
 use App\Models\CuaHang;
 use App\Models\DoanhThu;
+use App\Models\SanPham;
 
 class HoaDonController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         if (isset($request->idCh)) {
             $idCh = $request->idCh;
             $isExist = CuaHang::select('*')->where('id', $idCh)->exists();
@@ -54,7 +56,8 @@ class HoaDonController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $input = $request->all();
         $validator = Validator::make($input, [
             'Sp' => 'required',
@@ -82,29 +85,66 @@ class HoaDonController extends Controller
         } else {
             $maHd = 1;
         }
-        $hdInput['maHd'] = 'HD'. str_pad($maHd, 7, '0', STR_PAD_LEFT). '-'. Carbon::now()->format('dmY');
+        $hdInput['maHd'] = 'HD' . str_pad($maHd, 7, '0', STR_PAD_LEFT) . '-' . Carbon::now()->format('dmY');
         $hd = HoaDon::create($hdInput);
-        
+
         $ngayTao = Carbon::now()->format("Y-m-d");
-        $statistical = DoanhThu::where('ngayTao',$ngayTao)->where('idCh',$hdInput['idCh'])->first();
-        if($statistical){
+        $statistical = DoanhThu::where('ngayTao', $ngayTao)->where('idCh', $hdInput['idCh'])->first();
+        if ($statistical) {
             if (is_array($input['Sp'])) {
-            foreach ($input['Sp'] as $sp) {
-                $soLuongDT = $statistical->soLuong + $sp['soLuong'];
-                $hdctInput = [
-                    'idSp' => $sp['idSp'],
-                    'soLuong' => $sp['soLuong'],
-                    'tong' => $sp['tong']
+                foreach ($input['Sp'] as $sp) {
+                    $statistical->soLuong += $sp['soLuong'];
+                    $hdctInput = [
+                        'idSp' => $sp['idSp'],
+                        'soLuong' => $sp['soLuong'],
+                        'tong' => $sp['tong']
+                    ];
+                    $spOne = SanPham::find($sp['idSp']);
+                    $von = $spOne->giaVon * $sp['soLuong'];
+                    $loiNhuan = $input['tongTien'] - $von;
+                    $statistical->loiNhuan += $loiNhuan;
+                    $hdctInput['idHd'] = $hd->id;
+                    $hdct = HoaDonCT::create($hdctInput);
+                }
+                $statistical->hoaDon += 1;
+                $statistical->doanhThu += $hdInput['tongTien'];
+                $statistical->save();
+            } else {
+                $loiNhuan = 0;
+                $soLuong = 0;
+                $doanhThu = 0;
+                $hoaDon = 1;
+                if (is_array($input['Sp'])) {
+                    foreach ($input['Sp'] as $sp) {
+                        $statistical->soLuong += $sp['soLuong'];
+                        $hdctInput = [
+                            'idSp' => $sp['idSp'],
+                            'soLuong' => $sp['soLuong'],
+                            'tong' => $sp['tong']
+                        ];
+                        $spOne = SanPham::find($sp['idSp']);
+                        $von = $spOne->giaVon * $sp['soLuong'];
+                        $loiNhuan = $input['tongTien'] - $von;
+                        $statistical->loiNhuan += $loiNhuan;
+                        $hdctInput['idHd'] = $hd->id;
+                        $hdct = HoaDonCT::create($hdctInput);
+                    }
+                    $statistical->hoaDon += 1;
+                    $statistical->doanhThu += $hdInput['tongTien'];
+                }
+                $statisticalInput = [
+                    'loiNhuan' => $loiNhuan,
+                    'soLuong' => $soLuong,
+                    'doanhThu' => $doanhThu,
+                    'hoaDon' => $hoaDon,
+                    'idCh' => $input['idCh'],
+                    'ngayTao' => $ngayTao
                 ];
-                $hdctInput['idHd'] = $hd->id;
-                $hdct = HoaDonCT::create($hdctInput);
+                $statistical = DoanhThu::create($statisticalInput);
             }
-            
         }
-        
-        }
-       
-        
+
+
         $arr = [
             'status' => true,
             'message' => 'Hóa đơn đã tạo thành công',
@@ -116,16 +156,17 @@ class HoaDonController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id) {
+    public function show(string $id)
+    {
         $bill = HoaDon::findOrFail($id);
         $hdcts = HoaDonCT::whereBelongsTo($bill)->get();
         $arr = [
             'status' => true,
-            'message' => 'Hóa đơn'. ' '. $bill->maHd,
+            'message' => 'Hóa đơn' . ' ' . $bill->maHd,
             'data' => [
                 new HoaDonResource($bill),
                 HDCTResource::collection($hdcts)
-                ]
+            ]
         ];
         return response()->json($arr, 200);
     }
@@ -141,7 +182,8 @@ class HoaDonController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, HoaDon $hoa_don) {
+    public function update(Request $request, HoaDon $hoa_don)
+    {
         // $input = $request->all();
         // $validator = Validator::make($input, [
         //     'tongTien' => 'required|numeric',

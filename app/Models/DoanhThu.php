@@ -15,5 +15,6 @@ class DoanhThu extends Model
         'loiNhuan',
         'soLuong',
         'hoaDon',
+        'idCh',
     ];
 }

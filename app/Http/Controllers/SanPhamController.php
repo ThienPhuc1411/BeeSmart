@@ -237,9 +237,6 @@ class SanPhamController extends Controller
             'idLoai' => 'required',
             'maSp' => 'required',
             'donVi' => 'required|numeric',
-
-
-
         ], [
             'required' => ':attribute Không được để trống',
             'numeric' => ':attribute Phải là số',
@@ -278,8 +275,6 @@ class SanPhamController extends Controller
                 'data' => []
             ];
             return response()->json($arr, 200);
-
-
         }
         if (empty($input['soLuong'])) {
             $product->soLuong = $product->soLuong + 0;
@@ -292,9 +287,6 @@ class SanPhamController extends Controller
                 $product->soLuong = $input['soLuong'];
             }
         }
-
-
-
         $product->anHien = $input['anHien'];
         $product->idCh = $input['idCh'];
         $product->idNcc = $input['idNcc'];

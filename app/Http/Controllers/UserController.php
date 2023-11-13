@@ -55,12 +55,20 @@ class UserController extends Controller
         }
 
         if(Auth::attempt($request->all())){
+            $tt_user=DB::table('users')
+        ->join('sub_cua_hang','sub_cua_hang.idUsers','users.id')
+        ->join('cua_hang','cua_hang.id','sub_cua_hang.idCh')
+        ->join('loai_cua_hang','loai_cua_hang.id','cua_hang.idLoaiCh')
+        ->select('users.*','sub_cua_hang.idCh as idCh','cua_hang.tenCh','loai_cua_hang.ten as tenLoaiCh','loai_cua_hang.id as idLoaiCh')
+        ->get();
+        $user = Auth::user();
+        $success =  $user->createToken('MyApp')->plainTextToken;
+            $arr=[
+                'token' => $success,
 
-            $user = Auth::user();
-
-            $success =  $user->createToken('MyApp')->plainTextToken;
-
-            return Response(['token' => $success],200);
+                'tt_user'=>$tt_user,
+            ];
+            return response($arr,200);
         }
 
         return Response(['message' => 'email or password wrong'],401);
@@ -73,9 +81,22 @@ class UserController extends Controller
     {
         if (Auth::check()) {
 
-            $user = Auth::user();
 
-            return Response(['data' => $user],200);
+
+            $tt_user=DB::table('users')
+            ->join('sub_cua_hang','sub_cua_hang.idUsers','users.id')
+            ->join('cua_hang','cua_hang.id','sub_cua_hang.idCh')
+            ->join('loai_cua_hang','loai_cua_hang.id','cua_hang.idLoaiCh')
+            ->select('users.*','sub_cua_hang.idCh as idCh','cua_hang.tenCh','loai_cua_hang.ten as tenLoaiCh','loai_cua_hang.id as idLoaiCh')
+            ->get();
+
+
+
+                $arr=[
+
+                    'tt_user'=>$tt_user,
+                ];
+                return response($arr,200);
         }
 
         return Response(['data' => 'Unauthorized'],401);

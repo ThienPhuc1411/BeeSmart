@@ -105,6 +105,8 @@ class HoaDonController extends Controller
                     $statistical->loiNhuan += $loiNhuan;
                     $hdctInput['idHd'] = $hd->id;
                     $hdct = HoaDonCT::create($hdctInput);
+                    $soLuongSp = SanPham::find($hdctInput['idSp']);
+                    $soLuongSp->decrement('soLuong', $hdctInput['soLuong']);
                 }
                 $statistical->hoaDon += 1;
                 $statistical->doanhThu += $hdInput['tongTien'];
@@ -128,6 +130,8 @@ class HoaDonController extends Controller
                         $statistical->loiNhuan += $loiNhuan;
                         $hdctInput['idHd'] = $hd->id;
                         $hdct = HoaDonCT::create($hdctInput);
+                        $soLuongSp = SanPham::find($hdctInput['idSp']);
+                        $soLuongSp->decrement('soLuong', $hdctInput['soLuong']);
                     }
                     $statistical->hoaDon += 1;
                     $statistical->doanhThu += $hdInput['tongTien'];
@@ -142,6 +146,7 @@ class HoaDonController extends Controller
                 ];
                 $statistical = DoanhThu::create($statisticalInput);
             }
+
         }
 
 

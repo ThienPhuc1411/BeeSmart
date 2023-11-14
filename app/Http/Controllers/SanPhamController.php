@@ -60,10 +60,6 @@ class SanPhamController extends Controller
             'giaVon' => 'required|numeric|integer|min:0|lt:giaBan',
             'giaBan' => 'required|numeric|integer|min:0|',
             'idCh' => 'required',
-            'idNcc' => 'required',
-            'idDm' => 'required',
-            'idTh' => 'required',
-            'idLoai' => 'required',
             'donVi' => 'required|numeric',
             'maSp' => 'required|between:1,10'
 
@@ -103,12 +99,26 @@ class SanPhamController extends Controller
         }
         //check img
         if (!empty($input['img'])) {
-            $img = $request->file('img');
-            $destination = public_path('/upload/products');
-            $ext = $img->getClientOriginalExtension();
-            $fileName = Str::random(6) . '_' . time() . '.' . $ext;
-            $img->move($destination, $fileName);
-            $input['img'] = $destination . '/' . $fileName;
+            // $img = $request->file('img');
+            // $destination = public_path('/upload/products');
+            // $ext = $img->getClientOriginalExtension();
+            // $fileName = Str::random(6) . '_' . time() . '.' . $ext;
+            // $img->move($destination, $fileName);
+            // $input['img'] = $destination . '/' . $fileName;
+
+
+            $file = $request->file('img');
+            $fileDestinationPath = "upload/products";
+            if ($file->move($fileDestinationPath, $file->getClientOriginalName())) {
+               $input['img'] = $fileDestinationPath . '/' . $file->getClientOriginalName();
+            } else {
+                $arr = [
+                    'success' => false,
+                    'message' => 'Lỗi kiểm tra dữ liệu',
+                    'data' => $validator->errors()
+                ];
+                return response()->json($arr, 200);
+            }
         }
         //check số lượng
         if (!empty($input['soLuong']) && $input['soLuong'] < 0) {
@@ -118,6 +128,7 @@ class SanPhamController extends Controller
             ];
             return response()->json($arr, 200);
         }
+
 
         // add ngayTao
         $mytime = Carbon::now()->format("Y-m-d");
@@ -295,7 +306,12 @@ class SanPhamController extends Controller
 
 
 
-        $product->anHien = $input['anHien'];
+
+        if(empty($input['anHien'])){
+             $product->anHien = 1;
+        }else{
+             $product->anHien = $input['anHien'];
+        }
         $product->idCh = $input['idCh'];
         $product->idNcc = $input['idNcc'];
         $product->idDm = $input['idDm'];
@@ -304,12 +320,18 @@ class SanPhamController extends Controller
         $product->maSp = $input['maSp'];
         $mytime = Carbon::now()->format("Y-m-d");
         if (!empty($input['img'])) {
-            $img = $request->file('img');
-            $destination = public_path('/upload/products');
-            $ext = $img->getClientOriginalExtension();
-            $fileName = Str::random(6) . '_' . time() . '.' . $ext;
-            $img->move($destination, $fileName);
-            $product->img = $destination . '/' . $fileName;
+            $file = $request->file('img');
+            $fileDestinationPath = "upload/products";
+            if ($file->move($fileDestinationPath, $file->getClientOriginalName())) {
+               $input['img'] = $fileDestinationPath . '/' . $file->getClientOriginalName();
+            } else {
+                $arr = [
+                    'success' => false,
+                    'message' => 'Lỗi kiểm tra dữ liệu',
+                    'data' => $validator->errors()
+                ];
+                return response()->json($arr, 200);
+            }
         }
         $product->ngayTao = $mytime;
         $product->save();

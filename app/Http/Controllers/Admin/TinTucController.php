@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Tin;
 use App\Models\DanhMucTin;
+use Illuminate\Support\Facades\Auth;
 
 
 class TinTucController extends Controller
@@ -106,6 +107,8 @@ class TinTucController extends Controller
 
     public function handleAdd(Request $request){
         $post = new Tin;
+        $idUsers=Auth::id();
+        // dd($idUsers);
         $request->validate(
             [
                 'tieuDe' => ['required', 'unique:tin_tuc'],
@@ -141,6 +144,7 @@ class TinTucController extends Controller
             $post->noiDung = $request->noiDung;
             $post->idDmTin = $request->idDmTin;
             $post->slug= $slug;
+            $post->idUsers=$idUsers;
             $post->urlHinh = $fileDestinationPath . '/' . $file->getClientOriginalName();
             $post->save();
         }else{

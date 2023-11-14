@@ -326,6 +326,7 @@ class SanPhamController extends Controller
             $fileDestinationPath = "upload/products";
             if ($file->move($fileDestinationPath, $file->getClientOriginalName())) {
                $input['img'] = $fileDestinationPath . '/' . $file->getClientOriginalName();
+               $product->img = $input['img'];
             } else {
                 $arr = [
                     'success' => false,

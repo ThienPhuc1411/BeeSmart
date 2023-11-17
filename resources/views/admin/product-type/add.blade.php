@@ -6,7 +6,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Thêm Loại cửa hàng</h1>
+    <h1 class="h3 mb-2 text-gray-800">Thêm Loại sản phẩm</h1>
 
 
     <!-- DataTales Example -->
@@ -22,10 +22,10 @@
 
         </div>
         <div class="card-body">
-            <form method="POST" action="{{route('store-type.add')}}">
+            <form method="POST" action="{{route('product-type.add')}}">
                 @csrf
                 <div class="form-group">
-                    <label for="tieuDe">Tên loại cửa hàng:</label>
+                    <label for="tieuDe">Tên loại sản phẩm:</label>
                     <input type="text" class="form-control" id="ten" name="ten" >
                 </div>
                 <button type="submit" class="btn btn-primary">Thêm</button>

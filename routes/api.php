@@ -14,6 +14,7 @@ use App\Http\Controllers\DanhMucSanPhamController;
 use App\Http\Controllers\SanPhamController;
 use App\Http\Controllers\VnPayController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DoanhThuController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -52,7 +53,7 @@ Route::resource('danh-muc-san-pham', DanhMucSanPhamController::class);
 Route::resource('hoa-don', HoaDonController::class);
 
 //Thanh toán VNPay
-Route::post('/vnpay_payment',[VnPayController::class,'vnpay_payment']);
+Route::post('/vnpay_payment',[VnPayController::class,'vnpay_payment'])->name('vnpay_payment');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -68,3 +69,5 @@ Route::group(['middleware' => 'auth:sanctum'],function(){
 });
 // register api
 Route::post('register',[UserController::class,'register']);
+
+Route::get('doanhthu',[DoanhThuController::class,'index']);

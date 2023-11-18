@@ -398,71 +398,75 @@ class SanPhamController extends Controller
     //     return response()->json($arr, 201);
     // }
 
-    public function sort_search(Request $request)
-    {
+    public function sort_search(Request $request){
 
         $input = $request->all();
-        $query = DB::table('san_pham')->select('*');
+        $query=DB::table('san_pham')->select('*');
 
 
 
 
         // dd($input);
-        if (!empty($input['keyword'])) {
+        if(!empty($input['keyword'])){
 
 
-            if (!empty($input['dm'])) {
-                $query = $query->where('idDm', '=', $input['dm']);
+                    if(!empty($input['dm'])){
+                        $query=$query->where('idDm','=',$input['dm']);
+
+                    }
+                    if(!empty($input['th'])){
+                        $query=$query->where('idTh','=',$input['th']);
+                    }
+                    if(!empty($input['ch'])){
+                        $query=$query->where('idCh','=',$input['ch']);
+
+                    }
+                    if(!empty($input['ncc'])){
+                        $query=$query->where('idNcc','=',$input['ncc']);
+                    }
+                    if(!empty($input['loai'])){
+                        $query=$query->where('idLoai','=',$input['loai']);
+                    }
+                    $query=$query->where('ten','like',$input['keyword'].'%');
+                }
+
+
+
+
+        else{
+            if(!empty($input['dm'])){
+                $query=$query->where('idDm','=',$input['dm']);
 
             }
-            if (!empty($input['th'])) {
-                $query = $query->where('idTh', '=', $input['th']);
+            if(!empty($input['th'])){
+                $query=$query->where('idTh','=',$input['th']);
             }
-            if (!empty($input['ch'])) {
-                $query = $query->where('idCh', '=', $input['ch']);
+            if(!empty($input['ch'])){
+                $query=$query->where('idCh','=',$input['ch']);
 
             }
-            if (!empty($input['ncc'])) {
-                $query = $query->where('idNcc', '=', $input['ncc']);
+            if(!empty($input['ncc'])){
+                $query=$query->where('idNcc','=',$input['ncc']);
             }
-            if (!empty($input['loai'])) {
-                $query = $query->where('idLoai', '=', $input['loai']);
-            }
-            $query = $query->where('ten', 'like', $input['keyword'] . '%');
-        } else {
-            if (!empty($input['dm'])) {
-                $query = $query->where('idDm', '=', $input['dm']);
-
-            }
-            if (!empty($input['th'])) {
-                $query = $query->where('idTh', '=', $input['th']);
-            }
-            if (!empty($input['ch'])) {
-                $query = $query->where('idCh', '=', $input['ch']);
-
-            }
-            if (!empty($input['ncc'])) {
-                $query = $query->where('idNcc', '=', $input['ncc']);
-            }
-            if (!empty($input['loai'])) {
-                $query = $query->where('idLoai', '=', $input['loai']);
+            if(!empty($input['loai'])){
+                $query=$query->where('idLoai','=',$input['loai']);
             }
         }
 
 
         // dd($query);
-        $query = $query->get();
-        if (count($query) != 0) {
+        $query=$query->get();
+        if(count($query)!=0){
             $arr = [
                 'status' => true,
                 'message' => "Danh sách sản phẩm",
-                'data' => $query
-            ];
-        } else {
+                'data'=>$query
+                ];
+        }else{
             $arr = [
                 'status' => false,
                 'message' => "Khong kiem dc san pham"
-            ];
+                ];
         }
 
 

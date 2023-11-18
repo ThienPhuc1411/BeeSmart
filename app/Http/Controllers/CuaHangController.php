@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use App\Models\subCuaHang;
 use Mail;
 use App\Mail\TaoCuaHang;
+use Auth;
 
 class CuaHangController extends Controller
 {
@@ -85,7 +86,7 @@ class CuaHangController extends Controller
 
 
         //Gửi mail thông báo tạo cửa hàng thành công
-        $userMail = '19.trantienanh.99@gmail.com'; //temp
+        $userMail = Auth::email(); //temp
         $mailData = [
             'title' => 'Đã tạo cửa hàng thành công',
             'body' => $store->tenCh

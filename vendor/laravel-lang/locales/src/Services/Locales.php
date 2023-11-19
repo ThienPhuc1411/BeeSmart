@@ -17,6 +17,8 @@ declare(strict_types=1);
 
 namespace LaravelLang\Locales\Services;
 
+use LaravelLang\Locales\Concerns\Aliases;
+use LaravelLang\Locales\Concerns\Localized;
 use LaravelLang\Locales\Concerns\Mapping;
 use LaravelLang\Locales\Concerns\Registry;
 use LaravelLang\Locales\Data\LocaleData;
@@ -24,8 +26,10 @@ use LaravelLang\Locales\Enums\Locale;
 
 class Locales
 {
-    use Registry;
+    use Aliases;
+    use Localized;
     use Mapping;
+    use Registry;
 
     public function __construct(
         protected RawLocales $raw
@@ -77,6 +81,11 @@ class Locales
     public function get(mixed $locale): LocaleData
     {
         return $this->registry([__METHOD__, $locale], fn () => $this->map($this->raw->get($locale)));
+    }
+
+    public function info(mixed $locale): LocaleData
+    {
+        return $this->registry([__METHOD__, $locale], fn () => $this->map($this->raw->info($locale)));
     }
 
     public function getDefault(): LocaleData

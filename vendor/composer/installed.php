@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '498f162b0a79fa3e7fd12d8da99dec1a5c53dca1',
+        'reference' => '5f8417f6b7c2d9652dda0e12869d01fdd0d3ee7f',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -481,7 +481,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '498f162b0a79fa3e7fd12d8da99dec1a5c53dca1',
+            'reference' => '5f8417f6b7c2d9652dda0e12869d01fdd0d3ee7f',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -883,8 +883,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0|2.0|3.0',
-                1 => '3.0.0',
+                0 => '3.0.0',
+                1 => '1.0|2.0|3.0',
             ),
         ),
         'psr/simple-cache' => array(
@@ -1398,9 +1398,9 @@
             'dev_requirement' => true,
         ),
         'theseer/tokenizer' => array(
-            'pretty_version' => '1.2.1',
-            'version' => '1.2.1.0',
-            'reference' => '34a41e998c2183e22995f158c581e7b5e755ab9e',
+            'pretty_version' => '1.2.2',
+            'version' => '1.2.2.0',
+            'reference' => 'b2ad5003ca10d4ee50a12da31de12a5774ba6b96',
             'type' => 'library',
             'install_path' => __DIR__ . '/../theseer/tokenizer',
             'aliases' => array(),

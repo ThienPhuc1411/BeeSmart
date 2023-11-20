@@ -28,6 +28,7 @@
     <!-- data table -->
     <link href="/ad/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 
 <body id="page-top">
@@ -65,7 +66,7 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            {{-- <li class="nav-item">
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fa-solid fa-hand-holding-dollar"></i>
@@ -78,7 +79,7 @@
                         <a class="collapse-item" href="{{ route('profit-month') }}">Tháng </a>
                     </div>
                 </div>
-            </li> --}}
+            </li>
 
 
             <!-- Nav Item - Utilities Collapse Menu -->
@@ -249,7 +250,7 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    {{-- <form
+                    <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
                             <input type="text" class="form-control bg-light border-0 small" placeholder="Nhập từ khóa..."
@@ -260,7 +261,7 @@
                                 </button>
                             </div>
                         </div>
-                    </form> --}}
+                    </form>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -613,36 +614,13 @@
                             <div
                                 class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                 <h6 class="m-0 font-weight-bold text-primary">Nguồn doanh thu</h6>
-                                <div class="dropdown no-arrow">
-                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                        aria-labelledby="dropdownMenuLink">
-                                        <div class="dropdown-header">Dropdown Header:</div>
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Something else here</a>
                                     </div>
                                 </div>
                             </div>
                             <!-- Card Body -->
                             <div class="card-body">
                                 <div class="chart-pie pt-4 pb-2">
-                                    <canvas id="myPieChart"></canvas>
-                                </div>
-                                <div class="mt-4 text-center small">
-                                    <span class="mr-2">
-                                        <i class="fas fa-circle text-primary"></i> Dịch Vụ
-                                    </span>
-                                    <span class="mr-2">
-                                        <i class="fas fa-circle text-success"></i> Quảng Cáo
-                                    </span>
-                                    <span class="mr-2">
-                                        <i class="fas fa-circle text-info"></i> Hoa Hồng
-                                    </span>
+                                    <div id="piechart" style="width: 900px; height: 500px;"></div>
                                 </div>
                             </div>
                         </div>
@@ -715,7 +693,8 @@
 
     <!-- Page level custom scripts -->
     <script src="/ad/js/demo/chart-area-demo.js"></script>
-    <script src="/ad/js/demo/chart-pie-demo.js"></script>
+    {{-- <script src="/ad/js/demo/chart-pie-demo.js"></script> --}}
+    @yield('pie-chart')
     <!--Page level database -->
     <script src="/ad/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="/ad/vendor/datatables/dataTables.bootstrap4.min.js"></script>

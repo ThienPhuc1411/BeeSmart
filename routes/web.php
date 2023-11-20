@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Admin\UserController;
 use  App\Http\Controllers\Admin\LoaiCuaHangController;
 use  App\Http\Controllers\Admin\DanhMucTinController;
 use  App\Http\Controllers\Admin\TinTucController;
@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\BinhLuanController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\VnPayController;
 use App\Http\Controllers\Admin\LoaiSanPhamController;
+use App\Http\Controllers\Admin\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,12 +29,14 @@ use App\Http\Controllers\Admin\LoaiSanPhamController;
     Route::post('/login',[AuthController::class,'loginPost'])->name('login');
 
 
-Route::get('', [AdminController::class, 'index_admin'])->name('index')->middleware(['admin','auth']);
+Route::get('', [HomeController::class, 'index'])->name('index')->middleware(['admin','auth']);
 
 Route::prefix('user')->name('user.')->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('index');
     Route::get('/block/{id}',[UserController::class, 'block'])->name('block');
     Route::get('/unblock/{id}',[UserController::class, 'unblock'])->name('unblock');
+    Route::get('/updateAdvance/{id}',[UserController::class,'updateAdvance'])->name('update-advance');
+    Route::get('/updatePremium/{id}',[UserController::class,'updatePremium'])->name('update-premium');
 })->middleware(['admin','auth']);
 
 Route::prefix('loai-cua-hang')->name('store-type.')->group(function () {

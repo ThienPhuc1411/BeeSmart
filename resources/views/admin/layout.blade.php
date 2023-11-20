@@ -65,7 +65,7 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fa-solid fa-hand-holding-dollar"></i>
@@ -78,7 +78,7 @@
                         <a class="collapse-item" href="{{ route('profit-month') }}">Tháng </a>
                     </div>
                 </div>
-            </li>
+            </li> --}}
 
 
             <!-- Nav Item - Utilities Collapse Menu -->
@@ -249,7 +249,7 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form
+                    {{-- <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
                             <input type="text" class="form-control bg-light border-0 small" placeholder="Nhập từ khóa..."
@@ -260,7 +260,7 @@
                                 </button>
                             </div>
                         </div>
-                    </form>
+                    </form> --}}
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">

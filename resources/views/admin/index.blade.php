@@ -1,5 +1,5 @@
 @extends('admin.layout')
-<form action="{{ route('vnpay') }}" method="post">
+{{-- <form action="{{ route('vnpay') }}" method="post">
     @csrf
     <input type="hidden" name="MaDH" value="opisduayfidsa">
     <input type="hidden" name="order_desc" value="thanh toán hóa đơn">
@@ -8,7 +8,7 @@
     <input type="hidden" name="language" value="vn">
     <input type="hidden" name="bank_code" value="NCB">
     <button class="btn btn-default" type="submit" name="redirect">Thanh toán VNPAY</button>
-</form>
+</form> --}}
 @if (session('msg'))
     {{-- <a href="#" class="btn btn-success btn-icon-split">
                         <span class="icon text-white-50">
@@ -17,3 +17,6 @@
                     </a> --}}
     {{-- <div class="alert alert-success">{{ session('msg') }}</div> --}}
 @endif
+@section('title')
+    {{$title}}
+@endsection

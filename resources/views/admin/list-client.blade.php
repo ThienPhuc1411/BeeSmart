@@ -1,6 +1,6 @@
 @extends('admin.layout')
 @section('title')
-    {{$title}}
+    {{ $title }}
 @endsection
 @section('container')
     <div class="container-fluid">
@@ -37,11 +37,13 @@
                                 <th>Vai trò</th>
                                 <th>Loại tài khoản</th>
                                 <th>Trạng Thái</th>
+                                <th>Nâng cấp</th>
                             </tr>
                         </thead>
-                        @if (!empty($users))
-                            @foreach ($users as $users)
-                                <tbody>
+                        <tbody>
+                            @if (!empty($users))
+                                @foreach ($users as $users)
+                                <tr>
                                     <td>{{ $users->HoTen }}</td>
                                     <td>{{ $users->email }}</td>
                                     <td>{{ $users->sdt }}</td>
@@ -73,7 +75,8 @@
 
                                     <td>
                                         @if ($users->status == 1)
-                                            <p><a href="{{ route('user.block', $users->id) }}" onclick="return confirm('Bạn có chắc muốn khóa tài khoản này?')"
+                                            <p><a href="{{ route('user.block', $users->id) }}"
+                                                    onclick="return confirm('Bạn có chắc muốn khóa tài khoản này?')"
                                                     class="btn btn-primary btn-icon-split">
                                                     <span class="text" style="width:120px">Hoạt Động</span>
                                                 </a>
@@ -88,10 +91,36 @@
 
 
                                     </td>
-                                </tbody>
-                            @endforeach
-                        @else
-                            <td colspan="" class="text-center">Không có dữ liệu</td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
+                                                Nâng cấp tài khoản
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                @if ($users->loai == 1)
+                                                    <li><a class="dropdown-item"
+                                                            href="{{ route('user.update-advance', $users->id) }}">Advance</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item"
+                                                            href="{{ route('user.update-premium', $users->id) }}">Premium</a>
+                                                    </li>
+                                                @elseif($users->loai == 2)
+                                                    <li><a class="dropdown-item"
+                                                            href="{{ route('user.update-premium', $users->id) }}">Premium</a>
+                                                    </li>
+                                                @else
+                                                    <li></li>
+                                                @endif
+
+
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
+                        </tbody>
+                    @else
+                        <td colspan="" class="text-center">Không có dữ liệu</td>
                         @endif
                     </table>
                     {{-- <div class="d-flex justify-content-end">{{ $users->links() }}</div> --}}
@@ -99,6 +128,6 @@
             </div>
         </div>
 
-        
+
     </div>
 @endsection

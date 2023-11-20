@@ -70,4 +70,4 @@ Route::group(['middleware' => 'auth:sanctum'],function(){
 // register api
 Route::post('register',[UserController::class,'register']);
 
-Route::get('doanhthu',[DoanhThuController::class,'index']);
+Route::get('doanh-thu',[DoanhThuController::class,'index']);

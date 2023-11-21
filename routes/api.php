@@ -61,6 +61,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::post('login',[UserController::class,'loginUser']);
+Route::post('checkEmail',[UserController::class,'checkEmail']);
+Route::post('changePassword',[UserController::class,'changePassword']);
+Route::post('forgotPassword',[UserController::class,'forgotPassword']);
+Route::post('updateInfo',[UserController::class,'updateInfo']);
 
 
 Route::group(['middleware' => 'auth:sanctum'],function(){

@@ -6,8 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\User;
 use DB;
+use Mail;
 use Auth;
+use Hash;
+use Str;
 use Validator;
+use App\Mail\QuenMatKhau;
 use App\Models\subCuaHang;
 use App\Models\CuaHang;
 
@@ -28,15 +32,19 @@ class UserController extends Controller
         }
 
         if(Auth::attempt($request->all())){
+            $user = Auth::user();
             $tt_user=DB::table('users')
-        ->join('sub_cua_hang','sub_cua_hang.idUsers','users.id')
-        ->join('cua_hang','cua_hang.id','sub_cua_hang.idCh')
-        ->join('loai_cua_hang','loai_cua_hang.id','cua_hang.idLoaiCh')
-        ->select('users.*','sub_cua_hang.idCh as idCh','cua_hang.tenCh','loai_cua_hang.ten as tenLoaiCh','loai_cua_hang.id as idLoaiCh')
-        ->get();
-        $user = Auth::user();
+            ->join('sub_cua_hang','sub_cua_hang.idUsers','users.id')
+            ->join('cua_hang','cua_hang.id','sub_cua_hang.idCh')
+            ->join('loai_cua_hang','loai_cua_hang.id','cua_hang.idLoaiCh')
+            ->select('users.*','sub_cua_hang.idCh as idCh','cua_hang.tenCh','loai_cua_hang.ten as tenLoaiCh','loai_cua_hang.id as idLoaiCh')
+            ->where('users.id',$user->id)
+            ->get();
+
+        // dd($user);
         $success =  $user->createToken('MyApp')->plainTextToken;
             $arr=[
+                'status'=>true,
                 'token' => $success,
 
                 'tt_user'=>$tt_user,
@@ -55,18 +63,19 @@ class UserController extends Controller
         if (Auth::check()) {
 
 
-
+            $user=Auth::user();
             $tt_user=DB::table('users')
             ->join('sub_cua_hang','sub_cua_hang.idUsers','users.id')
             ->join('cua_hang','cua_hang.id','sub_cua_hang.idCh')
             ->join('loai_cua_hang','loai_cua_hang.id','cua_hang.idLoaiCh')
+            ->where('users.id',$user->id)
             ->select('users.*','sub_cua_hang.idCh as idCh','cua_hang.tenCh','loai_cua_hang.ten as tenLoaiCh','loai_cua_hang.id as idLoaiCh')
             ->get();
 
 
 
                 $arr=[
-
+                    'status'=>true,
                     'tt_user'=>$tt_user,
                 ];
                 return response($arr,200);
@@ -172,5 +181,123 @@ class UserController extends Controller
         // dd($input);
         return response()->json($arr,201);
 
+    }
+    public function checkEmail(Request $request){
+
+        $email=$request->email;
+
+
+        if((DB::table('users')->where('email','=',$email)->first())){
+            $id=DB::table('users')->where('email','=',$email)->first();
+             // dd($id->id);
+            //lí do sài $id->id , vì giá trị trong find phải là int
+            $user = User::where('email','=',$email)->first();
+            $tt_user=DB::table('users')
+            ->join('sub_cua_hang','sub_cua_hang.idUsers','users.id')
+            ->join('cua_hang','cua_hang.id','sub_cua_hang.idCh')
+            ->join('loai_cua_hang','loai_cua_hang.id','cua_hang.idLoaiCh')
+            ->select('users.*','sub_cua_hang.idCh as idCh','cua_hang.tenCh','loai_cua_hang.ten as tenLoaiCh','loai_cua_hang.id as idLoaiCh')
+            ->where('users.id',$user->id)
+            ->first();
+
+
+
+
+            $success =  $user->createToken('MyApp')->plainTextToken;
+                $arr=[
+                    'status'=>true,
+                    'token' => $success,
+
+                    'tt_user'=>$tt_user,
+                ];
+                return response()->json($arr,200);
+
+
+        }
+        else{
+            $arr=[
+                'status'=>false,
+                'message'=>'Email chưa được đăng ký',
+
+            ];
+            return response()->json($arr,401);
+        }
+
+    }
+    public function changePassword(Request $request){
+
+        $id=$request->id;
+        $newpass=$request->newpass;
+        $checkpass=$request->checkpass;
+        $user=User::find($id);
+        // dd($user->password);
+        // dd($checkpass);
+        // dd(bcrypt($checkpass));
+
+
+        if (Hash::check($checkpass, $user->password)) {
+            $user->password=$newpass;
+            $user->save();
+            $arr=[
+                'status'=>true,
+                'message'=>'Đổi mật khẩu thành công'
+
+                ];
+        }
+
+
+        else{
+            $arr=[
+                    'status'=>false,
+                    'message'=>'Mật khẩu cũ không đúng'
+                    ];
+        }
+        return response()->json($arr,200);
+
+
+    }
+    public function forgotPassword(Request $request){
+
+            $userMail = $request->email;
+            if((DB::table('users')->where('email','=',$userMail)->first())){
+                $newPassword =Str::random(6);
+                // dd($newPassword);
+                $user=User::where('email','=',$userMail)->first();
+                $user->password=$newPassword;
+                $user->save();
+                $mailData = [
+                    'status'=>true,
+                    'title' => 'Xin chào '.$user->HoTen,
+                    'body' => 'Mật khẩu mới của bạn là:'.$newPassword
+                ];
+                Mail::to($userMail)->send(new QuenMatKhau($mailData));
+                return response()->json($mailData,201);
+            }else{
+                $mailData = [
+                    'status'=>false,
+                    'title' => 'Email không tồn tại',
+
+                ];
+                return response()->json($mailData,200);
+            }
+
+
+
+    }
+    public function updateInfo(Request $request){
+        $input=$request->all();
+        $id=$input['id'];
+        $user=User::where('id','=',$id)->first();
+        $user->sdt=$input['sdt'];
+        $user->Diachi=$input['Diachi'];
+        $user->quan=$input['quan'];
+        $user->save();
+        $arr = [
+            'status' => true,
+            'message' => 'Tài khoản cập nhật thành công',
+            // 'data' => new san_phamResource($product),
+            'datalink' => $user
+        ];
+        return response()->json($arr, 200);
     }
 }

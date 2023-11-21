@@ -12,7 +12,7 @@ class LoaiCuaHangController extends Controller
     //
     public function index()
     {
-        $loaiCh = LoaiCuaHang::all();
+        $loaiCh = LoaiCuaHang::select('*')->orderBy('updated_at','desc')->get();
         $title = "Loại cửa hàng";
         return view('admin.store-type.list-store-type', compact('loaiCh', 'title'));
     }

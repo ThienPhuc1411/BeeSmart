@@ -12,7 +12,7 @@ class UserController extends Controller
     //
     public function index(){
         $title = 'Khách hàng';
-        $users = DB::table('users')->paginate(10)->withQueryString();
+        $users = DB::table('users')->orderBy('updated_at','descc')->paginate(10)->withQueryString();
         return view('admin.list-client',compact('users','title'));
     }
 

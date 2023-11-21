@@ -12,7 +12,7 @@ class LoaiSanPhamController extends Controller
     //
     public function index()
     {
-        $loaiSp = LoaiSanPham::all();
+        $loaiSp = LoaiSanPham::select('*')->orderBy('updated_at','desc')->get();
         $title = "Loại Sản Phẩm";
         return view('admin.product-type.list-product-type', compact('loaiSp', 'title'));
     }

@@ -75,6 +75,7 @@
                             </div>
                         @enderror
                     </div>
+                    <input type="hidden" name="idUsers" value="{{Auth::id()}}">
                     <button type="submit" class="btn btn-primary">Thêm</button>
 
                 </form>

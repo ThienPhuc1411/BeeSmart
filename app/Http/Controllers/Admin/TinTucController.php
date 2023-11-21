@@ -15,6 +15,7 @@ class TinTucController extends Controller
     {
         $post = Tin::select('tin_tuc.*', 'danh_muc_tin.ten as tenDm')
             ->join('danh_muc_tin', 'danh_muc_tin.id', 'tin_tuc.idDmTin')
+            ->orderBy('updated_at','descc')
             ->get();
         $title = "Tin tức";
         // dd($post);
@@ -135,6 +136,7 @@ class TinTucController extends Controller
             } else {
                 $msg = 'Không upload được Ảnh';
             }
+            $post->idUsers = $request->idUsers;
             $slug = \Str::slug($request->tieuDe);
             $post->tieuDe = $request->tieuDe;
             $post->tomTat = $request->tomTat;

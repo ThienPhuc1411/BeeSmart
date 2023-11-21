@@ -27,7 +27,7 @@ class HomeController extends Controller
             $chartData .= "['" . $data[$i]['labels'] . "','" . $data[$i]['countCh'] . "'],";
         }
         $chartData = rtrim($chartData,",");
-        echo $chartData;
+        // echo $chartData;
         return view("admin.index", compact('title', 'data','chartData'));
     }
 }

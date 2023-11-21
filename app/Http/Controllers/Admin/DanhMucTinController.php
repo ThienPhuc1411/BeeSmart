@@ -11,7 +11,7 @@ class DanhMucTinController extends Controller
     //
     public function index()
     {
-        $data = DanhMucTin::all();
+        $data = DanhMucTin::select('*')->orderBy('updated_at','desc')->get();
         $title = "Danh mục tin";
         return view("admin.loai-tin.list-post-type", compact('data', 'title'));
     }

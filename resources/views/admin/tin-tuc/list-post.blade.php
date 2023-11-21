@@ -32,7 +32,7 @@
                                 <th>STT</th>
                                 <th>Danh Mục</th>
                                 <th>Tiêu Đề</th>
-                                <th>Hình ảnh</th>
+                                <th width="15%">Hình ảnh</th>
                                 <th>Tóm tắt</th>
                                 <th>Ngày Đăng</th>
                                 <th>Trạng Thái</th>
@@ -46,7 +46,8 @@
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $item->tenDm }}</td>
                                         <td>{{ $item->tieuDe }}</td>
-                                        <td>{{ asset($item->urlHinh) }}</td>
+                                        <td><img src="{{ asset($item->urlHinh) }}" alt="" width="100%"></td>
+                                        {{-- <td>{{ asset($item->urlHinh) }}</td> --}}
                                         <td>{{ $item->tomTat }}</td>
                                         <td>{{ date('d-m-Y', strtotime($item->created_at)) }}</td>
                                         @if ($item->anHien == 1)

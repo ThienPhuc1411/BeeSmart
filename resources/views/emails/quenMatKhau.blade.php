@@ -1,0 +1,2 @@
+{{ $mailData['title'] }}
+{{ $mailData['body'] }}

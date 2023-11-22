@@ -37,6 +37,7 @@ class SanPhamController extends Controller
                 'thuong_hieu.ten as tenTh'
             )
             ->where('san_pham.idCh', '=', $idCh)
+            ->orderBy('updated_at','desc')
             ->get();
         $arr = [
             'status' => true,
@@ -149,7 +150,7 @@ class SanPhamController extends Controller
                 'loai_san_pham.ten as tenLoaiSp',
                 'nha_cung_cap.ten as tenNcc',
                 'thuong_hieu.ten as tenTh'
-            )->get();
+            )->orderBy('updated_at','desc')->get();
 
 
         $arr = [
@@ -188,7 +189,7 @@ class SanPhamController extends Controller
                 'loai_san_pham.ten as tenLoaiSp',
                 'nha_cung_cap.ten as tenNcc',
                 'thuong_hieu.ten as tenTh'
-            )->get();
+            )->orderBy('updated_at','desc')->get();
         $arr = [
             'status' => true,
             'message' => "Chi tiết sản phẩm ",
@@ -223,7 +224,7 @@ class SanPhamController extends Controller
                 'loai_san_pham.ten as tenLoaiSp',
                 'nha_cung_cap.ten as tenNcc',
                 'thuong_hieu.ten as tenTh'
-            )->get();
+            )->orderBy('updated_at','desc')->get();
         $arr = [
             'status' => true,
             'message' => "Chi tiết sản phẩm ",
@@ -311,12 +312,14 @@ class SanPhamController extends Controller
         $mytime = Carbon::now()->format("Y-m-d");
         if (!empty($input['img'])) {
             $img = $request->file('img');
-            $destination = public_path('/upload/products');
+            $destination = "/upload/products";
             $ext = $img->getClientOriginalExtension();
             $fileName = Str::random(6) . '_' . time() . '.' . $ext;
             $img->move($destination, $fileName);
             $product->img = $destination . '/' . $fileName;
+
         }
+
         $product->ngayTao = $mytime;
         $product->save();
 

@@ -17,6 +17,9 @@
                     </a> --}}
     {{-- <div class="alert alert-success">{{ session('msg') }}</div> --}}
 @endif
+@section('title')
+    {{$title}}
+@endsection
 @section('pie-chart')
     <script type="text/javascript">
         google.charts.load('current', {

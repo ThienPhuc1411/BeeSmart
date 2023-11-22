@@ -17,10 +17,12 @@
                     </a> --}}
     {{-- <div class="alert alert-success">{{ session('msg') }}</div> --}}
 @endif
+
 @section('title')
-    {{$title}}
+    {{ $title }}
 @endsection
-@section('pie-chart')
+
+{{-- @section('pie-chart')
     <script type="text/javascript">
         google.charts.load('current', {
             'packages': ['corechart']
@@ -36,7 +38,7 @@
                 // ['Commute', 2],
                 // ['Watch TV', 2],
                 // ['Sleep', 7]
-                <?php echo $chartData?>
+                <?php echo $chartData; ?>
             ]);
 
             var options = {
@@ -48,4 +50,13 @@
             chart.draw(data, options);
         }
     </script>
+@endsection --}}
+
+@section('container')
+    {{-- <a href="{{route('viewPDF')}}">view PDF</a> --}}
+    <form action="{{route('viewPDF')}}" method="post">
+        @csrf
+        <input type="hidden" name="idCh" value="4">
+        <button type="submit">View PDF</button>
+    </form>
 @endsection

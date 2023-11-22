@@ -11,6 +11,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\VnPayController;
 use App\Http\Controllers\Admin\LoaiSanPhamController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\HoaDonController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -128,5 +129,5 @@ Route::post('/vnpay_payment',[VnPayController::class,'vnpay_payment'])->name('vn
 // // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-
+Route::post('newPDF',[HoaDonController::class,'viewPDF'])->name('viewPDF');
 

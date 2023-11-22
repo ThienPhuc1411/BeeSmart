@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use App\Models\CuaHang;
 use App\Models\DoanhThu;
 use App\Models\SanPham;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class HoaDonController extends Controller
 {
@@ -208,5 +209,26 @@ class HoaDonController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function viewPDF(Request $request){
+        $idCh = $request->idCh;
+        $cuaHang = CuaHang::find($idCh);
+        $hoadon = HoaDon::where('idCh',$idCh)->get();
+
+        // $pdf = Pdf::loadView('pdf.hoadon',compact('hoadon','cuaHang'));
+        $pdf = Pdf::loadHTML(view('pdf.hoadon',compact('hoadon','cuaHang'))->render());
+        // $pdf = Pdf::setOption(['dpi' => 150, 'defaultFont' => 'sans-serif']);
+        return $pdf->stream('PDF');
+    }
+
+    public function downloadPDF(Request $request){
+        $idCh = $request->idCh;
+        $cuaHang = CuaHang::find($idCh);
+        $hoadon = HoaDon::where('idCh',$idCh)->get();
+
+        $pdf = Pdf::loadView('pdf.hoadon',compact('hoadon','cuaHang'));
+        // $pdf = Pdf::setOption(['dpi' => 150, 'defaultFont' => 'sans-serif']);
+        return $pdf->download();
     }
 }

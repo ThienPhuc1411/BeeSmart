@@ -30,7 +30,7 @@ use App\Http\Controllers\HoaDonController;
     Route::post('/login',[AuthController::class,'loginPost'])->name('login');
 
 
-Route::get('', [HomeController::class, 'index'])->name('index')->middleware(['admin','auth']);
+Route::get('', [UserController::class, 'index'])->name('index')->middleware(['admin','auth']);
 
 Route::prefix('user')->name('user.')->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('index');
@@ -129,5 +129,6 @@ Route::post('/vnpay_payment',[VnPayController::class,'vnpay_payment'])->name('vn
 // // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-Route::post('newPDF',[HoaDonController::class,'viewPDF'])->name('viewPDF');
+Route::get('viewPDF',[HoaDonController::class,'viewPDF'])->name('viewPDF');
+Route::get('downloadPDF',[HoaDonController::class,'downloadPDF'])->name('downloadPDF');
 

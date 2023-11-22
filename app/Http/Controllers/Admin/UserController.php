@@ -12,7 +12,7 @@ class UserController extends Controller
     //
     public function index(){
         $title = 'Khách hàng';
-        $users = DB::table('users')->orderBy('updated_at','descc')->paginate(10)->withQueryString();
+        $users = DB::table('users')->orderBy('updated_at','desc')->get();
         return view('admin.list-client',compact('users','title'));
     }
 
@@ -22,7 +22,7 @@ class UserController extends Controller
         $user = User::find($id);
         $user->status = 0;
         $user->save();
-        $users = DB::table('users')->paginate(10)->withQueryString();
+        $users = DB::table('users')->orderBy('updated_at','desc')->get();
         return view('admin.list-client',compact('users','title'));
         // dd($id);
     }
@@ -33,7 +33,7 @@ class UserController extends Controller
         $user = User::find($id);
         $user->status = 1;
         $user->save();
-        $users = DB::table('users')->paginate(10)->withQueryString();
+        $users = DB::table('users')->orderBy('updated_at','desc')->get();
         return view('admin.list-client',compact('users','title'));
         // dd($id);
     }
@@ -44,7 +44,7 @@ class UserController extends Controller
         $user = User::find($id);
         $user->loai = 2;
         $user->save();
-        $users = DB::table('users')->paginate(10)->withQueryString();
+        $users = DB::table('users')->orderBy('updated_at','desc')->get();
         return view('admin.list-client',compact('users','title'));
         // dd($id);
     }
@@ -55,7 +55,7 @@ class UserController extends Controller
         $user = User::find($id);
         $user->loai = 3;
         $user->save();
-        $users = DB::table('users')->paginate(10)->withQueryString();
+        $users = DB::table('users')->orderBy('updated_at','desc')->get();
         return view('admin.list-client',compact('users','title'));
         // dd($id);
     }

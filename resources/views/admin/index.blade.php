@@ -53,10 +53,12 @@
 @endsection --}}
 
 @section('container')
-    {{-- <a href="{{route('viewPDF')}}">view PDF</a> --}}
-    <form action="{{route('viewPDF')}}" method="post">
+    <a href="{{route('viewPDF')}}">view PDF</a>
+    {{-- <form action="{{route('viewPDF')}}" method="post">
         @csrf
         <input type="hidden" name="idCh" value="4">
         <button type="submit">View PDF</button>
-    </form>
+    </form> --}}
+    <br>
+    <a href="{{route('downloadPDF')}}">download PDF</a>
 @endsection

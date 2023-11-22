@@ -40,7 +40,7 @@
                         <select class="form-control" id="loaiTin" name="idDmTin" >
                             <option value="">Chọn loại tin</option>
                             @foreach ($cate as $item)
-                                <option value="{{$item->id}}">{{old('idDmTin') == $item->id || $post->idDmTin == $item->id ? 'selected' : false }}</option>
+                                <option value="{{$item->id}}"{{old('idDmTin') == $item->id || $post->idDmTin == $item->id ? 'selected' : false }}> {{$item->ten}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -69,6 +69,10 @@
                 </form>
             </div>
         </div>
+
+        <select name="" id="">
+            <option value="" selected></option>
+        </select>
 
 
     </div>

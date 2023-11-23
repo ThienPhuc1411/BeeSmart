@@ -17,11 +17,11 @@ class VnPayController extends Controller
         $vnp_HashSecret = "YZNGDIUGMPEEIOOLRVUOPJDTRVUMZGWN"; //Chuỗi bí mật
 
         $vnp_TxnRef = $code_cart; //Mã đơn hàng. 
-        $vnp_OrderInfo = $_POST['order_desc'];//Thông tin đơn hàng
-        $vnp_OrderType = $_POST['order_type'];//Loại đơn hàng
+        $vnp_OrderInfo = $data['order_desc'];//Thông tin đơn hàng
+        $vnp_OrderType = $data['order_type'];//Loại đơn hàng
         $vnp_Amount = $data['total'] * 100;//Giá trị đơn hàng
         $vnp_Locale = $data['language']; //Ngôn ngữ: mặc định vn
-        $vnp_BankCode = $_POST['bank_code'];//Mã ngân hàng: Mặc định NCB
+        $vnp_BankCode = $data['bank_code'];//Mã ngân hàng: Mặc định NCB
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
         //Add Params of 2.0.1 Version
         // $vnp_ExpireDate = $_POST['txtexpire'];

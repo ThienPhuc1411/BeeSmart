@@ -18,11 +18,12 @@ class TinController extends Controller
     }
 
     // Hiển thị thông tin của một tin cụ thể
-    public function show($id)
+    public function show(Request $request)
     {
-        $tintuc = Tin::find($id);
+        $slug = $request->slug;
+        $tintuc = Tin::where('slug',$slug);
         $tintuc->increment('view', 1);
-        $binhluan = BinhLuan::where('idTin',$id)->get();
+        $binhluan = BinhLuan::where('idTin',$tintuc->id)->get();
         $tintuc->save();
         if (!$tintuc) {
             return response()->json(['message' => 'Tin không tồn tại'], 404);

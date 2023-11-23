@@ -37,7 +37,7 @@ class SanPhamController extends Controller
                 'thuong_hieu.ten as tenTh'
             )
             ->where('san_pham.idCh', '=', $idCh)
-            ->orderBy('updated_at','desc')
+            ->orderBy('updated_at', 'desc')
             ->get();
         $arr = [
             'status' => true,
@@ -111,7 +111,7 @@ class SanPhamController extends Controller
             $file = $request->file('img');
             $fileDestinationPath = "upload/products";
             if ($file->move($fileDestinationPath, $file->getClientOriginalName())) {
-               $input['img'] = $fileDestinationPath . '/' . $file->getClientOriginalName();
+                $input['img'] = $fileDestinationPath . '/' . $file->getClientOriginalName();
             } else {
                 $arr = [
                     'success' => false,
@@ -150,7 +150,7 @@ class SanPhamController extends Controller
                 'loai_san_pham.ten as tenLoaiSp',
                 'nha_cung_cap.ten as tenNcc',
                 'thuong_hieu.ten as tenTh'
-            )->orderBy('updated_at','desc')->get();
+            )->orderBy('updated_at', 'desc')->get();
 
 
         $arr = [
@@ -189,7 +189,7 @@ class SanPhamController extends Controller
                 'loai_san_pham.ten as tenLoaiSp',
                 'nha_cung_cap.ten as tenNcc',
                 'thuong_hieu.ten as tenTh'
-            )->orderBy('updated_at','desc')->get();
+            )->orderBy('updated_at', 'desc')->get();
         $arr = [
             'status' => true,
             'message' => "Chi tiết sản phẩm ",
@@ -224,7 +224,7 @@ class SanPhamController extends Controller
                 'loai_san_pham.ten as tenLoaiSp',
                 'nha_cung_cap.ten as tenNcc',
                 'thuong_hieu.ten as tenTh'
-            )->orderBy('updated_at','desc')->get();
+            )->orderBy('updated_at', 'desc')->get();
         $arr = [
             'status' => true,
             'message' => "Chi tiết sản phẩm ",
@@ -390,75 +390,59 @@ class SanPhamController extends Controller
     //     return response()->json($arr, 201);
     // }
 
-    public function sort_search(Request $request){
-
+    public function sort_search(Request $request)
+    {
         $input = $request->all();
-        $query=DB::table('san_pham')->select('*');
-
-
-
-
+        $query = DB::table('san_pham')->select('*');
         // dd($input);
-        if(!empty($input['keyword'])){
-
-
-                    if(!empty($input['dm'])){
-                        $query=$query->where('idDm','=',$input['dm']);
-
-                    }
-                    if(!empty($input['th'])){
-                        $query=$query->where('idTh','=',$input['th']);
-                    }
-                    if(!empty($input['ch'])){
-                        $query=$query->where('idCh','=',$input['ch']);
-
-                    }
-                    if(!empty($input['ncc'])){
-                        $query=$query->where('idNcc','=',$input['ncc']);
-                    }
-                    if(!empty($input['loai'])){
-                        $query=$query->where('idLoai','=',$input['loai']);
-                    }
-                    $query=$query->where('ten','like',$input['keyword'].'%');
-                }
-
-
-
-
-        else{
-            if(!empty($input['dm'])){
-                $query=$query->where('idDm','=',$input['dm']);
-
+        if (!empty($input['keyword'])) {
+            if (!empty($input['dm'])) {
+                $query = $query->where('idDm', '=', $input['dm']);
             }
-            if(!empty($input['th'])){
-                $query=$query->where('idTh','=',$input['th']);
+            if (!empty($input['th'])) {
+                $query = $query->where('idTh', '=', $input['th']);
             }
-            if(!empty($input['ch'])){
-                $query=$query->where('idCh','=',$input['ch']);
-
+            if (!empty($input['ch'])) {
+                $query = $query->where('idCh', '=', $input['ch']);
             }
-            if(!empty($input['ncc'])){
-                $query=$query->where('idNcc','=',$input['ncc']);
+            if (!empty($input['ncc'])) {
+                $query = $query->where('idNcc', '=', $input['ncc']);
             }
-            if(!empty($input['loai'])){
-                $query=$query->where('idLoai','=',$input['loai']);
+            if (!empty($input['loai'])) {
+                $query = $query->where('idLoai', '=', $input['loai']);
+            }
+            $query = $query->where('ten', 'like', $input['keyword'] . '%');
+        } else {
+            if (!empty($input['dm'])) {
+                $query = $query->where('idDm', '=', $input['dm']);
+            }
+            if (!empty($input['th'])) {
+                $query = $query->where('idTh', '=', $input['th']);
+            }
+            if (!empty($input['ch'])) {
+                $query = $query->where('idCh', '=', $input['ch']);
+            }
+            if (!empty($input['ncc'])) {
+                $query = $query->where('idNcc', '=', $input['ncc']);
+            }
+            if (!empty($input['loai'])) {
+                $query = $query->where('idLoai', '=', $input['loai']);
             }
         }
-
-
         // dd($query);
-        $query=$query->get();
-        if(count($query)!=0){
+        $query = $query->orderBy('updated_at', 'desc')->get();
+        if (count($query) != 0) {
             $arr = [
                 'status' => true,
                 'message' => "Danh sách sản phẩm",
-                'data'=>$query
-                ];
-        }else{
+                'data' => $query
+            ];
+        } else {
             $arr = [
                 'status' => false,
-                'message' => "Khong kiem dc san pham"
-                ];
+                'message' => "Không tìm được sản phẩm",
+                'data' => []
+            ];
         }
 
 

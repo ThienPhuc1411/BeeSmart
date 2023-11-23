@@ -11,7 +11,7 @@ class DanhMucTinController extends Controller
      // Hiển thị danh sách cửa hàng
      public function index()
      {
-         $danhmuctin = DanhMucTin::all();
+         $danhmuctin = DanhMucTin::where('anHien',1)->orderBy('updated_at','desc')->get();
          return response()->json(['danhmuctin' => $danhmuctin], 200);
      }
 

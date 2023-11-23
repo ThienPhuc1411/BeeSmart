@@ -13,7 +13,7 @@ class TinController extends Controller
 {
     public function index()
     {
-        $tintuc = Tin::all();
+        $tintuc = Tin::where('anHien',1)->orderBy('updated_at','desc')->get();
         return response()->json(['danhsachtin' => $tintuc], 200);
     }
 

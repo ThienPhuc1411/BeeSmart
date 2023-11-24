@@ -14,9 +14,16 @@ class LienHeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $input = $request->all();
+        $lienHe = LienHe::all();
+        $arr = [
+            'status' => true,
+            'message' => 'Danh sách thương hiệu',
+            'data' => LienHeResource::collection($lienHe)
+        ];
+        return response()->json($arr, 200);
     }
 
     /**
@@ -85,7 +92,13 @@ class LienHeController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $lienHe = LienHe::findOrFail($id);
+        $arr = [
+            'status' => true,
+            'message' => 'Chi tiết người liên hệ',
+            'data' => new LienHeResource($lienHe)
+        ];
+        return response()->json($arr, 201);
     }
 
     /**

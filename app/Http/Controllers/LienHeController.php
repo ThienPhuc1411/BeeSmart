@@ -120,8 +120,14 @@ class LienHeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(LienHe $lien_he)
     {
-        //
+        $lien_he->delete();
+        $arr = [
+            'status' => true,
+            'message' => 'Đã xóa thành công',
+            'data' => []
+        ];
+        return response()->json($arr, 200);
     }
 }

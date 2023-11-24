@@ -88,8 +88,10 @@ class CuaHangController extends Controller
         //Gửi mail thông báo tạo cửa hàng thành công
         $userMail = Auth::email(); //temp
         $mailData = [
+            'ten' => Auth::HoTen(),
             'title' => 'Đã tạo cửa hàng thành công',
-            'body' => $store->tenCh
+            'body' => $store->tenCh,
+            'slug' => $store->slug
         ];
         Mail::to($userMail)->send(new TaoCuaHang($mailData));
 

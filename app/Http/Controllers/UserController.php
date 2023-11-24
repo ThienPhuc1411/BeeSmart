@@ -267,8 +267,8 @@ class UserController extends Controller
                 $user->save();
                 $mailData = [
                     'status'=>true,
-                    'title' => 'Xin chào '.$user->HoTen,
-                    'body' => 'Mật khẩu mới của bạn là:'.$newPassword
+                    'ten' => $user->HoTen,
+                    'newpass' => $newPassword
                 ];
                 Mail::to($userMail)->send(new QuenMatKhau($mailData));
                 return response()->json($mailData,201);

@@ -14,8 +14,17 @@ class Tin extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return['ID'=>$this->id,'TD'=>$this->tieuDe,'TT'=>$this->tomTat,
-        'ND'=>$this->noiDung,'IDDM'=>$this->idDmTin,'IDUS'=>$this->idUsers,
-        'AH'=>$this->anHien,'CR'=>$this->created_at,'UD'=>$this->updated_at,];
+        return [
+            'id' => $this->id,
+            'tieuDe' => $this->tieuDe,
+            'tomTat' => $this->tomTat,
+            'noiDung' => $this->noiDung,
+            'idDmTin' => $this->idDmTin,
+            'idUsers' => $this->idUsers,
+            'anHien' => $this->anHien,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+            'slug' => $this->slug
+        ];
     }
 }

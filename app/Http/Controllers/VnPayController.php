@@ -10,7 +10,7 @@ class VnPayController extends Controller
     public function vnpay_payment(Request $request)
     {
         $data = $request->all();
-        $code_cart = rand(00000,99999);
+        $code_cart = $request->MaDH;
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
         $vnp_Returnurl = "http://localhost:8000/";
         $vnp_TmnCode = "YFJ5KAVS"; //Mã website tại VNPAY 
@@ -111,8 +111,8 @@ class VnPayController extends Controller
             'data' => $vnp_Url
         );
         if (isset($_POST['redirect'])) {
-            header('Location: ' . $vnp_Url);
-            die();
+            return header('Location: ' . $vnp_Url);
+            // die();
         } else {
             echo json_encode($returnData);
         }

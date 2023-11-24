@@ -13,7 +13,7 @@ class TinController extends Controller
 {
     public function index()
     {
-        $tintuc = Tin::where('anHien',1)->orderBy('updated_at','desc')->get();
+        $tintuc = Tin::where('anHien', 1)->orderBy('updated_at', 'desc')->get();
         return response()->json(['danhsachtin' => $tintuc], 200);
     }
 
@@ -21,18 +21,31 @@ class TinController extends Controller
     public function show(Request $request)
     {
         $slug = $request->slug;
-        $tintuc = Tin::where('slug',$slug);
+        $tintuc = Tin::where('slug', 'LIKE', '%' . $slug . '%')->first();
         $tintuc->increment('view', 1);
-        $binhluan = BinhLuan::where('idTin',$tintuc->id)->get();
+        $binhluan = BinhLuan::where('idTin', $tintuc->id)->get();
         $tintuc->save();
         if (!$tintuc) {
-            return response()->json(['message' => 'Tin không tồn tại'], 404);
+            $arr = [
+                'status' => false,
+                'message' => 'Không tồn tại bài viết',
+                'data' => []
+            ];
+            return response()->json($arr, 200);
+        }else{
+            $arr = [
+                'status' => true,
+                'message' => 'Chi tiết bài viết',
+                'data' => $tintuc,
+                'binhluan' => $binhluan
+            ];
+            return response()->json($arr, 200);
         }
         // // Tăng số lượng view của tin tức
         // DB::table('tin_tuc')->where('id', $id)->increment('view');
         // DB::table('tin_tuc')->where('id', $id)->increment('view');
 
-        return response()->json(['tintuc' => $tintuc,'binhluan' => $binhluan], 200);
+        
     }
 
     // Thêm một cửa hàng mới

@@ -18,9 +18,10 @@ class TinController extends Controller
     }
 
     // Hiển thị thông tin của một tin cụ thể
-    public function show(Request $request)
+    public function show($slug)
     {
-        $slug = $request->slug;
+        // $slug = $request->slug;
+        dd($slug);
         $tintuc = Tin::where('slug', 'LIKE', '%' . $slug . '%')->first();
         $tintuc->increment('view', 1);
         $binhluan = BinhLuan::where('idTin', $tintuc->id)->get();
@@ -45,7 +46,7 @@ class TinController extends Controller
         // DB::table('tin_tuc')->where('id', $id)->increment('view');
         // DB::table('tin_tuc')->where('id', $id)->increment('view');
 
-        
+
     }
 
     // Thêm một cửa hàng mới

@@ -16,7 +16,7 @@ class TinTucController extends Controller
     {
         $post = Tin::select('tin_tuc.*', 'danh_muc_tin.ten as tenDm')
             ->join('danh_muc_tin', 'danh_muc_tin.id', 'tin_tuc.idDmTin')
-            ->orderBy('updated_at','descc')
+            ->orderBy('updated_at','desc')
             ->get();
         $title = "Tin tức";
         // dd($post);

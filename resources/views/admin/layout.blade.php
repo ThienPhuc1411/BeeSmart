@@ -85,6 +85,7 @@
                         <h6 class="collapse-header">Danh sách</h6>
                         <a class="collapse-item" href="{{ route('user.index') }}">Khách Hàng</a>
                         <a class="collapse-item" href="{{ route('post.index') }}">Tin</a>
+                        <a class="collapse-item" href="{{ route('index') }}">Thông Báo</a>
                     </div>
                 </div>
             </li>

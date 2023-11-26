@@ -12,6 +12,7 @@ use App\Http\Controllers\VnPayController;
 use App\Http\Controllers\Admin\LoaiSanPhamController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\HoaDonController;
+use App\Http\Controllers\Admin\LienHeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,7 +31,7 @@ use App\Http\Controllers\HoaDonController;
     Route::post('/login',[AuthController::class,'loginPost'])->name('login');
 
 
-Route::get('', [UserController::class, 'index'])->name('index')->middleware(['admin','auth']);
+Route::get('', [LienHeController::class, 'index'])->name('index')->middleware(['admin','auth']);
 
 Route::prefix('user')->name('user.')->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('index');
@@ -110,6 +111,11 @@ Route::get('list-profit-month', [AdminController::class, 'list_profit_month'])->
 Route::get('pass',function(){
     return bcrypt('hihi');
 });
+
+Route::prefix('lien-he')->name('lien-he.')->group(function(){
+    Route::get('/',[LienHeController::class,'index'])->name('index');
+    Route::get('/confirm/{id}',[LienHeController::class,'confirm'])->name('confirm');
+})->middleware(['admin','auth']);
 
 Route::post('/vnpay_payment',[VnPayController::class,'vnpay_payment'])->name('vnpay');
 // Auth::routes();

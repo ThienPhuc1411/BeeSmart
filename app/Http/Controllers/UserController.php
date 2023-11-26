@@ -52,7 +52,7 @@ class UserController extends Controller
             return response($arr,200);
         }
 
-        return Response(['message' => 'email or password wrong'],401);
+        return Response(['message' => 'Email hoặc Mật khẩu không đúng'],401);
     }
 
     /**

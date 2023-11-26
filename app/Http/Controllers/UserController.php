@@ -289,6 +289,7 @@ class UserController extends Controller
         $id=$input['id'];
         $user=User::where('id','=',$id)->first();
         $user->sdt=$input['sdt'];
+        $user->HoTen = $input['HoTen'];
         $user->Diachi=$input['Diachi'];
         $user->quan=$input['quan'];
         $user->save();

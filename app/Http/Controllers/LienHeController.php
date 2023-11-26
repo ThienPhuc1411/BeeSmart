@@ -44,12 +44,13 @@ class LienHeController extends Controller
         [
             'ten' => 'required|max:225',
             'email' => 'required|max:255|email',
-            'sdt' => 'required|max:11|numeric',
+            'sdt' => 'required|max:11|numeric|min:10',
             'diaChi' => 'required|max:255'
         ],
         [
             'required' => ':attribute không được bỏ trống',
             'max' => ':attribute không được lớn hơn :max ký tự',
+            'min' => ':attribute không được nhỏ hơn :min ký tự',
             'email' => ':attribute phải là email',
             'numeric' => 'Không được có chữ trong :attribute',
         ],

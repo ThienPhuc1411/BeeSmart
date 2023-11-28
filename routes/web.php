@@ -109,7 +109,7 @@ Route::get('list-profit-day', [AdminController::class, 'list_profit_day'])->name
 Route::get('list-profit-month', [AdminController::class, 'list_profit_month'])->name('profit-month')->middleware(['admin','auth']);
 
 Route::get('pass',function(){
-    return bcrypt('hihi');
+    return bcrypt('admin123');
 });
 
 Route::prefix('lien-he')->name('lien-he.')->group(function(){

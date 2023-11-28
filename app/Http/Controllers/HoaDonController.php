@@ -98,7 +98,7 @@ class HoaDonController extends Controller
                         'tong' => $sp['tong']
                     ];
                     $spOne = SanPham::find($sp['idSp']);
-                    $von = $spOne->giaVon * $sp['soLuong'];
+                    $von = $spOne->giaVon * $hdctInput['soLuong'];
                     $loiNhuan = $input['tongTien'] - $von;
                     $statistical->loiNhuan += $loiNhuan;
                     $hdctInput['idHd'] = $hd->id;

@@ -8,6 +8,7 @@ use App\Http\Resources\LienHeResource;
 use Validator;
 use Mail;
 use App\Mail\LienHe as MailLienHe;
+use App\Mail\AdminLienHe;
 
 class LienHeController extends Controller
 {
@@ -44,7 +45,8 @@ class LienHeController extends Controller
         [
             'ten' => 'required|max:225',
             'email' => 'required|max:255|email',
-            'sdt' => 'required|max:11|numeric',
+            // 'sdt' => 'required|min:10|max:11|numeric',
+            'sdt' => 'required',
             'diaChi' => 'required|max:255'
         ],
         [
@@ -71,13 +73,15 @@ class LienHeController extends Controller
         $lienHe = LienHe::create($input);
         
         $userMail = $lienHe['email'];
+        $adminMail = 'beesmart301@gmail.com';
         // dd($userMail);
         $mailData = [
-            'ten' => $lienHe['ten']
+            'ten' => $lienHe['ten'],
+            'email' => $userMail
         ];
         // dd($lienHe['ten']);
         Mail::to($userMail)->send(new MailLienHe($mailData));
-
+        Mail::to($adminMail)->send(new AdminLienHe($mailData));
         $arr = [
             'status' => true,
             'message' => ['Đăng ký nhận tư vấn thành công',

@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class LienHe extends Mailable
+class AdminLienHe extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -25,11 +25,10 @@ class LienHe extends Mailable
     /**
      * Get the message envelope.
      */
-    
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Phản hồi yêu cầu liên hệ',
+            subject: 'Có yêu cầu liên hệ mới',
         );
     }
 
@@ -39,7 +38,7 @@ class LienHe extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.lienHe',
+            view: 'emails.adminLienHe',
         );
     }
 

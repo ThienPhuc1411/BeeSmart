@@ -403,7 +403,7 @@ class SanPhamController extends Controller
                 $query = $query->where('idTh', '=', $input['th']);
             }
             if (!empty($input['ch'])) {
-                $query = $query->where('idCh', '=', $input['ch']);
+                $query = $query->where('idCh', '=', $input['idCh']);
             }
             if (!empty($input['ncc'])) {
                 $query = $query->where('idNcc', '=', $input['ncc']);
@@ -411,6 +411,14 @@ class SanPhamController extends Controller
             if (!empty($input['loai'])) {
                 $query = $query->where('idLoai', '=', $input['loai']);
             }
+            if(!empty($input['tinhTrang'])){
+                   if($input['tinhTrang'] == 0){
+                    $query = $query->where('soLuong', 0);
+                }else{
+                    $query = $query->where('soLuong','>',0);
+                } 
+            }
+            
             $query = $query->where('ten', 'like', $input['keyword'] . '%');
         } else {
             if (!empty($input['dm'])) {
@@ -420,7 +428,7 @@ class SanPhamController extends Controller
                 $query = $query->where('idTh', '=', $input['th']);
             }
             if (!empty($input['ch'])) {
-                $query = $query->where('idCh', '=', $input['ch']);
+                $query = $query->where('idCh', '=', $input['idCh']);
             }
             if (!empty($input['ncc'])) {
                 $query = $query->where('idNcc', '=', $input['ncc']);
@@ -428,6 +436,14 @@ class SanPhamController extends Controller
             if (!empty($input['loai'])) {
                 $query = $query->where('idLoai', '=', $input['loai']);
             }
+            if(!empty($input['tinhTrang'])){
+                   if($input['tinhTrang'] == 0){
+                    $query = $query->where('soLuong', 0);
+                }else{
+                    $query = $query->where('soLuong','>',0);
+                } 
+            }
+            
         }
         // dd($query);
         $query = $query->orderBy('updated_at', 'desc')->get();

@@ -89,6 +89,7 @@ class HoaDonController extends Controller
         $hd = HoaDon::create($hdInput);
         $ngayTao = Carbon::now()->format("Y-m-d");
         $statistical = DoanhThu::where('ngayTao', $ngayTao)->where('idCh', $hdInput['idCh'])->first();
+        $von=0;
         if ($statistical) {
             if (is_array($input['Sp'])) {
                 foreach ($input['Sp'] as $sp) {
@@ -97,20 +98,22 @@ class HoaDonController extends Controller
                         'soLuong' => $sp['soLuong'],
                         'tong' => $sp['tong']
                     ];
-                    $spOne = SanPham::find($hdctInput['idSp']);
-                    $von = $spOne->giaVon * $hdctInput['soLuong'];
-                    $loiNhuan = $input['tongTien'] - $von;
-                    $statistical->loiNhuan += $loiNhuan;
+                    $spOne = SanPham::find($sp['idSp']);
+                    // $spOne = SanPham::find($hdctInput['idSp']);
+                    $von += $spOne->giaVon * $hdctInput['soLuong'];
                     $hdctInput['idHd'] = $hd->id;
                     $hdct = HoaDonCT::create($hdctInput);
-                    $spOne->decrement('soLuong', $hdctInput['soLuong']);
+                    if ($spOne->soLuong > 0) {
+                        $spOne->decrement('soLuong', $hdctInput['soLuong']);
+                    }
                 }
+                $loiNhuan = $hdInput['tongTien']-$von;
+                $statistical->loiNhuan+=$loiNhuan;
                 $statistical->hoaDon += 1;
                 $statistical->doanhThu += $hdInput['tongTien'];
                 $statistical->save();
             }
         } else {
-            $loiNhuanDT = 0;
             // $soLuongDT = 0;
             $doanhThuDT = 0;
             $hoaDonDT = 0;
@@ -122,19 +125,21 @@ class HoaDonController extends Controller
                         'soLuong' => $sp['soLuong'],
                         'tong' => $sp['tong']
                     ];
-                    $spOne = SanPham::find($hdctInput['idSp']);
-                    $von = $spOne->giaVon * $hdctInput['soLuong'];
-                    $loiNhuan = $input['tongTien'] - $von;
-                    $loiNhuanDT += $loiNhuan;
+                    $spOne = SanPham::find($sp['idSp']);
+                    $von += $spOne->giaVon * $sp['soLuong'];
                     $hdctInput['idHd'] = $hd->id;
                     $hdct = HoaDonCT::create($hdctInput);
-                    $spOne->decrement('soLuong', $hdctInput['soLuong']);
+                    if ($spOne->soLuong > 0) {
+                        $spOne->decrement('soLuong', $hdctInput['soLuong']);
+                    }
                 }
+                $loiNhuan = $hdInput['tongTien']-$von;
                 $hoaDonDT += 1;
+                
                 $doanhThuDT += $hdInput['tongTien'];
             }
             $statisticalInput = [
-                'loiNhuan' => $loiNhuanDT,
+                'loiNhuan' => $loiNhuan,
                 'doanhThu' => $doanhThuDT,
                 'hoaDon' => $hoaDonDT,
                 'idCh' => $input['idCh'],
@@ -165,9 +170,9 @@ class HoaDonController extends Controller
             'status' => true,
             'message' => 'Hóa đơn' . ' ' . $bill->maHd,
             'data' => [
-                new HoaDonResource($bill),
-                HDCTResource::collection($hdcts)
-            ]
+                    new HoaDonResource($bill),
+                    HDCTResource::collection($hdcts)
+                ]
         ];
         return response()->json($arr, 200);
     }
@@ -209,27 +214,25 @@ class HoaDonController extends Controller
         //
     }
 
-    public function viewPDF(Request $request)
-    {
+    public function viewPDF(Request $request){
         $idCh = $request->idCh;
         // $idCh = 4;
         $cuaHang = CuaHang::find($idCh);
-        $hoadon = HoaDon::where('idCh', $idCh)->get();
+        $hoadon = HoaDon::where('idCh',$idCh)->get();
 
-        $pdf = Pdf::loadHTML(view('pdf.hoadon', compact('hoadon', 'cuaHang'))->render());
+        $pdf = Pdf::loadHTML(view('pdf.hoadon',compact('hoadon','cuaHang'))->render());
         return $pdf->stream('PDF');
 
         // return view('pdf.hoadon',compact('hoadon','cuaHang'));
     }
 
-    public function downloadPDF(Request $request)
-    {
+    public function downloadPDF(Request $request){
         $idCh = $request->idCh;
         // $idCh = 4;
         $cuaHang = CuaHang::find($idCh);
-        $hoadon = HoaDon::where('idCh', $idCh)->get();
+        $hoadon = HoaDon::where('idCh',$idCh)->get();
 
-        $pdf = Pdf::loadView('pdf.hoadon', compact('hoadon', 'cuaHang'));
+        $pdf = Pdf::loadView('pdf.hoadon',compact('hoadon','cuaHang'));
         // $pdf = Pdf::setOption(['dpi' => 150, 'defaultFont' => 'sans-serif']);
         return $pdf->download();
     }

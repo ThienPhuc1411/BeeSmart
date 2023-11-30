@@ -153,4 +153,23 @@ class TinController extends Controller
         return response()->json(['tincuabanla' => $tintuc], 200);
     }
 
+    public function search(Request $request){
+        $search = Tin::where('tieuDe','LIKE','%'.$request->search.'%')->where('anHien',1)->get();
+        if(!empty($search)){
+            $arr = [
+                'status' => true,
+                'message' => 'Kết quả tìm kiếm',
+                'data' => $search
+            ];
+            return response()->json($arr, 200);
+        }else{
+            $arr = [
+                'status' => false,
+                'message' => 'Không có kết quả phù hợp',
+                'data' => []
+            ];
+            return response()->json($arr, 200);
+        }
+    }
+
 }

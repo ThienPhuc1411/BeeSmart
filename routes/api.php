@@ -80,3 +80,4 @@ Route::get('doanh-thu',[DoanhThuController::class,'index']);
 
 Route::get('downloadPDF-hoa-don',[HoaDonController::class,'downloadPDF']);
 
+Route::get('search-post',[TinController::class,'search']);

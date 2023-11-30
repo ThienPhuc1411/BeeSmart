@@ -140,19 +140,6 @@ class TinController extends Controller
         return response()->json(['message' => 'Tin xóa thành công'], 204);
     }
 
-    public function searchByTitle(Request $request)
-    {
-        $keyword = $request->input('keyword');
-
-        $tintuc = Tin::where('tieuDe', 'like', "%$keyword%")->get();
-
-        if ($tintuc->isEmpty()) {
-            return response()->json(['message' => 'Không tìm thấy tin'], 404);
-        }
-
-        return response()->json(['tincuabanla' => $tintuc], 200);
-    }
-
     public function search(Request $request){
         $search = Tin::where('tieuDe','LIKE','%'.$request->search.'%')->where('anHien',1)->get();
         if(!empty($search)){

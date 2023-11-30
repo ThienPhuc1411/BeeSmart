@@ -24,7 +24,6 @@ Route::resource('cua-hang', CuaHangController::class);
 Route::resource('loai-cua-hang',LoaiCHController::class);
 Route::resource('danh-muc-tin',DanhMucTinController::class);
 Route::resource('tin',TinController::class);
-Route::get('searchByTitle',[TinController::class,'searchByTitle']);
 
 
 // Route::resource('san-pham', san_phamController::class);

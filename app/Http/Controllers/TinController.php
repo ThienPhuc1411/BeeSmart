@@ -11,10 +11,20 @@ use App\Models\BinhLuan;
 
 class TinController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $tintuc = Tin::where('anHien', 1)->orderBy('updated_at', 'desc')->get();
-        return response()->json(['danhsachtin' => $tintuc], 200);
+        
+        $tintuc = Tin::where('anHien', 1);
+        if($request->search){
+            $tintuc = $tintuc->where('tieuDe','LIKE','%'.$request->search.'%');
+        }
+        $tintuc->orderBy('updated_at', 'desc')->get();
+        $arr=[
+            'status' => true,
+            'message' => 'Danh sách bài viết',
+            'data' => $tintuc
+        ];
+        return response()->json($arr, 200);
     }
 
     // Hiển thị thông tin của một tin cụ thể

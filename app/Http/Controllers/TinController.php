@@ -18,7 +18,7 @@ class TinController extends Controller
         if($request->search){
             $tintuc = $tintuc->where('tieuDe','LIKE','%'.$request->search.'%');
         }
-        $tintuc->orderBy('updated_at', 'desc')->get();
+        $tintuc=$tintuc->orderBy('updated_at', 'desc')->get();
         $arr=[
             'status' => true,
             'message' => 'Danh sách bài viết',

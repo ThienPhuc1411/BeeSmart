@@ -12,6 +12,8 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use app\Models\CuaHang;
 use App\Models\nhaCungCap;
+use Excel;
+use App\Imports\products as productImport;
 
 class SanPhamController extends Controller
 {
@@ -429,5 +431,13 @@ class SanPhamController extends Controller
         return response()->json($arr, 200);
     }
 
+    public function importExcel(){
+        return view('admin.import-excel');
+    }
+
+    public function saveImportExcel(Request $request){
+        Excel::import(new productImport,$request->file);
+        return "Thành công";
+    }
 
 }

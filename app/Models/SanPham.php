@@ -26,7 +26,5 @@ class SanPham extends Model
         'idLoai',
         'maSp',
         'ngayTao'
-
-
     ];
 }

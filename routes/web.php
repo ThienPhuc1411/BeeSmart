@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SanPhamController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\UserController;
@@ -138,3 +139,5 @@ Route::post('/vnpay_payment',[VnPayController::class,'vnpay_payment'])->name('vn
 Route::get('viewPDF',[HoaDonController::class,'viewPDF'])->name('viewPDF');
 Route::get('downloadPDF',[HoaDonController::class,'downloadPDF'])->name('downloadPDF');
 
+Route::get('test-excel',[SanPhamController::class,'importExcel']);
+Route::post('test-excel',[SanPhamController::class,'saveImportExcel'])->name('import-Excel');

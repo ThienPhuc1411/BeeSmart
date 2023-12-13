@@ -230,7 +230,16 @@ class HoaDonController extends Controller
         $idCh = $request->idCh;
         // $idCh = 4;
         $cuaHang = CuaHang::find($idCh);
-        $hoadon = HoaDon::where('idCh',$idCh)->get();
+        $hoadon = HoaDon::where('idCh',$idCh);
+        if(isset($request->type)){
+            if($request->type == 'theo-ngay'){
+                $hoadon = $hoadon->where('DAY(created_at)',$request->day);
+            }
+            if($request->type == 'theo-thang'){
+                $hoadon = $hoadon->where('MONTH(created_at)',$request->day);
+            }
+        }
+        $hoadon = $hoadon->get();
 
         $pdf = Pdf::loadView('pdf.hoadon',compact('hoadon','cuaHang'));
         // $pdf = Pdf::setOption(['dpi' => 150, 'defaultFont' => 'sans-serif']);

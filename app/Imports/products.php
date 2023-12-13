@@ -16,15 +16,16 @@ class products implements ToModel,WithHeadingRow
     */
     public function model(array $row)
     {
+        // dd($row);
         return new SanPham([
-            'ten' => $row['Tên'],
-            'maSp' => $row['Mã Sản Phẩm'],
-            'giaVon' => $row['Giá vốn'],
-            'giaBan' => $row['Giá bán'],
-            'soLuong' => $row['Số Lượng'],
-            'donVi' => $row['Đơn Vị'],
-            'theTich' => $row['Thể Tích'],
-            'khoiLuong' => $row['Khối Lượng'],
+            'ten' => $row['ten'],
+            'maSp' => $row['ma_san_pham'],
+            'giaVon' => $row['gia_von'],
+            'giaBan' => $row['gia_ban'],
+            'soLuong' => $row['so_luong'],
+            'donVi' => $row['don_vi'],
+            'theTich' => $row['the_tich'],
+            'khoiLuong' => $row['khoi_luong'],
             // 'idCh' => $idCh,
             'ngayTao' => Carbon::now()->format("Y-m-d"),
         ]);

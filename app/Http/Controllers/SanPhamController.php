@@ -68,6 +68,7 @@ class SanPhamController extends Controller
             'required' => ':attribute Không được để trống',
             'numeric' => ':attribute Phải là số',
             'integer' => ':attribute Phải là số nguyên ',
+            // 'between'=>':attribute Phải nằm trong khoảng ',
             'min' => ':attribute Phải là số dương'
         ], [
             'ten' => 'Tên sản phẩm',
@@ -99,6 +100,7 @@ class SanPhamController extends Controller
         }
         //check img
         if (!empty($input['img'])) {
+            
             $file = $request->file('img');
             $fileDestinationPath = "upload/products";
             if ($file->move($fileDestinationPath, $file->getClientOriginalName())) {
@@ -279,17 +281,23 @@ class SanPhamController extends Controller
             ];
             return response()->json($arr, 200);
         }
-        if (empty($input['soLuong'])) {
+        if (!isset($input['soLuong'])) {
             $product->soLuong = $product->soLuong + 0;
-        } else {
+        }
+        else{
+
             if ($input['soLuong'] < 0) {
-                if ($product->soLuong == 0) {
-                    $product->soLuong = 0;
-                }
-            } else {
+            if($product->soLuong == 0) {
+                $product->soLuong = 0;
+            }
+        }
+            else {
                 $product->soLuong = $input['soLuong'];
             }
         }
+
+
+
 
 
 
@@ -305,7 +313,8 @@ class SanPhamController extends Controller
             $file = $request->file('img');
             $fileDestinationPath = "upload/products";
             if ($file->move($fileDestinationPath, $file->getClientOriginalName())) {
-                $input['img'] = $fileDestinationPath . '/' . $file->getClientOriginalName();
+               $input['img'] = $fileDestinationPath . '/' . $file->getClientOriginalName();
+               $product->img = $input['img'];
             } else {
                 $arr = [
                     'success' => false,
@@ -314,6 +323,7 @@ class SanPhamController extends Controller
                 ];
                 return response()->json($arr, 200);
             }
+
         }
 
         $product->ngayTao = $mytime;
@@ -355,6 +365,8 @@ class SanPhamController extends Controller
         return response()->json($arr, 200);
     }
 
+
+
     public function sort_search(Request $request)
     {
         $input = $request->all();
@@ -367,7 +379,7 @@ class SanPhamController extends Controller
             if (!empty($input['th'])) {
                 $query = $query->where('idTh', '=', $input['th']);
             }
-            if (!empty($input['ch'])) {
+            if (!empty($input['idCh'])) {
                 $query = $query->where('idCh', '=', $input['idCh']);
             }
             if (!empty($input['ncc'])) {
@@ -377,12 +389,14 @@ class SanPhamController extends Controller
                 $query = $query->where('idLoai', '=', $input['loai']);
             }
             if (!empty($input['tinhTrang'])) {
-                if ($input['tinhTrang'] == 0) {
+                if($input['tinhTrang'] ==1){
                     $query = $query->where('soLuong', 0);
-                } else {
-                    $query = $query->where('soLuong', '>', 0);
+                }
+                if($input['tinhTrang'] == 2){
+                    $query = $query->where('soLuong','>',0);
                 }
             }
+
             $query = $query->where('ten', 'like', $input['keyword'] . '%');
         } else {
             if (!empty($input['dm'])) {
@@ -391,7 +405,7 @@ class SanPhamController extends Controller
             if (!empty($input['th'])) {
                 $query = $query->where('idTh', '=', $input['th']);
             }
-            if (!empty($input['ch'])) {
+            if (!empty($input['idCh'])) {
                 $query = $query->where('idCh', '=', $input['idCh']);
             }
             if (!empty($input['ncc'])) {
@@ -401,15 +415,18 @@ class SanPhamController extends Controller
                 $query = $query->where('idLoai', '=', $input['loai']);
             }
             if (!empty($input['tinhTrang'])) {
-                if ($input['tinhTrang'] == 0) {
+                if($input['tinhTrang'] ==1){
                     $query = $query->where('soLuong', 0);
-                } else {
-                    $query = $query->where('soLuong', '>', 0);
+                }
+                if($input['tinhTrang'] == 2){
+                    $query = $query->where('soLuong','>',0);
                 }
             }
+
         }
         // dd($query);
         $query = $query->orderBy('updated_at', 'desc')->get();
+
         if (count($query) != 0) {
             $arr = [
                 'status' => true,

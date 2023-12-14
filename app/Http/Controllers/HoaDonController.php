@@ -233,7 +233,7 @@ class HoaDonController extends Controller
         $hoadon = HoaDon::where('idCh',$idCh);
         if(isset($request->type)){
             if($request->type == 'theo-ngay'){
-                $hoadon = $hoadon->where('DAY(created_at)',$request->day);
+                $hoadon = $hoadon->where('DAY(created_at)',date('d'));
             }
             if($request->type == 'theo-thang'){
                 $hoadon = $hoadon->where('MONTH(created_at)',$request->day);

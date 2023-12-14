@@ -13,6 +13,7 @@ use App\Models\CuaHang;
 use App\Models\DoanhThu;
 use App\Models\SanPham;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\User;
 
 class HoaDonController extends Controller
 {
@@ -89,7 +90,7 @@ class HoaDonController extends Controller
         $hd = HoaDon::create($hdInput);
         $ngayTao = Carbon::now()->format("Y-m-d");
         $statistical = DoanhThu::where('ngayTao', $ngayTao)->where('idCh', $hdInput['idCh'])->first();
-        $von=0;
+        $von = 0;
         if ($statistical) {
             if (is_array($input['Sp'])) {
                 foreach ($input['Sp'] as $sp) {
@@ -107,8 +108,8 @@ class HoaDonController extends Controller
                         $spOne->decrement('soLuong', $hdctInput['soLuong']);
                     }
                 }
-                $loiNhuan = $hdInput['tongTien']-$von;
-                $statistical->loiNhuan+=$loiNhuan;
+                $loiNhuan = $hdInput['tongTien'] - $von;
+                $statistical->loiNhuan += $loiNhuan;
                 $statistical->hoaDon += 1;
                 $statistical->doanhThu += $hdInput['tongTien'];
                 $statistical->save();
@@ -133,9 +134,9 @@ class HoaDonController extends Controller
                         $spOne->decrement('soLuong', $hdctInput['soLuong']);
                     }
                 }
-                $loiNhuan = $hdInput['tongTien']-$von;
+                $loiNhuan = $hdInput['tongTien'] - $von;
                 $hoaDonDT += 1;
-                
+
                 $doanhThuDT += $hdInput['tongTien'];
             }
             $statisticalInput = [
@@ -170,9 +171,9 @@ class HoaDonController extends Controller
             'status' => true,
             'message' => 'Hóa đơn' . ' ' . $bill->maHd,
             'data' => [
-                    new HoaDonResource($bill),
-                    HDCTResource::collection($hdcts)
-                ]
+                new HoaDonResource($bill),
+                HDCTResource::collection($hdcts)
+            ]
         ];
         return response()->json($arr, 200);
     }
@@ -214,42 +215,59 @@ class HoaDonController extends Controller
         //
     }
 
-    public function viewPDF(Request $request){
+    public function viewPDF(Request $request)
+    {
         $idCh = $request->idCh;
         // $idCh = 4;
         $cuaHang = CuaHang::find($idCh);
-        $hoadon = HoaDon::where('idCh',$idCh)->get();
+        $hoadon = HoaDon::where('idCh', $idCh)->get();
 
-        $pdf = Pdf::loadHTML(view('pdf.hoadon',compact('hoadon','cuaHang'))->render());
+        $pdf = Pdf::loadHTML(view('pdf.hoadon', compact('hoadon', 'cuaHang'))->render());
         return $pdf->stream('PDF');
 
         // return view('pdf.hoadon',compact('hoadon','cuaHang'));
     }
 
-    public function downloadPDF(Request $request){
+    public function downloadPDF(Request $request)
+    {
         $idCh = $request->idCh;
         // $idCh = 4;
-        $cuaHang = CuaHang::find($idCh);
-        // dd($request->all());
-        $hoadon = HoaDon::where('idCh',$idCh);
-        // if(isset($request->type)){
-        //     if($request->type == 'theo-ngay'){
-        //         $hoadon = $hoadon->where('DAY(created_at)',date('d'));
-        //     }
-        //     if($request->type == 'theo-thang'){
-        //         $hoadon = $hoadon->where('MONTH(created_at)',$request->day);
-        //     }
-        // }
-        $start = $request->startDate;
-        $end = $request->endDate;
-        // dd($start);
-        $startDate = Carbon::createFromFormat('Y-m-d', '2023-11-04')->startOfDay();
-        // dd($startDate);
-        $endDate = Carbon::createFromFormat('Y-m-d', '2023-11-05')->endOfDay();
-        $hoadon = $hoadon->whereBetween('created_at',[$startDate,$endDate])->get();
-        // dd($endDate);
-        dd($hoadon);
-        $pdf = Pdf::loadView('pdf.hoadon',compact('hoadon','cuaHang'));
-        return $pdf->download();
+        $userRole = User::join('sub_cua_hang', 'sub_cua_hang.idUsers', 'users.id')
+            ->join('cua_hang', 'sub_cua_hang.idCh', 'cua_hang.id')
+            ->where('idCh', $idCh)
+            ->select('users.loai')
+            ->first();
+        // dd($userRole->loai);
+        if ($userRole->loai != 1) {
+            $cuaHang = CuaHang::find($idCh);
+            // dd($request->all());
+            $hoadon = HoaDon::where('idCh', $idCh);
+            // if(isset($request->type)){
+            //     if($request->type == 'theo-ngay'){
+            //         $hoadon = $hoadon->where('DAY(created_at)',date('d'));
+            //     }
+            //     if($request->type == 'theo-thang'){
+            //         $hoadon = $hoadon->where('MONTH(created_at)',$request->day);
+            //     }
+            // }
+            $start = $request->startDate;
+            $end = $request->endDate;
+            // dd($start);
+            $startDate = Carbon::createFromFormat('Y-m-d', '2023-11-04')->startOfDay();
+            // dd($startDate);
+            $endDate = Carbon::createFromFormat('Y-m-d', '2023-11-05')->endOfDay();
+            $hoadon = $hoadon->whereBetween('created_at', [$startDate, $endDate])->get();
+            // dd($endDate);
+            dd($hoadon);
+            $pdf = Pdf::loadView('pdf.hoadon', compact('hoadon', 'cuaHang'));
+            return $pdf->download();
+        }else{
+            $arr = [
+                'status' => false,
+                'message' => 'Tài khoản của bạn không đủ để thực hiện chức năng này'
+            ];
+            return response()->json($arr, 200);
+        }
+
     }
 }

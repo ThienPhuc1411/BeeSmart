@@ -12,6 +12,8 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use app\Models\CuaHang;
 use App\Models\nhaCungCap;
+use Excel;
+use App\Imports\products as productImport;
 
 class SanPhamController extends Controller
 {
@@ -73,11 +75,11 @@ class SanPhamController extends Controller
             'ten' => 'Tên sản phẩm',
             'giaVon' => 'Giá Vốn',
             'giaBan' => 'Giá Bán',
-            'idCh' => 'ID Cửa Hàng',
-            'idNcc' => 'ID Nhà Cung Cấp',
-            'idTh' => 'ID Thương Thiệu',
-            'idDm' => 'ID Danh Mục',
-            'idLoai' => 'ID Loại Sản Phẩm',
+            'idCh' => 'Cửa Hàng',
+            'idNcc' => 'Nhà Cung Cấp',
+            'idTh' => 'Thương Thiệu',
+            'idDm' => 'Danh Mục',
+            'idLoai' => 'Loại Sản Phẩm',
             'maSp' => 'Mã Sản Phẩm',
             'donVi' => 'Đơn vị tính'
         ]);
@@ -250,11 +252,11 @@ class SanPhamController extends Controller
             'ten' => 'Tên sản phẩm',
             'giaVon' => 'Giá Vốn',
             'giaBan' => 'Giá Bán',
-            'idCh' => 'ID Cửa Hàng',
-            'idNcc' => 'ID Nhà Cung Cấp',
-            'idTh' => 'ID Thương Thiệu',
-            'idDm' => 'ID Danh Mục',
-            'idLoai' => 'ID Loại Sản Phẩm',
+            'idCh' => 'Cửa Hàng',
+            'idNcc' => 'Nhà Cung Cấp',
+            'idTh' => 'Thương Thiệu',
+            'idDm' => 'Danh Mục',
+            'idLoai' => 'Loại Sản Phẩm',
             'maSp' => 'Mã Sản Phẩm',
             'donVi' => 'Đơn vị tính'
         ]);
@@ -429,5 +431,20 @@ class SanPhamController extends Controller
         return response()->json($arr, 200);
     }
 
+    public function importExcel(){
+        return view('admin.import-excel');
+    }
+
+    public function saveImportExcel(Request $request){
+        Excel::import(new productImport,$request->file);
+        $sanpham = SanPham::where('idCh','=',null)->get();
+        // dd($sanpham);
+        $idCh = $request->idCh;
+        foreach($sanpham as $item){
+            $item->idCh = $idCh;
+            $item->save();
+        }
+        return "Thành công";
+    }
 
 }

@@ -78,3 +78,5 @@ Route::post('register',[UserController::class,'register']);
 Route::get('doanh-thu',[DoanhThuController::class,'index']);
 
 Route::get('downloadPDF-hoa-don',[HoaDonController::class,'downloadPDF']);
+
+Route::post('test-excel',[SanPhamController::class,'saveImportExcel']);

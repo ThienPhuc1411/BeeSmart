@@ -214,10 +214,6 @@ class UserController extends Controller
             ->select('users.*','sub_cua_hang.idCh as idCh','cua_hang.tenCh','loai_cua_hang.ten as tenLoaiCh','loai_cua_hang.id as idLoaiCh')
             ->where('users.id',$user->id)
             ->first();
-
-
-
-
             $success =  $user->createToken('MyApp')->plainTextToken;
                 $arr=[
                     'status'=>true,
@@ -226,8 +222,6 @@ class UserController extends Controller
                     'tt_user'=>$tt_user,
                 ];
                 return response()->json($arr,200);
-
-
         }
         else{
             $arr=[
@@ -240,7 +234,6 @@ class UserController extends Controller
 
     }
     public function changePassword(Request $request){
-
         $id=$request->id;
         $newpass=$request->newpass;
         $checkpass=$request->checkpass;

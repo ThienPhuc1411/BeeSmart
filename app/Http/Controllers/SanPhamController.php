@@ -75,11 +75,11 @@ class SanPhamController extends Controller
             'ten' => 'Tên sản phẩm',
             'giaVon' => 'Giá Vốn',
             'giaBan' => 'Giá Bán',
-            'idCh' => 'ID Cửa Hàng',
-            'idNcc' => 'ID Nhà Cung Cấp',
-            'idTh' => 'ID Thương Thiệu',
-            'idDm' => 'ID Danh Mục',
-            'idLoai' => 'ID Loại Sản Phẩm',
+            'idCh' => 'Cửa Hàng',
+            'idNcc' => 'Nhà Cung Cấp',
+            'idTh' => 'Thương Thiệu',
+            'idDm' => 'Danh Mục',
+            'idLoai' => 'Loại Sản Phẩm',
             'maSp' => 'Mã Sản Phẩm',
             'donVi' => 'Đơn vị tính'
         ]);
@@ -252,11 +252,11 @@ class SanPhamController extends Controller
             'ten' => 'Tên sản phẩm',
             'giaVon' => 'Giá Vốn',
             'giaBan' => 'Giá Bán',
-            'idCh' => 'ID Cửa Hàng',
-            'idNcc' => 'ID Nhà Cung Cấp',
-            'idTh' => 'ID Thương Thiệu',
-            'idDm' => 'ID Danh Mục',
-            'idLoai' => 'ID Loại Sản Phẩm',
+            'idCh' => 'Cửa Hàng',
+            'idNcc' => 'Nhà Cung Cấp',
+            'idTh' => 'Thương Thiệu',
+            'idDm' => 'Danh Mục',
+            'idLoai' => 'Loại Sản Phẩm',
             'maSp' => 'Mã Sản Phẩm',
             'donVi' => 'Đơn vị tính'
         ]);

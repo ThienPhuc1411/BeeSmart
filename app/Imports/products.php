@@ -26,7 +26,6 @@ class products implements ToModel,WithHeadingRow
             'donVi' => $row['don_vi'],
             'theTich' => $row['the_tich'],
             'khoiLuong' => $row['khoi_luong'],
-            // 'idCh' => $idCh,
             'ngayTao' => Carbon::now()->format("Y-m-d"),
         ]);
     }

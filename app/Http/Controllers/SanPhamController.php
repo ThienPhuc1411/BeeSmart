@@ -437,6 +437,13 @@ class SanPhamController extends Controller
 
     public function saveImportExcel(Request $request){
         Excel::import(new productImport,$request->file);
+        $sanpham = SanPham::where('idCh','=',null)->get();
+        // dd($sanpham);
+        $idCh = $request->idCh;
+        foreach($sanpham as $item){
+            $item->idCh = $idCh;
+            $item->save();
+        }
         return "Thành công";
     }
 

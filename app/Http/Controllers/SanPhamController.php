@@ -425,9 +425,6 @@ class SanPhamController extends Controller
                 'data' => []
             ];
         }
-
-
-
         return response()->json($arr, 200);
     }
 

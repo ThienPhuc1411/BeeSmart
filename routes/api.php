@@ -41,12 +41,6 @@ Route::get('sp-loaiSp',[SanPhamController::class,'sptheoLoaiSp']);
 Route::get('sp-ncc',[SanPhamController::class,'sptheoNcc']);
 
 Route::resource('nha-cung-cap', nhaCungCapController::class);
-// Route::resources([
-//     'thuong-hieu' => ThuongHieuController::class,
-//     'loai-san-pham' => LoaiSanPhamController::class,
-//     'danh-muc-san-pham' => DanhMucSanPhamController::class,
-//     'hoa-don' => HoaDonController::class
-// ]);
 Route::resource('thuong-hieu', ThuongHieuController::class);
 Route::resource('loai-san-pham', LoaiSanPhamController::class);
 Route::resource('danh-muc-san-pham', DanhMucSanPhamController::class);
@@ -60,7 +54,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
 Route::post('login',[UserController::class,'loginUser']);
 Route::post('checkEmail',[UserController::class,'checkEmail']);
 Route::post('changePassword',[UserController::class,'changePassword']);
@@ -72,6 +65,7 @@ Route::group(['middleware' => 'auth:sanctum'],function(){
     Route::get('user',[UserController::class,'userDetails']);
     Route::get('logout',[UserController::class,'logout']);
 });
+
 // register api
 Route::post('register',[UserController::class,'register']);
 

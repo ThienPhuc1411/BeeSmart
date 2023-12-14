@@ -230,19 +230,26 @@ class HoaDonController extends Controller
         $idCh = $request->idCh;
         // $idCh = 4;
         $cuaHang = CuaHang::find($idCh);
+        // dd($request->all());
         $hoadon = HoaDon::where('idCh',$idCh);
-        if(isset($request->type)){
-            if($request->type == 'theo-ngay'){
-                $hoadon = $hoadon->where('DAY(created_at)',date('d'));
-            }
-            if($request->type == 'theo-thang'){
-                $hoadon = $hoadon->where('MONTH(created_at)',$request->day);
-            }
-        }
-        $hoadon = $hoadon->get();
-
+        // if(isset($request->type)){
+        //     if($request->type == 'theo-ngay'){
+        //         $hoadon = $hoadon->where('DAY(created_at)',date('d'));
+        //     }
+        //     if($request->type == 'theo-thang'){
+        //         $hoadon = $hoadon->where('MONTH(created_at)',$request->day);
+        //     }
+        // }
+        $start = $request->startDate;
+        $end = $request->endDate;
+        // dd($start);
+        $startDate = Carbon::createFromFormat('Y/m/d', $start)->startOfDay();
+        // dd($startDate);
+        $endDate = Carbon::createFromFormat('Y/m/d', $end)->endOfDay();
+        $hoadon = $hoadon->whereBetween('created_at',[$startDate,$endDate])->get();
+        // dd($endDate);
+        dd($hoadon);
         $pdf = Pdf::loadView('pdf.hoadon',compact('hoadon','cuaHang'));
-        // $pdf = Pdf::setOption(['dpi' => 150, 'defaultFont' => 'sans-serif']);
         return $pdf->download();
     }
 }

@@ -72,7 +72,7 @@ class LienHeController extends Controller
         }
 
         $lienHe = LienHe::create($input);
-        
+
         $userMail = $lienHe['email'];
         $adminMail = 'beesmart301@gmail.com';
         // dd($userMail);

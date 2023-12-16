@@ -56,6 +56,7 @@ class SanPhamController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
+
         $validator = Validator::make($input, [
             'ten' => 'required',
             'giaVon' => 'required|numeric|integer|min:0|lt:giaBan',
@@ -100,7 +101,7 @@ class SanPhamController extends Controller
         }
         //check img
         if (!empty($input['img'])) {
-            
+
             $file = $request->file('img');
             $fileDestinationPath = "upload/products";
             if ($file->move($fileDestinationPath, $file->getClientOriginalName())) {
@@ -122,12 +123,39 @@ class SanPhamController extends Controller
             ];
             return response()->json($arr, 200);
         }
-
-
+        $loaiUser=DB::table('users')
+        ->join('sub_cua_hang','sub_cua_hang.idUsers','users.id')
+        ->join('cua_hang','cua_hang.id','sub_cua_hang.idCh')
+        ->select('users.*')
+        ->where('cua_hang.id',$request->idCh)
+        ->first();
+        $checkSp=DB::table('san_pham')->select('*')->where('idCh',$request->idCh)->get();
+        // dd($loaiUser->loai);
+        if($loaiUser->loai==1){
+            if(count($checkSp)>=30){
+                $arr = [
+                    'success' => false,
+                    'message' => 'Số sản phẩm được thêm tối đa của tài khoản BASIC là 30'
+                ];
+                return response()->json($arr, 200);
+            }
+        }
+        if($loaiUser->loai==2){
+            dd(count($checkSp));
+            if(count($checkSp)>=60){
+                $arr = [
+                    'success' => false,
+                    'message' => 'Số sản phẩm được thêm tối đa của tài khoản ADVANCE là 60'
+                ];
+                return response()->json($arr, 200);
+            }
+        }
         // add ngayTao
         $mytime = Carbon::now()->format("Y-m-d");
         $input['ngayTao'] = $mytime;
         //
+
+
         $product = SanPham::create($input);
         $datalink = DB::table('san_pham')
             ->join('cua_hang', 'cua_hang.id', 'san_pham.idCh')
@@ -414,7 +442,7 @@ class SanPhamController extends Controller
             if (!empty($input['loai'])) {
                 $query = $query->where('idLoai', '=', $input['loai']);
             }
-            if (!empty($input['tinhTrang'])) {
+            if (isset($input['tinhTrang'])) {
                 if($input['tinhTrang'] ==1){
                     $query = $query->where('soLuong', 0);
                 }

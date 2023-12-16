@@ -73,4 +73,4 @@ Route::get('doanh-thu',[DoanhThuController::class,'index']);
 
 Route::get('downloadPDF-hoa-don',[HoaDonController::class,'downloadPDF']);
 
-Route::post('test-excel',[SanPhamController::class,'saveImportExcel']);
+Route::post('import-excel',[SanPhamController::class,'saveImportExcel']);

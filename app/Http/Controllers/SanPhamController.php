@@ -125,64 +125,60 @@ class SanPhamController extends Controller
             ];
             return response()->json($arr, 200);
         }
-        $loaiUser=DB::table('users')
-        ->join('sub_cua_hang','sub_cua_hang.idUsers','users.id')
-        ->join('cua_hang','cua_hang.id','sub_cua_hang.idCh')
-        ->select('users.*')
-        ->where('cua_hang.id',$request->idCh)
-        ->first();
-        $checkSp=DB::table('san_pham')->select('*')->where('idCh',$request->idCh)->get();
+        $loaiUser = DB::table('users')
+            ->join('sub_cua_hang', 'sub_cua_hang.idUsers', 'users.id')
+            ->join('cua_hang', 'cua_hang.id', 'sub_cua_hang.idCh')
+            ->select('users.*')
+            ->where('cua_hang.id', $request->idCh)
+            ->first();
+        $checkSp = DB::table('san_pham')->select('*')->where('idCh', $request->idCh)->get();
         // dd($loaiUser->loai);
-        if($loaiUser->loai==1){
-            if(count($checkSp)>=30){
+        if ($loaiUser->loai == 1) {
+            if (count($checkSp) >= 30) {
                 $arr = [
                     'success' => false,
                     'message' => 'Số sản phẩm được thêm tối đa của tài khoản BASIC là 30'
                 ];
                 return response()->json($arr, 200);
             }
-        }
-        if($loaiUser->loai==2){
+        } else if ($loaiUser->loai == 2) {
             dd(count($checkSp));
-            if(count($checkSp)>=60){
+            if (count($checkSp) >= 60) {
                 $arr = [
                     'success' => false,
                     'message' => 'Số sản phẩm được thêm tối đa của tài khoản ADVANCE là 60'
                 ];
                 return response()->json($arr, 200);
             }
+        } else {
+            $mytime = Carbon::now()->format("Y-m-d");
+            $input['ngayTao'] = $mytime;
+            $product = SanPham::create($input);
+            $datalink = DB::table('san_pham')
+                ->join('cua_hang', 'cua_hang.id', 'san_pham.idCh')
+                ->join('dm_san_pham', 'dm_san_pham.id', 'san_pham.idDm')
+                ->join('loai_san_pham', 'loai_san_pham.id', 'san_pham.idLoai')
+                ->join('nha_cung_cap', 'nha_cung_cap.id', 'san_pham.idNcc')
+                ->join('thuong_hieu', 'thuong_hieu.id', 'san_pham.idTh')
+                ->where('san_pham.id', '=', $product->id)
+                ->select(
+                    'san_pham.*',
+                    'cua_hang.tenCh as tenCh',
+                    'dm_san_pham.ten as tenDm',
+                    'loai_san_pham.ten as tenLoaiSp',
+                    'nha_cung_cap.ten as tenNcc',
+                    'thuong_hieu.ten as tenTh'
+                )->orderBy('updated_at', 'desc')->get();
+
+
+            $arr = [
+                'status' => true,
+                'message' => "Sản phẩm đã lưu thành công",
+                // 'data'=>new san_phamResource($product),
+                'datalink' => $datalink
+            ];
+            return response()->json($arr, 201);
         }
-        // add ngayTao
-        $mytime = Carbon::now()->format("Y-m-d");
-        $input['ngayTao'] = $mytime;
-        //
-
-
-        $product = SanPham::create($input);
-        $datalink = DB::table('san_pham')
-            ->join('cua_hang', 'cua_hang.id', 'san_pham.idCh')
-            ->join('dm_san_pham', 'dm_san_pham.id', 'san_pham.idDm')
-            ->join('loai_san_pham', 'loai_san_pham.id', 'san_pham.idLoai')
-            ->join('nha_cung_cap', 'nha_cung_cap.id', 'san_pham.idNcc')
-            ->join('thuong_hieu', 'thuong_hieu.id', 'san_pham.idTh')
-            ->where('san_pham.id', '=', $product->id)
-            ->select(
-                'san_pham.*',
-                'cua_hang.tenCh as tenCh',
-                'dm_san_pham.ten as tenDm',
-                'loai_san_pham.ten as tenLoaiSp',
-                'nha_cung_cap.ten as tenNcc',
-                'thuong_hieu.ten as tenTh'
-            )->orderBy('updated_at', 'desc')->get();
-
-
-        $arr = [
-            'status' => true,
-            'message' => "Sản phẩm đã lưu thành công",
-            // 'data'=>new san_phamResource($product),
-            'datalink' => $datalink
-        ];
-        return response()->json($arr, 201);
     }
 
 
@@ -313,24 +309,16 @@ class SanPhamController extends Controller
         }
         if (!isset($input['soLuong'])) {
             $product->soLuong = $product->soLuong + 0;
-        }
-        else{
+        } else {
 
             if ($input['soLuong'] < 0) {
-            if($product->soLuong == 0) {
-                $product->soLuong = 0;
-            }
-        }
-            else {
+                if ($product->soLuong == 0) {
+                    $product->soLuong = 0;
+                }
+            } else {
                 $product->soLuong = $input['soLuong'];
             }
         }
-
-
-
-
-
-
         $product->anHien = $input['anHien'];
         $product->idCh = $input['idCh'];
         $product->idNcc = $input['idNcc'];
@@ -343,8 +331,8 @@ class SanPhamController extends Controller
             $file = $request->file('img');
             $fileDestinationPath = "upload/products";
             if ($file->move($fileDestinationPath, $file->getClientOriginalName())) {
-               $input['img'] = $fileDestinationPath . '/' . $file->getClientOriginalName();
-               $product->img = $input['img'];
+                $input['img'] = $fileDestinationPath . '/' . $file->getClientOriginalName();
+                $product->img = $input['img'];
             } else {
                 $arr = [
                     'success' => false,
@@ -353,9 +341,7 @@ class SanPhamController extends Controller
                 ];
                 return response()->json($arr, 200);
             }
-
         }
-
         $product->ngayTao = $mytime;
         $product->save();
 
@@ -419,11 +405,11 @@ class SanPhamController extends Controller
                 $query = $query->where('idLoai', '=', $input['loai']);
             }
             if (!empty($input['tinhTrang'])) {
-                if($input['tinhTrang'] ==1){
+                if ($input['tinhTrang'] == 1) {
                     $query = $query->where('soLuong', 0);
                 }
-                if($input['tinhTrang'] == 2){
-                    $query = $query->where('soLuong','>',0);
+                if ($input['tinhTrang'] == 2) {
+                    $query = $query->where('soLuong', '>', 0);
                 }
             }
 
@@ -445,14 +431,13 @@ class SanPhamController extends Controller
                 $query = $query->where('idLoai', '=', $input['loai']);
             }
             if (isset($input['tinhTrang'])) {
-                if($input['tinhTrang'] ==1){
+                if ($input['tinhTrang'] == 1) {
                     $query = $query->where('soLuong', 0);
                 }
-                if($input['tinhTrang'] == 2){
-                    $query = $query->where('soLuong','>',0);
+                if ($input['tinhTrang'] == 2) {
+                    $query = $query->where('soLuong', '>', 0);
                 }
             }
-
         }
         // dd($query);
         $query = $query->orderBy('updated_at', 'desc')->get();
@@ -473,20 +458,25 @@ class SanPhamController extends Controller
         return response()->json($arr, 200);
     }
 
-    public function importExcel(){
+    public function importExcel()
+    {
         return view('admin.import-excel');
     }
 
-    public function saveImportExcel(Request $request){
-        Excel::import(new productImport,$request->file);
-        $sanpham = SanPham::where('idCh','=',null)->get();
+    public function saveImportExcel(Request $request)
+    {
+        Excel::import(new productImport, $request->file);
+        $sanpham = SanPham::where('idCh', '=', null)->get();
         // dd($sanpham);
         $idCh = $request->idCh;
-        foreach($sanpham as $item){
+        foreach ($sanpham as $item) {
             $item->idCh = $idCh;
             $item->save();
         }
-        return "Thành công";
+        return $arr = [
+            'status' => true,
+            'message' => 'Thành Công'
+        ];
     }
 
 }

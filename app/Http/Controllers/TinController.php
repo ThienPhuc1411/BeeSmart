@@ -31,7 +31,7 @@ class TinController extends Controller
     public function show($slug)
     {
         // $slug = $request->slug;
-        dd($slug);
+        // dd($slug);
         $tintuc = Tin::where('slug', 'LIKE', '%' . $slug . '%')->first();
         $tintuc->increment('view', 1);
         $binhluan = BinhLuan::where('idTin', $tintuc->id)->get();

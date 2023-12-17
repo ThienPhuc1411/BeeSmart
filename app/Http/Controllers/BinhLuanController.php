@@ -11,9 +11,17 @@ class BinhLuanController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        $idTin = $request->idTin;
+        $bl = BinhLuan::where('idTin',$idTin)->where('anHien',1)->orderBy('updated_at','desc')->get();
+        $arr = [
+            'status' => true,
+            'message' => 'Danh sách bình luận',
+            'data' => $bl
+        ];
+        return response()->json($arr, 200);
     }
 
     /**

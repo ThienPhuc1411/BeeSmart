@@ -42,13 +42,17 @@ class BinhLuanController extends Controller
         $validator = Validator::make(
             $input,
             [
-                'noiDung' => 'required'
+                'noiDung' => 'required',
+                'hoTen' => 'required',
+                'email' => 'required|email'
             ],
             [
                 'required' => 'Bạn chưa nhập :attribute'
             ],
             [
-                'noiDung' => 'Nội dung'
+                'noiDung' => 'Nội dung',
+                'hoTen' => 'Tên',
+                'email' => 'Địa chỉ email'
             ]
         );
         if ($validator->fails()) {
@@ -64,7 +68,6 @@ class BinhLuanController extends Controller
         $arr = [
             'status' => true,
             'message' => "Bình luận của bạn đã được lưu lại",
-            'data' => new comments($cmt)
         ];
         return response()->json($arr, 201);
     }

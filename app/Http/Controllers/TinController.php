@@ -8,17 +8,21 @@ use App\Http\Resources\Tin as Tintuc;
 use Validator;
 use DB;
 use App\Models\BinhLuan;
+use Illuminate\Contracts\Support\Jsonable;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Pagination\CursorPaginator;
 
 class TinController extends Controller
 {
     public function index(Request $request)
     {
-        
+        $perPage = $request->pageSize;
         $tintuc = Tin::where('anHien', 1);
         if($request->search){
             $tintuc = $tintuc->where('tieuDe','LIKE','%'.$request->search.'%');
         }
-        $tintuc=$tintuc->orderBy('updated_at', 'desc')->get();
+        $tintuc=$tintuc->orderBy('updated_at', 'desc')->paginate($perPage)->withQueryString();
         $arr=[
             'status' => true,
             'message' => 'Danh sách bài viết',

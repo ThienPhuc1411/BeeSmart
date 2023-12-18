@@ -43,7 +43,7 @@ class nhaCungCapController extends Controller
             'ten' => 'required',
             'diaChi' => 'required',
             'sdt' => 'required|max:11|min:10',
-            'email' => 'required|unique:nha_cung_cap|email',
+            'email' => 'required|email',
             'MST' => 'required',
             'idCh' => 'required'
         ], [

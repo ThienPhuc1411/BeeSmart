@@ -260,6 +260,9 @@ class HoaDonController extends Controller
                     $endDate = Carbon::createFromFormat('Y-m-d', $end)->endOfDay();
                     $hoadon = $hoadon->whereBetween('created_at', [$startDate, $endDate])->orderBy('created_at','desc')->get();
                 }
+                else{
+                    $hoadon = $hoadon->whereBetween('created_at', $startDate)->orderBy('created_at','desc')->get();
+                }
             } else {
                 $hoadon = $hoadon->orderBy('created_at','desc')->get();
             }

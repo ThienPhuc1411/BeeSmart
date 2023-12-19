@@ -253,9 +253,9 @@ class HoaDonController extends Controller
             $start = $request->startDate;
             $end = $request->endDate;
             // dd($start);
-            $startDate = Carbon::createFromFormat('Y-m-d', '2023-11-04')->startOfDay();
+            $startDate = Carbon::createFromFormat('Y-m-d', $start)->startOfDay();
             // dd($startDate);
-            $endDate = Carbon::createFromFormat('Y-m-d', '2023-11-05')->endOfDay();
+            $endDate = Carbon::createFromFormat('Y-m-d', $end)->endOfDay();
             $hoadon = $hoadon->whereBetween('created_at', [$startDate, $endDate])->get();
             // dd($endDate);
             dd($hoadon);

@@ -17,7 +17,7 @@ class ThuongHieuController extends Controller
     {
         $idCh = $request->idCh;
         // dd($request->id);
-        $brands = ThuongHieu::where('idCh', $idCh)->get();
+        $brands = ThuongHieu::where('idCh', $idCh)->orderBy('updated_at', 'desc')->get();
         $arr = [
             'status' => true,
             'message' => 'Danh sách thương hiệu',

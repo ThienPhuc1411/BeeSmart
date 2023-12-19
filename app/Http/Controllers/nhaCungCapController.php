@@ -15,7 +15,7 @@ class nhaCungCapController extends Controller
     public function index(Request $request)
     {
         $idCh = $request->idCh;
-        $ncc = nhaCungCap::where('idCh',$idCh)->get();
+        $ncc = nhaCungCap::where('idCh',$idCh)->orderBy('updated_at', 'desc')->get();
         $arr = [
             'status' => true,
             'message' => "Danh sách nhà cung cấp",

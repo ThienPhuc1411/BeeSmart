@@ -15,7 +15,7 @@ class DanhMucSanPhamController extends Controller
      */
     public function index(Request $request) {
         $idCh = $request->idCh;
-        $danhmucsp = DanhMucSanPham::where('idCh',$idCh)->get();
+        $danhmucsp = DanhMucSanPham::where('idCh',$idCh)->orderBy('updated_at', 'desc')->get();
         $arr = [
             'status' => true,
             'message' => 'Danh sách danh mục sản phẩm',

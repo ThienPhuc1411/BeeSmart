@@ -141,8 +141,9 @@ class SanPhamController extends Controller
                 ];
                 return response()->json($arr, 403);
             }
-        } else if ($loaiUser->loai == 2) {
-            dd(count($checkSp));
+        }
+        if ($loaiUser->loai == 2) {
+            // dd(count($checkSp));
             if (count($checkSp) >= 60) {
                 $arr = [
                     'success' => false,
@@ -150,35 +151,35 @@ class SanPhamController extends Controller
                 ];
                 return response()->json($arr, 403);
             }
-        } else {
-            $mytime = Carbon::now()->format("Y-m-d");
-            $input['ngayTao'] = $mytime;
-            $product = SanPham::create($input);
-            $datalink = DB::table('san_pham')
-                ->join('cua_hang', 'cua_hang.id', 'san_pham.idCh')
-                ->join('dm_san_pham', 'dm_san_pham.id', 'san_pham.idDm')
-                ->join('loai_san_pham', 'loai_san_pham.id', 'san_pham.idLoai')
-                ->join('nha_cung_cap', 'nha_cung_cap.id', 'san_pham.idNcc')
-                ->join('thuong_hieu', 'thuong_hieu.id', 'san_pham.idTh')
-                ->where('san_pham.id', '=', $product->id)
-                ->select(
-                    'san_pham.*',
-                    'cua_hang.tenCh as tenCh',
-                    'dm_san_pham.ten as tenDm',
-                    'loai_san_pham.ten as tenLoaiSp',
-                    'nha_cung_cap.ten as tenNcc',
-                    'thuong_hieu.ten as tenTh'
-                )->orderBy('updated_at', 'desc')->get();
-
-
-            $arr = [
-                'status' => true,
-                'message' => "Sản phẩm đã lưu thành công",
-                // 'data'=>new san_phamResource($product),
-                'datalink' => $datalink
-            ];
-            return response()->json($arr, 201);
         }
+        $mytime = Carbon::now()->format("Y-m-d");
+        $input['ngayTao'] = $mytime;
+        $product = SanPham::create($input);
+        $datalink = DB::table('san_pham')
+            ->join('cua_hang', 'cua_hang.id', 'san_pham.idCh')
+            ->join('dm_san_pham', 'dm_san_pham.id', 'san_pham.idDm')
+            ->join('loai_san_pham', 'loai_san_pham.id', 'san_pham.idLoai')
+            ->join('nha_cung_cap', 'nha_cung_cap.id', 'san_pham.idNcc')
+            ->join('thuong_hieu', 'thuong_hieu.id', 'san_pham.idTh')
+            ->where('san_pham.id', '=', $product->id)
+            ->select(
+                'san_pham.*',
+                'cua_hang.tenCh as tenCh',
+                'dm_san_pham.ten as tenDm',
+                'loai_san_pham.ten as tenLoaiSp',
+                'nha_cung_cap.ten as tenNcc',
+                'thuong_hieu.ten as tenTh'
+            )->orderBy('updated_at', 'desc')->get();
+
+
+        $arr = [
+            'status' => true,
+            'message' => "Sản phẩm đã lưu thành công",
+            // 'data'=>new san_phamResource($product),
+            'datalink' => $datalink
+        ];
+        return response()->json($arr, 201);
+
     }
 
 

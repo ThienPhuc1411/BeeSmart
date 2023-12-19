@@ -26,7 +26,7 @@ class HoaDonController extends Controller
             $idCh = $request->idCh;
             $isExist = CuaHang::select('*')->where('id', $idCh)->exists();
             if ($isExist) {
-                $bills = HoaDon::where('idCh', $idCh)->get();
+                $bills = HoaDon::where('idCh', $idCh)->orderBy('created_at','desc')->get();
                 $arr = [
                     'status' => true,
                     'message' => 'Danh sách hóa đơn',

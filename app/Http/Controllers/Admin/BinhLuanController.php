@@ -57,7 +57,7 @@ class BinhLuanController extends Controller
         }
         return redirect()->route('binh-luan.trash')->with('msg', $msg);
     }
-    
+
     public function restore($id){
         $binhLuan = BinhLuan::onlyTrashed()->find($id);
         if(!empty($binhLuan)){

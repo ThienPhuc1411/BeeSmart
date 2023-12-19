@@ -42,7 +42,7 @@
                                 @foreach ($binhLuan as $key => $item)
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
-                                        <td>{{ date('d-m-Y', strtotime($$item->ngayDang)) }}</td>
+                                        <td>{{ date('d-m-Y', strtotime($item->ngayDang)) }}</td>
                                         <td>{{ $item->tenTin }}</td>
                                         <td>{{ $item->noiDung }}</td>
                                         @if ($item->anHien == 1)

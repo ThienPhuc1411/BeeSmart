@@ -250,18 +250,19 @@ class HoaDonController extends Controller
             //         $hoadon = $hoadon->where('MONTH(created_at)',$request->day);
             //     }
             // }
-            if (isset($startDate)) {
-                if (isset($endDate)) {
+            if (!empty($request->startDate)) {
+                if (!empty($request->endDate)) {
                     $start = $request->startDate;
                     $end = $request->endDate;
-                    // dd($start);
-                    $startDate = Carbon::createFromFormat('Y-m-d', $start)->startOfDay();
-                    // dd($startDate);
-                    $endDate = Carbon::createFromFormat('Y-m-d', $end)->endOfDay();
-                    $hoadon = $hoadon->whereBetween('created_at', [$startDate, $endDate])->orderBy('created_at','desc')->get();
+                    $start = Carbon::createFromFormat('Y-m-d', $start)->startOfDay();
+                    $end = Carbon::createFromFormat('Y-m-d', $end)->endOfDay();
+                    $hoadon = $hoadon->whereBetween('created_at', [$start, $end])->orderBy('created_at','desc')->get();
                 }
                 else{
-                    $hoadon = $hoadon->where('created_at', $startDate)->orderBy('created_at','desc')->get();
+                    $start = $request->startDate;
+                    // dd($start);
+                    $start = Carbon::createFromFormat('Y-m-d', $start)->startOfDay();
+                    $hoadon = $hoadon->where('created_at', $start)->orderBy('created_at','desc')->get();
                 }
             } else {
                 $hoadon = $hoadon->orderBy('created_at','desc')->get();

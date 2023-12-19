@@ -261,7 +261,7 @@ class HoaDonController extends Controller
                     $hoadon = $hoadon->whereBetween('created_at', [$startDate, $endDate])->orderBy('created_at','desc')->get();
                 }
                 else{
-                    $hoadon = $hoadon->whereBetween('created_at', $startDate)->orderBy('created_at','desc')->get();
+                    $hoadon = $hoadon->where('created_at', $startDate)->orderBy('created_at','desc')->get();
                 }
             } else {
                 $hoadon = $hoadon->orderBy('created_at','desc')->get();

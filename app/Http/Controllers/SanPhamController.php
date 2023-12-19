@@ -139,7 +139,7 @@ class SanPhamController extends Controller
                     'success' => false,
                     'message' => 'Số sản phẩm được thêm tối đa của tài khoản BASIC là 30'
                 ];
-                return response()->json($arr, 200);
+                return response()->json($arr, 403);
             }
         } else if ($loaiUser->loai == 2) {
             dd(count($checkSp));
@@ -148,7 +148,7 @@ class SanPhamController extends Controller
                     'success' => false,
                     'message' => 'Số sản phẩm được thêm tối đa của tài khoản ADVANCE là 60'
                 ];
-                return response()->json($arr, 200);
+                return response()->json($arr, 403);
             }
         } else {
             $mytime = Carbon::now()->format("Y-m-d");

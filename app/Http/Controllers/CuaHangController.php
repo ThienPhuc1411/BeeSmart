@@ -76,7 +76,7 @@ class CuaHangController extends Controller
         // dd($slug);
         $input['slug'] = $slug;
         // dd($input['slug']);
-        $cuahang = User::join('sub-cua_hang', 'sub_cua_hang.idUsers', 'users.id')
+        $cuahang = User::join('sub_cua_hang', 'sub_cua_hang.idUsers', 'users.id')
             ->join('cua_hang', 'sub_cua_hang.idCh', 'cua_hang.id')
             ->where('users.id', $idUser)
             ->get();

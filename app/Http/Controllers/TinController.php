@@ -38,7 +38,7 @@ class TinController extends Controller
         // dd($slug);
         $tintuc = Tin::where('slug', 'LIKE', '%' . $slug . '%')->first();
         $tintuc->increment('view', 1);
-        $binhluan = BinhLuan::where('idTin', $tintuc->id)->get();
+        $binhluan = BinhLuan::where('idTin', $tintuc->id)->where('anHien',1)->get();
         $tintuc->save();
         if (!$tintuc) {
             $arr = [

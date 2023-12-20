@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\LoaiCuaHangController;
 use App\Http\Controllers\Admin\DanhMucTinController;
 use App\Http\Controllers\Admin\TinTucController;
-use App\Http\Controllers\Admin\BinhLuanController;
+use App\Http\Controllers\Admin\BinhLuanController as BinhLuan;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\VnPayController;
 use App\Http\Controllers\Admin\LoaiSanPhamController;
@@ -96,12 +96,12 @@ Route::prefix('tin-tuc')->name('post.')->group(function () {
 })->middleware(['admin', 'auth']);
 
 Route::prefix('binh-luan')->name('cmt.')->group(function () {
-    Route::get('/', [BinhLuanController::class, 'index'])->name('index');
-    Route::get('/approve/{id}', [BinhLuanController::class, 'approve'])->name('approve');
-    Route::get('/trash', [BinhLuanController::class, 'trash'])->name('trash');
-    Route::get('/delete/{id}', [BinhLuanController::class, 'delete'])->name('delete');
-    Route::get('/force-delete/{id}', [BinhLuanController::class, 'force-delete'])->name('force-delete');
-    Route::get('restore/{id}', [BinhLuanController::class, 'restore'])->name('restore');
+    Route::get('/', [BinhLuan::class, 'index'])->name('index');
+    Route::get('/approve/{id}', [BinhLuan::class, 'approve'])->name('approve');
+    Route::get('/trash', [BinhLuan::class, 'trash'])->name('trash');
+    Route::get('/delete/{id}', [BinhLuan::class, 'delete'])->name('delete');
+    Route::get('/force-delete/{id}', [BinhLuan::class, 'force-delete'])->name('force-delete');
+    Route::get('restore/{id}', [BinhLuan::class, 'restore'])->name('restore');
 })->middleware(['admin', 'auth']);
 
 Route::delete('logout', [AuthController::class, 'logout'])->name('logout')->middleware(['admin', 'auth']);

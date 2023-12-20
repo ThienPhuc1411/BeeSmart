@@ -11,6 +11,7 @@ use App\Models\subCuaHang;
 use Mail;
 use App\Mail\TaoCuaHang;
 use Auth;
+use App\Models\User;
 
 class CuaHangController extends Controller
 {
@@ -19,11 +20,11 @@ class CuaHangController extends Controller
     {
         $idUser = $request->idUsers;
         // dd($request->idUsers);
-        $stores = CuaHang::where('sub_cua_hang.idUsers','=',$idUser)
-        ->join('sub_cua_hang','sub_cua_hang.idCh','cua_hang.id')
-        ->join('users','sub_cua_hang.idUsers','users.id')
-        ->select('cua_hang.*')
-        ->get();
+        $stores = CuaHang::where('sub_cua_hang.idUsers', '=', $idUser)
+            ->join('sub_cua_hang', 'sub_cua_hang.idCh', 'cua_hang.id')
+            ->join('users', 'sub_cua_hang.idUsers', 'users.id')
+            ->select('cua_hang.*')
+            ->get();
         // dd($stores);
         $arr = [
             'status' => true,
@@ -49,6 +50,7 @@ class CuaHangController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
+        $idUser = $request->idUser;
         // dd($input);
         // Validate dữ liệu đầu vào
         $validatedData = Validator::make($input, [
@@ -74,14 +76,36 @@ class CuaHangController extends Controller
         // dd($slug);
         $input['slug'] = $slug;
         // dd($input['slug']);
-
-        // Tạo một cửa hàng mới và lưu vào cơ sở dữ liệu
+        $cuahang = User::join('sub-cua_hang', 'sub_cua_hang.idUsers', 'users.id')
+            ->join('cua_hang', 'sub_cua_hang.idCh', 'cua_hang.id')
+            ->where('users.id', $idUser)
+            ->get();
+        $user = User::find($idUser);
+        if ($user->loai == 1) {
+            $arr = [
+                'status' => false,
+                'message' => 'Bạn đã vượt quá giới hạn tạo cửa hàng'
+            ];
+            return response()->json($arr, 403);
+        }
+        if ($user->loai == 2) {
+            if (count($cuahang) > 3) {
+                $arr = [
+                    'status' => false,
+                    'message' => 'Bạn đã vượt quá giới hạn tạo cửa hàng'
+                ];
+                return response()->json($arr, 403);
+            }
+        }
         $store = CuaHang::create($input);
         $lastId = $store->id;
         $subChInput = [
             'idUsers' => $input['idUsers'],
             'idCh' => $lastId,
         ];
+        $cuahang = User::join('sub-cua_hang', 'sub_cua_hang.idUsers', 'users.id')
+            ->join('cua_hang', 'sub_cua_hang.idCh', 'cua_hang.id')
+            ->get();
         $subCh = subCuaHang::create($subChInput);
 
 
@@ -94,8 +118,6 @@ class CuaHangController extends Controller
             'slug' => $store->slug
         ];
         Mail::to($userMail)->send(new TaoCuaHang($mailData));
-
-
         $arr = [
             'status' => true,
             // 'message' => "Cửa hàng đã lưu thành công",
@@ -106,6 +128,8 @@ class CuaHangController extends Controller
             'data' => new Store($store)
         ];
         return response()->json($arr, 201);
+        // Tạo một cửa hàng mới và lưu vào cơ sở dữ liệu
+
     }
 
     // Sửa thông tin của một cửa hàng

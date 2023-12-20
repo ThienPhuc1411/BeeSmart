@@ -55,9 +55,9 @@ class BinhLuanController extends Controller
         }else{
             $msg = 'Bình luận không tồn tại';
         }
-        return redirect()->route('binh-luan.trash')->with('msg', $msg);
+        return redirect()->route('cmt.trash')->with('msg', $msg);
     }
-    
+
     public function restore($id){
         $binhLuan = BinhLuan::onlyTrashed()->find($id);
         if(!empty($binhLuan)){
@@ -66,6 +66,6 @@ class BinhLuanController extends Controller
         }else{
             $msg = 'Bình luận không tồn tại';
         }
-        return redirect()->route('binh-luan.trash')->with('msg', $msg);
+        return redirect()->route('cmt.trash')->with('msg', $msg);
     }
 }

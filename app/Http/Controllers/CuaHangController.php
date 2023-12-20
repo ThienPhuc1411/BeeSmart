@@ -103,7 +103,7 @@ class CuaHangController extends Controller
             'idUsers' => $input['idUsers'],
             'idCh' => $lastId,
         ];
-        $cuahang = User::join('sub-cua_hang', 'sub_cua_hang.idUsers', 'users.id')
+        $cuahang = User::join('sub_cua_hang', 'sub_cua_hang.idUsers', 'users.id')
             ->join('cua_hang', 'sub_cua_hang.idCh', 'cua_hang.id')
             ->get();
         $subCh = subCuaHang::create($subChInput);

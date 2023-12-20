@@ -177,7 +177,7 @@ class CuaHangController extends Controller
     public function destroy($id)
     {
         $store = CuaHang::find($id);
-        $sub = \DB::table('sub_cua_hang')->where('idCh',$id)->first();
+        
 
         if (!$store) {
             return response()->json([
@@ -187,7 +187,7 @@ class CuaHangController extends Controller
         }
 
         $store->delete();
-        $sub->delete();
+        $sub = \DB::table('sub_cua_hang')->where('idCh',$id)->delete();
         return response()->json([
             'status' => true,
             'message' => 'Xóa cửa hàng thành công',

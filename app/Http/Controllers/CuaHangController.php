@@ -191,6 +191,6 @@ class CuaHangController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Xóa cửa hàng thành công',
-        ], 204);
+        ], 200);
     }
 }

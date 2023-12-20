@@ -57,7 +57,7 @@ class TinTucController extends Controller
         } else {
             $request->validate(
                 [
-                    'tieuDe' => ['required', 'unique:tin_tuc'],
+                    'tieuDe' => ['required'],
                     'tomTat' => ['required'],
                     'idDmTin' => ['required'],
                     'noiDung' => ['required'],

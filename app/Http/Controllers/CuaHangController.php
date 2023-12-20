@@ -50,7 +50,7 @@ class CuaHangController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        $idUser = $request->idUser;
+        $idUser = $request->idUsers;
         // dd($input);
         // Validate dữ liệu đầu vào
         $validatedData = Validator::make($input, [
@@ -81,6 +81,7 @@ class CuaHangController extends Controller
             ->where('users.id', $idUser)
             ->get();
         $user = User::find($idUser);
+        // dd($user);
         if ($user->loai == 1) {
             $arr = [
                 'status' => false,
@@ -110,9 +111,9 @@ class CuaHangController extends Controller
 
 
         //Gửi mail thông báo tạo cửa hàng thành công
-        $userMail = Auth::email(); //temp
+        $userMail = $user->email; //temp
         $mailData = [
-            'ten' => Auth::HoTen(),
+            'ten' => $user->HoTen,
             'title' => 'Đã tạo cửa hàng thành công',
             'body' => $store->tenCh,
             'slug' => $store->slug
@@ -133,10 +134,10 @@ class CuaHangController extends Controller
     }
 
     // Sửa thông tin của một cửa hàng
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $input = $request->all();
-
+        $id = $request->id;
         // Validate dữ liệu đầu vào
         $validator = Validator::make($input, [
             'tenCh' => 'required|string|max:50',
@@ -176,12 +177,20 @@ class CuaHangController extends Controller
     public function destroy($id)
     {
         $store = CuaHang::find($id);
+        $sub = \DB::table('sub_cua_hang')->where('idCh',$id)->first();
 
         if (!$store) {
-            return response()->json(['message' => 'Cửa hàng không tồn tại'], 404);
+            return response()->json([
+                'status' => false,
+                'message' => 'Cửa hàng không tồn tại'
+            ], 404);
         }
 
         $store->delete();
-        return response()->json(['message' => 'Xóa cửa hàng thành công'], 204);
+        $sub->delete();
+        return response()->json([
+            'status' => true,
+            'message' => 'Xóa cửa hàng thành công',
+        ], 204);
     }
 }
